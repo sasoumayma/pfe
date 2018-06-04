@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListSortieTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <div class="ui-g">
+                <div class="ui-g-12">
+                    <p:panel header="INFO SORIE" style="margin-top:20px;">
+                        <h:form id="SortieCreateForm">
+                            <h:panelGroup id="display">
+                                <p:panelGrid columns="8" rendered="#{sortieController.selected != null}">
+
+                                    <p:outputLabel value="#{bundle.CreateSortieLabel_fournisseur}" for="fournisseur" />
+                                    <p:selectOneMenu id="fournisseur" value="#{sortieController.selected.fournisseur}" >
+                                        <f:selectItems value="#{fournisseurController.itemsAvailableSelectOne}"
+                                                       var="fournisseurItem"
+                                                       itemValue="#{fournisseurItem}" itemLabel="#{fournisseurItem.nom}"/>
+                                    </p:selectOneMenu>
+
+                                    <p:outputLabel value="#{bundle.CreateSortieLabel_dateSortie}" for="dateSortie" />
+                                    <p:calendar id="dateSortie" pattern="MM/dd/yyyy" value="#{sortieController.selected.dateSortie}" title="#{bundle.EditSortieTitle_dateSortie}"  showOn="button"/>
+
+                                    <p:outputLabel value="#{bundle.CreateSortieLabel_nombreTotal}" for="nombreTotal" />
+                                    <p:inputText id="nombreTotal" value="#{sortieController.selected.nombreTotal}" title="#{bundle.CreateSortieTitle_nombreTotal}" />
+
+                                    <p:commandButton id="createButton" icon="ui-icon-plus"   value="SAVE" actionListener="#{sortieController.save()}" update=":SortieItemCreateForm, :SortieCreateForm , :SortieItemListForm:datalist" />
+                                    <p:commandButton id="resetButton" icon="ui-icon-pencil"   value="RESET" actionListener="#{sortieController.reset()}" update=":SortieItemCreateForm, :SortieCreateForm , :SortieItemListForm:datalist" />
+
+                                </p:panelGrid>
+                            </h:panelGroup>
+                        </h:form>
+                    </p:panel>
+                </div>
+            </div>
+            <div class="ui-g">
+                <div class="ui-g-4">
+                    <p:panel header="INFO EQUIPEMENT SORTIE " style="margin-top:20px">
+                        <h:form id="SortieItemCreateForm">
+                            <h:panelGroup id="display">
+                                <p:panelGrid columns="2" rendered="#{sortieController.sortieItem != null}">
+                                    <p:outputLabel value="#{bundle.CreateSortieItemLabel_magasin}" for="magasin" />
+                                    <p:selectOneMenu id="magasin" value="#{sortieController.sortieItem.magasin}" >
+                                        <f:selectItems value="#{magasinController.itemsAvailableSelectOne}"
+                                                       var="magasinItem"
+                                                       itemValue="#{magasinItem}"  itemLabel="#{magasinItem.nom}" />
+                                    </p:selectOneMenu>
+
+                                    <p:outputLabel value="#{bundle.CreateSortieItemLabel_salle}" for="salle" />
+                                    <p:selectOneMenu id="salle" value="#{sortieController.sortieItem.salle}" >
+                                        <f:selectItems value="#{salleController.itemsAvailableSelectOne}"
+                                                       var="salleItem"
+                                                       itemValue="#{salleItem}" itemLabel="#{salleItem.nom}" />
+                                    </p:selectOneMenu>
+
+                                    <p:outputLabel value="#{bundle.CreateSortieItemLabel_quantite}" for="quantite" />
+                                    <p:inputText id="quantite" value="#{sortieController.sortieItem.quantite}" title="#{bundle.CreateSortieItemTitle_quantite}" />
+
+                                    <p:outputLabel value="#{bundle.CreateSortieItemLabel_numeroSerie}" for="numeroSerie" />
+                                    <p:inputText id="numeroSerie" value="#{sortieController.sortieItem.numeroSerie}" title="#{bundle.CreateSortieItemTitle_numeroSerie}" />
+
+                                    <p:outputLabel value="#{bundle.CreateSortieItemLabel_observation}" for="observation" />
+                                    <p:inputText id="observation" value="#{sortieController.sortieItem.observation}" title="#{bundle.CreateSortieItemTitle_observation}" />
+
+                                    <p:outputLabel value="#{bundle.CreateSortieItemLabel_equipement}" for="equipement" />
+                                    <p:selectOneMenu id="equipement" value="#{sortieController.sortieItem.equipement}" >
+                                        <f:selectItems value="#{equipementController.itemsAvailableSelectOne}"
+                                                       var="equipementItem"
+                                                       itemValue="#{equipementItem}" itemLabel="#{equipementItem.designation}"/>
+                                    </p:selectOneMenu>
+                                    <p:outputLabel value="#{bundle.CreateSortieItemLabel_quantiteMinimale}" for="quantiteMinimale" />
+                                    <p:inputText id="quantiteMinimale" value="#{sortieController.sortieItem.quantiteMinimale}" title="#{bundle.CreateSortieItemTitle_quantiteMinimale}" />
+                                </p:panelGrid>
+                                <p:commandButton actionListener="#{sortieController.add()}" icon="ui-icon-plus" value="ADD" update=":SortieItemListForm:datalist" />
+
+                            </h:panelGroup>
+                        </h:form>
+                    </p:panel>
+                </div>
+                <div class="ui-g-8">
+                    <p:panel header="PLAN CATEGORIE LIST" style="margin-top:20px">
+                        <h:form id="SortieItemListForm">
+                            <p:dataTable id="datalist" value="#{sortieController.sortieItems}" var="item"
+                                         selectionMode="single" selection="#{sortieItemController.selected}"
+                                         paginator="true"
+                                         rowKey="#{item.salle.id}"
+                                         rows="10"
+                                         rowsPerPageTemplate="10,20,30,40,50"
+                                         >
+
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListSortieItemTitle_magasin}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.magasin}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListSortieItemTitle_salle}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.salle}"/>
+                                </p:column>
+
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListSortieItemTitle_quantite}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.quantite}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListSortieItemTitle_numeroSerie}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.numeroSerie}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListSortieItemTitle_observation}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.observation}"/>
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListSortieItemTitle_equipement}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.equipement}"/>
+                                </p:column>
+
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="#{bundle.ListSortieItemTitle_quantiteMinimale}"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.quantiteMinimale}"/>
+                                </p:column>
+
+                            </p:dataTable>
+                        </h:form>
+                    </p:panel>
+                </div>
+            </div>
+        </ui:define>
+    </ui:composition>
+</html>

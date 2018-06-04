@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+   
+    
+      <h:head>
+        <title>Authentification</title>
+        <h:outputStylesheet name="css/jsfcrud.css"/>
+        <h:outputStylesheet name="css/loginStyle.css"/>
+        <link rel="shortcut icon" href="../resources/image/logo-1.png" type="image/png" sizes="16x22"/>
+        <link rel="stylesheet" href="resources/font-awesome-4.6.3/css/font-awesome.min.css" type="text/css" />
+        
+    </h:head>
+   <h:body class="bodyLogin" style="background: url(resources/image/background-banner.jpg) no-repeat center center fixed; 
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;" >
+       <img src="resources/image/test.jpg" style="margin-top: 65px;" />
+        <h3 style="text-align: center">Connectez-vous à votre compte</h3>
+        <div class="login-card">
+            <img src="resources/image/user.png" style="border-radius: 100%; width: 100px; height: auto"/><br/>
+
+            <h:form>
+                <p:growl id="growl" sticky="true" showDetail="true" life="3000" />
+                <h:panelGrid columns="2" cellpadding="5"  styleClass="align-center ede-color">
+                    <i class="fa fa-user icon-login"></i>
+                    <p:inputText id="username" value="#{utilisateurController.selected.id}" required="false" label="username" placeholder="Nom d'utilisateur" />
+                    <i class="fa fa-key icon-login "></i>
+                    <p:password id="password" value="#{utilisateurController.selected.password}" required="false" label="password" placeholder="Mot de passe" />
+
+                    <f:facet name="footer">
+                        <p:commandButton value="Se connecter" style=" font-size: 14px;
+                                         font-family: 'Arial', sans-serif;font-weight: 700;height: 36px;
+                                         width: 100%;display: block;margin-bottom: 10px;position: relative;margin-left: 25px;"
+                                         update="growl" action="#{utilisateurController.seConnnecter()}"/>
+                    </f:facet>  
+                </h:panelGrid>
+            </h:form>
+        </div>
+    </h:body>
+
+</html>
+
