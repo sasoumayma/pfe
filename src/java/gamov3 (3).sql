@@ -3,10 +3,11 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Sam 02 Juin 2018 à 19:40
+-- Généré le :  Lun 04 Juin 2018 à 14:54
 -- Version du serveur :  5.6.15-log
 -- Version de PHP :  5.4.24
 
+SET FOREIGN_KEY_CHECKS=0;
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
@@ -65,6 +66,13 @@ CREATE TABLE IF NOT EXISTS `entree` (
   KEY `FK_ENTREE_UTILISATEUR_ID` (`UTILISATEUR_ID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
+--
+-- Contenu de la table `entree`
+--
+
+INSERT INTO `entree` (`ID`, `DATEENTREE`, `NOMBRETOTAL`, `FOURNISSEUR_ID`, `UTILISATEUR_ID`) VALUES
+(1, '2018-06-09', 77, 2, 'ana');
+
 -- --------------------------------------------------------
 
 --
@@ -85,6 +93,14 @@ CREATE TABLE IF NOT EXISTS `entreeitem` (
   KEY `FK_ENTREEITEM_ENTREE_ID` (`ENTREE_ID`),
   KEY `FK_ENTREEITEM_EQUIPEMENT_ID` (`EQUIPEMENT_ID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `entreeitem`
+--
+
+INSERT INTO `entreeitem` (`ID`, `NUMEROSERIE`, `OBSERVATION`, `QUANTITE`, `QUANTITEMINIMALE`, `EQUIPEMENT_ID`, `ENTREE_ID`, `MAGASIN_ID`) VALUES
+(151, 88, 'sjhhs', 77, 6, 51, 1, 52),
+(152, 88, 'sjhhs', 77, 6, 52, 1, 51);
 
 -- --------------------------------------------------------
 
@@ -138,6 +154,14 @@ CREATE TABLE IF NOT EXISTS `equipement` (
   KEY `FK_EQUIPEMENT_FOURNISSEUR_ID` (`FOURNISSEUR_ID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
+--
+-- Contenu de la table `equipement`
+--
+
+INSERT INTO `equipement` (`ID`, `AFFECTATION`, `DATEMISEENSERVICE`, `DESCRIPTION`, `DESIGNATION`, `DETAILS`, `EMPLACEMENT`, `MARQUE`, `OBSERVATION`, `TYPE`, `FOURNISSEUR_ID`, `UTILISATEUR_ID`) VALUES
+(51, 'hhhh', '2018-05-11', 'mdl7', 'delah', 'tfo', 'zbel', 'walo', 'tfoooo', 'tqdlqet', 1, NULL),
+(52, 'k', '2018-05-15', 'k', 'kio', 'hhh', 'k', 'k', 'h', 'o', 1, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -150,6 +174,15 @@ CREATE TABLE IF NOT EXISTS `fournisseur` (
   PRIMARY KEY (`ID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
+--
+-- Contenu de la table `fournisseur`
+--
+
+INSERT INTO `fournisseur` (`ID`, `NOM`) VALUES
+(1, 'HP'),
+(2, 'SHNEIDER'),
+(3, 'Societe');
+
 -- --------------------------------------------------------
 
 --
@@ -161,6 +194,14 @@ CREATE TABLE IF NOT EXISTS `magasin` (
   `NOM` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`ID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `magasin`
+--
+
+INSERT INTO `magasin` (`ID`, `NOM`) VALUES
+(51, 'MAG 1'),
+(52, 'MAG 2');
 
 -- --------------------------------------------------------
 
@@ -271,6 +312,15 @@ CREATE TABLE IF NOT EXISTS `salle` (
   KEY `FK_SALLE_SERVICE_ID` (`SERVICE_ID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
+--
+-- Contenu de la table `salle`
+--
+
+INSERT INTO `salle` (`ID`, `NOM`, `SERVICE_ID`) VALUES
+(3, 'Salle Technique', 1),
+(4, 'Salle Eenergetique', 1),
+(5, 'Salle3', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -287,8 +337,6 @@ CREATE TABLE IF NOT EXISTS `sequence` (
 -- Contenu de la table `sequence`
 --
 
-INSERT INTO `sequence` (`SEQ_NAME`, `SEQ_COUNT`) VALUES
-('SEQ_GEN', '0');
 
 -- --------------------------------------------------------
 
@@ -301,6 +349,14 @@ CREATE TABLE IF NOT EXISTS `service` (
   `LIBELLE` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`ID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `service`
+--
+
+INSERT INTO `service` (`ID`, `LIBELLE`) VALUES
+(1, 'radar/cir'),
+(2, 'Communication/navigation');
 
 -- --------------------------------------------------------
 
@@ -318,6 +374,13 @@ CREATE TABLE IF NOT EXISTS `sortie` (
   KEY `FK_SORTIE_FOURNISSEUR_ID` (`FOURNISSEUR_ID`),
   KEY `FK_SORTIE_UTILISATEUR_ID` (`UTILISATEUR_ID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `sortie`
+--
+
+INSERT INTO `sortie` (`ID`, `DATESORTIE`, `NOMBRETOTAL`, `FOURNISSEUR_ID`, `UTILISATEUR_ID`) VALUES
+(1, '2018-06-09', 33, 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -341,6 +404,14 @@ CREATE TABLE IF NOT EXISTS `sortieitem` (
   KEY `FK_SORTIEITEM_MAGASIN_ID` (`MAGASIN_ID`),
   KEY `FK_SORTIEITEM_SORTIE_ID` (`SORTIE_ID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `sortieitem`
+--
+
+INSERT INTO `sortieitem` (`ID`, `NUMEROSERIE`, `OBSERVATION`, `QUANTITE`, `QUANTITEMINIMALE`, `EQUIPEMENT_ID`, `MAGASIN_ID`, `SALLE_ID`, `SORTIE_ID`) VALUES
+(101, 44, 'dddd', 4, 3, 51, 51, 3, 1),
+(102, 44, 'dddd', 4, 3, 52, 52, 4, 1);
 
 -- --------------------------------------------------------
 
@@ -455,7 +526,9 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
 --
 
 INSERT INTO `utilisateur` (`ID`, `BLOCKED`, `MDPCHANGED`, `NBRCNX`, `NOM`, `PASSWORD`, `PRENOM`, `TYPE`) VALUES
-('sas', NULL, 0, 1, 'sas', 'sas', 'sas', NULL);
+('sas', 0, 0, 0, 'sas', '96166e27af5a3c431ffa7247ad4e1b2d488008311887cedc655121565721cbce', 'sas', 0),
+('ana', 0, 0, 0, 'ana', '24d4b96f58da6d4a8512313bbd02a28ebf0ca95dec6e4c86ef78ce7f01e788ac', 'ana', 0);
+SET FOREIGN_KEY_CHECKS=1;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
