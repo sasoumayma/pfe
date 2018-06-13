@@ -14,7 +14,48 @@
         </ui:define>
 
         <ui:define name="body">
-            <h:form id="ResponsableMaintenanceListForm">
+            
+           <div class="ui-g">
+                <div class="ui-g-12">
+              <h:form id="ResponsableMaintenanceListFormSearch">
+                <p:fieldset id="StatField" legend="CRITERE DE RECHERCHE" style="margin-bottom:20px" >
+                    <p:panelGrid columns="8">
+
+       
+
+                         <p:outputLabel value="Prenom" for="prenom" />
+                         <p:inputText id="prenom" value="#{responsableMaintenanceController.selected.prenom}" title="Prenom" />
+                         
+                         <p:outputLabel value="Nom" for="nom" />
+                         <p:inputText id="nom" value="#{responsableMaintenanceController.selected.nom}" title="Nom" />
+                         
+                         <p:outputLabel value="Fonction" for="fonction" />
+                         <p:inputText id="fonction" value="#{responsableMaintenanceController.selected.fonction}" title="Fonction" />
+                         
+                         <p:outputLabel value="Matricule" for="matricule" />
+                         <p:inputText id="matricule" value="#{responsableMaintenanceController.selected.matricule}" title="Matricule" />
+                         
+                        <p:outputLabel value="Equipement" for="equipement" />
+                        <p:selectOneMenu id="equipement" value="#{responsableMaintenanceController.selected.equipement}" >
+                            <f:selectItem itemValue="#{null}" itemLabel="--SELECT--"></f:selectItem>
+                            <f:selectItems value="#{equipementController.itemsAvailableSelectOne}"
+                                           var="equipementItem"
+                                           itemValue="#{equipementItem}"
+                                           itemLabel="#{equipementItem.designation}"
+                                           />
+                        </p:selectOneMenu>
+                       
+                        <p:commandButton id="createButton" icon="ui-icon-search"   value="search"  />
+
+                    </p:panelGrid>
+                </p:fieldset>
+            </h:form>
+                </div>
+            </div>
+            
+            
+            
+                    <h:form id="ResponsableMaintenanceListForm">
                 <p:panel header="#{bundle.ListResponsableMaintenanceTitle}">
                     <p:dataTable id="datalist" value="#{responsableMaintenanceController.items}" var="item"
                                  selectionMode="single" selection="#{responsableMaintenanceController.selected}"
@@ -24,14 +65,32 @@
                                  rowsPerPageTemplate="10,20,30,40,50"
                                  >
 
-                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
-                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+                        <p:ajax event="rowSelect"   update=" viewButton editButton deleteButton"/>
+                        <p:ajax event="rowUnselect" update=" viewButton editButton deleteButton"/>
 
+               <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListResponsableMaintenanceTitle_prenom}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.prenom}"/>
+                        </p:column>  
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListResponsableMaintenanceTitle_nom}"/>
                             </f:facet>
                             <h:outputText value="#{item.nom}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListResponsableMaintenanceTitle_grade}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.grade}"/>
+                        </p:column>
+                         <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListResponsableMaintenanceTitle_fonction}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.fonction}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
@@ -45,53 +104,31 @@
                             </f:facet>
                             <h:outputText value="#{item.equipement}"/>
                         </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListResponsableMaintenanceTitle_utilisateur}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.utilisateur}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListResponsableMaintenanceTitle_prenom}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.prenom}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListResponsableMaintenanceTitle_grade}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.grade}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListResponsableMaintenanceTitle_fonction}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.fonction}"/>
-                        </p:column>
+                        
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListResponsableMaintenanceTitle_qualification}"/>
                             </f:facet>
                             <h:outputText value="#{item.qualification}"/>
                         </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListResponsableMaintenanceTitle_id}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.id}"/>
-                        </p:column>
+                        
+                         <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Action"/>
+                                    </f:facet>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search"  update=":ResponsableMaintenanceViewForm" oncomplete="PF('ResponsableMaintenanceViewDialog').show()" disabled="#{empty responsableMaintenanceController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil"  update=":ResponsableMaintenanceEditForm" oncomplete="PF('ResponsableMaintenanceEditDialog').show()" disabled="#{empty responsableMaintenanceController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"   actionListener="#{responsableMaintenanceController.destroy}" update=":growl,datalist" disabled="#{empty responsableMaintenanceController.selected}"/>
+                  
+                         
+                         </p:column>
                         <f:facet name="footer">
-                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{responsableMaintenanceController.prepareCreate}" update=":ResponsableMaintenanceCreateForm" oncomplete="PF('ResponsableMaintenanceCreateDialog').show()"/>
-                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":ResponsableMaintenanceViewForm" oncomplete="PF('ResponsableMaintenanceViewDialog').show()" disabled="#{empty responsableMaintenanceController.selected}"/>
-                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":ResponsableMaintenanceEditForm" oncomplete="PF('ResponsableMaintenanceEditDialog').show()" disabled="#{empty responsableMaintenanceController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{responsableMaintenanceController.destroy}" update=":growl,datalist" disabled="#{empty responsableMaintenanceController.selected}"/>
-                        </f:facet>
-                    </p:dataTable>
+                 <p:commandButton id="exportButton" icon="ui-icon-pdf"   value="Export" action="#{responsableMaintenanceController.generatePdf()}" ajax="false"/>
+                </f:facet>
+                             </p:dataTable>
                 </p:panel>
             </h:form>
 
-            <ui:include src="Create.xhtml"/>
             <ui:include src="Edit.xhtml"/>
             <ui:include src="View.xhtml"/>
         </ui:define>

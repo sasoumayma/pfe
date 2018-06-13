@@ -4,6 +4,7 @@ import bean.Sortie;
 import bean.SortieItem;
 import controller.util.JsfUtil;
 import controller.util.JsfUtil.PersistAction;
+import java.io.IOException;
 import service.SortieFacade;
 
 import java.io.Serializable;
@@ -20,6 +21,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import net.sf.jasperreports.engine.JRException;
 import service.SortieItemFacade;
 
 @Named("sortieController")
@@ -27,13 +29,19 @@ import service.SortieItemFacade;
 public class SortieController implements Serializable {
 
     @EJB
+    private service.SortieItemFacade sortieItemFacade;
+    @EJB
     private service.SortieFacade ejbFacade;
     private List<Sortie> items = null;
     private Sortie selected;
-    @EJB
-    private service.SortieItemFacade sortieItemFacade;
+    
     private SortieItem sortieItem;
     private List<SortieItem> sortieItems;
+    
+    public void generatePdf() throws JRException, IOException {
+        sortieItemFacade.generatePdf();
+        FacesContext.getCurrentInstance().responseComplete();
+    }
 
     public void findBySortie(Sortie sortie) {
         sortieItems = (sortieItemFacade.findBySortie(sortie));

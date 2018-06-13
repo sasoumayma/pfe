@@ -8,10 +8,15 @@ package service;
 import bean.EntreeItem;
 import bean.Entree;
 import bean.EntreeItem;
+import controller.util.PdfUtil;
+import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import net.sf.jasperreports.engine.JRException;
 
 /**
  *
@@ -22,6 +27,13 @@ public class EntreeItemFacade extends AbstractFacade<EntreeItem> {
 
     @PersistenceContext(unitName = "gmaov3PU")
     private EntityManager em;
+    
+   
+    public void generatePdf() throws JRException, IOException{
+        Map<String,Object> params = new HashMap();
+        params.put("responsable", "Mme HAGCHI Faiza");
+        PdfUtil.generatePdf(findAll(), params, "entreeItem", "/jasper/entreeItem.jasper");
+    }
 
      public void save(Entree entree, List<EntreeItem> entreeItems) {
         for (EntreeItem entreeItem : entreeItems) {

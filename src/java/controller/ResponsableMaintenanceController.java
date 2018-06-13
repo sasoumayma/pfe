@@ -32,6 +32,9 @@ public class ResponsableMaintenanceController implements Serializable {
     }
 
     public ResponsableMaintenance getSelected() {
+        if (selected == null) {
+            selected = new ResponsableMaintenance();
+        }
         return selected;
     }
 

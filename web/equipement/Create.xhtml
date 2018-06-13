@@ -6,50 +6,153 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
 
-    <ui:composition>
+    <ui:composition template="/template.xhtml">
+        
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListEquipementTitle}"></h:outputText>
+        </ui:define>
+        
+        
+  <ui:define name="body">
+      
+            <div class="ui-g">
+                <div class="ui-g-4">
+                    <p:panel header="INFO EQUIPEMENT" style="margin-top:20px">
+                        <h:form id="EquipementCreateForm">
+                            <h:panelGroup id="display">
+                                <p:panelGrid columns="2" rendered="#{equipementController.selected != null}">
+                                    
+                                    
+                                    <p:outputLabel value="#{bundle.CreateEquipementLabel_designation}" for="designation" />
+                                    <p:inputText id="designation" value="#{equipementController.selected.designation}" title="#{bundle.CreateEquipementTitle_designation}" />
+                                    <p:outputLabel value="#{bundle.CreateEquipementLabel_type}" for="type" />
+                                    <p:inputText id="type" value="#{equipementController.selected.type}" title="#{bundle.CreateEquipementTitle_type}" />
+                                    <p:outputLabel value="#{bundle.CreateEquipementLabel_emplacement}" for="emplacement" />
+                                    <p:inputText id="emplacement" value="#{equipementController.selected.emplacement}" title="#{bundle.CreateEquipementTitle_emplacement}" />
+                                    <p:outputLabel value="#{bundle.CreateEquipementLabel_affectation}" for="affectation" />
+                                    <p:inputText id="affectation" value="#{equipementController.selected.affectation}" title="#{bundle.CreateEquipementTitle_affectation}" />
+                                    <p:outputLabel value="#{bundle.CreateEquipementLabel_marque}" for="marque" />
+                                    <p:inputText id="marque" value="#{equipementController.selected.marque}" title="#{bundle.CreateEquipementTitle_marque}" />
+                                    <p:outputLabel value="#{bundle.CreateEquipementLabel_fournisseur}" for="fournisseur" />
+                                    <p:selectOneMenu id="fournisseur" value="#{equipementController.selected.fournisseur}" >
+                                        <f:selectItems value="#{fournisseurController.itemsAvailableSelectOne}"
+                                                       var="fournisseurItem"
+                                                       itemValue="#{fournisseurItem}" itemLabel="#{fournisseurItem.nom}"/>
+                                    </p:selectOneMenu>
+                                    
 
-        <p:dialog id="EquipementCreateDlg" widgetVar="EquipementCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateEquipementTitle}">
-            <h:form id="EquipementCreateForm">
-                <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{equipementController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreateEquipementLabel_designation}" for="designation" />
-                        <p:inputText id="designation" value="#{equipementController.selected.designation}" title="#{bundle.CreateEquipementTitle_designation}" />
-                        <p:outputLabel value="#{bundle.CreateEquipementLabel_description}" for="description" />
-                        <p:inputText id="description" value="#{equipementController.selected.description}" title="#{bundle.CreateEquipementTitle_description}" />
-                        <p:outputLabel value="#{bundle.CreateEquipementLabel_type}" for="type" />
-                        <p:inputText id="type" value="#{equipementController.selected.type}" title="#{bundle.CreateEquipementTitle_type}" />
-                        <p:outputLabel value="#{bundle.CreateEquipementLabel_emplacement}" for="emplacement" />
-                        <p:inputText id="emplacement" value="#{equipementController.selected.emplacement}" title="#{bundle.CreateEquipementTitle_emplacement}" />
-                        <p:outputLabel value="#{bundle.CreateEquipementLabel_affectation}" for="affectation" />
-                        <p:inputText id="affectation" value="#{equipementController.selected.affectation}" title="#{bundle.CreateEquipementTitle_affectation}" />
-                        <p:outputLabel value="#{bundle.CreateEquipementLabel_marque}" for="marque" />
-                        <p:inputText id="marque" value="#{equipementController.selected.marque}" title="#{bundle.CreateEquipementTitle_marque}" />
-                        <p:outputLabel value="#{bundle.CreateEquipementLabel_fournisseur}" for="fournisseur" />
-                        <p:selectOneMenu id="fournisseur" value="#{equipementController.selected.fournisseur}" >
-                            <f:selectItems value="#{fournisseurController.itemsAvailableSelectOne}"
-                                           var="fournisseurItem"
-                                           itemValue="#{fournisseurItem}"/>
-                        </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.CreateEquipementLabel_dateMiseEnService}" for="dateMiseEnService" />
-                        <p:calendar id="dateMiseEnService" pattern="MM/dd/yyyy" value="#{equipementController.selected.dateMiseEnService}" title="#{bundle.EditEquipementTitle_dateMiseEnService}"  showOn="button"/>
-                        <p:outputLabel value="#{bundle.CreateEquipementLabel_details}" for="details" />
-                        <p:inputText id="details" value="#{equipementController.selected.details}" title="#{bundle.CreateEquipementTitle_details}" />
-                        <p:outputLabel value="#{bundle.CreateEquipementLabel_observation}" for="observation" />
-                        <p:inputText id="observation" value="#{equipementController.selected.observation}" title="#{bundle.CreateEquipementTitle_observation}" />
-                        <p:outputLabel value="#{bundle.CreateEquipementLabel_utilisateur}" for="utilisateur" />
-                        <p:selectOneMenu id="utilisateur" value="#{equipementController.selected.utilisateur}" >
-                            <f:selectItems value="#{utilisateurController.itemsAvailableSelectOne}"
-                                           var="utilisateurItem"
-                                           itemValue="#{utilisateurItem}"/>
-                        </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.CreateEquipementLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{equipementController.selected.id}" title="#{bundle.CreateEquipementTitle_id}" />
-                    </p:panelGrid>
-                    <p:commandButton actionListener="#{equipementController.create}" value="#{bundle.Save}" update="display,:EquipementListForm:datalist,:growl" oncomplete="handleSubmit(args,'EquipementCreateDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="EquipementCreateDialog.hide()"/>
-                </h:panelGroup>
-            </h:form>
-        </p:dialog>
 
+                                    
+                                    <p:outputLabel value="Date de mise en service" for="dateMiseEnService" />
+                                    <p:calendar id="dateMiseEnService" pattern="MM/dd/yyyy" value="#{equipementController.selected.dateMiseEnService}" title="dateMiseEnService"  showOn="button"/>
+
+                                    <p:outputLabel value="#{bundle.CreateEquipementLabel_details}" for="details" />
+                                    <p:inputText id="details" value="#{equipementController.selected.details}" title="#{bundle.CreateEquipementTitle_details}" />
+                                    <p:outputLabel value="#{bundle.CreateEquipementLabel_description}" for="description" />
+                                    <p:inputText id="description" value="#{equipementController.selected.description}" title="#{bundle.CreateEquipementTitle_description}" />
+                                    <p:outputLabel value="#{bundle.CreateEquipementLabel_observation}" for="observation" />
+                                    <p:inputText id="observation" value="#{equipementController.selected.observation}" title="#{bundle.CreateEquipementTitle_observation}" />
+                                    
+                                   
+                                 
+                                    
+                                    
+                                    
+                                    
+                                    
+                                </p:panelGrid>
+                                <p:commandButton actionListener="#{equipementController.save()}" icon="ui-icon-plus" value="ADD" update=":EquipementListForm:datalist" />
+                            </h:panelGroup>
+                        </h:form>
+                    </p:panel>
+                </div>
+                
+                
+                <div class="ui-g-8">
+                    <p:panel header="PLAN EQUIPEMENT LIST" style="margin-top:20px">
+                        <h:form id="EquipementListForm">
+                            <p:panel header="#{bundle.ListEquipementTitle}">
+                                <p:dataTable id="datalist" value="#{equipementController.items}" var="item"
+                                             selectionMode="single" selection="#{equipementController.selected}"
+                                             paginator="true"
+                                             rowKey="#{item.id}"
+                                             rows="10"
+                                             rowsPerPageTemplate="10,20,30,40,50"
+                                             >
+                                    
+                                    
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="#{bundle.ListEquipementTitle_designation}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.designation}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="#{bundle.ListEquipementTitle_type}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.type}"/>
+                                    </p:column>
+                                   
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="#{bundle.ListEquipementTitle_emplacement}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.emplacement}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="#{bundle.ListEquipementTitle_affectation}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.affectation}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="#{bundle.ListEquipementTitle_marque}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.marque}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="#{bundle.ListEquipementTitle_fournisseur}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.fournisseur.nom}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="#{bundle.ListEquipementTitle_dateMiseEnService}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.dateMiseEnService}">
+                                         <f:convertDateTime pattern="MM/dd/yyyy" />
+                                        </h:outputText>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="#{bundle.ListEquipementTitle_details}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.details}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="#{bundle.ListEquipementTitle_description}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.description}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="#{bundle.ListEquipementTitle_observation}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.observation}"/>
+                                    </p:column>
+                                    
+                                   
+                                </p:dataTable>
+                            </p:panel>
+                        </h:form>
+                    </p:panel>
+                </div>
+            </div>
+        </ui:define>
+      
     </ui:composition>
 </html>

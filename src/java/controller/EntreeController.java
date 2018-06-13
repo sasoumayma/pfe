@@ -4,6 +4,7 @@ import bean.Entree;
 import bean.EntreeItem;
 import controller.util.JsfUtil;
 import controller.util.JsfUtil.PersistAction;
+import java.io.IOException;
 import service.EntreeFacade;
 
 import java.io.Serializable;
@@ -20,6 +21,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import net.sf.jasperreports.engine.JRException;
 import service.EntreeItemFacade;
 
 @Named("entreeController")
@@ -27,14 +29,19 @@ import service.EntreeItemFacade;
 public class EntreeController implements Serializable {
 
     @EJB
+    private service.EntreeItemFacade entreeItemFacade;
+    @EJB
     private service.EntreeFacade ejbFacade;
     private List<Entree> items = null;
     private Entree selected;
-    
-      @EJB
-    private service.EntreeItemFacade entreeItemFacade;
+
     private EntreeItem entreeItem;
     private List<EntreeItem> entreeItems;
+
+    public void generatePdf() throws JRException, IOException {
+        entreeItemFacade.generatePdf();
+        FacesContext.getCurrentInstance().responseComplete();
+    }
 
     public void findByEntree(Entree entree) {
         entreeItems = (entreeItemFacade.findByEntree(entree));
@@ -68,7 +75,6 @@ public class EntreeController implements Serializable {
         setEntreeItems(null);
     }
 
-    
     public EntreeController() {
     }
 
@@ -76,15 +82,13 @@ public class EntreeController implements Serializable {
         return ejbFacade;
     }
 
-   
-
     public void setEntreeItemFacade(EntreeItemFacade entreeItemFacade) {
         this.entreeItemFacade = entreeItemFacade;
     }
 
     public EntreeItem getEntreeItem() {
-        if(entreeItem==null){
-            entreeItem= new EntreeItem();
+        if (entreeItem == null) {
+            entreeItem = new EntreeItem();
         }
         return entreeItem;
     }
@@ -94,8 +98,8 @@ public class EntreeController implements Serializable {
     }
 
     public List<EntreeItem> getEntreeItems() {
-         if(entreeItems==null){
-            entreeItems= new ArrayList();
+        if (entreeItems == null) {
+            entreeItems = new ArrayList();
         }
         return entreeItems;
     }

@@ -6,44 +6,128 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
 
-    <ui:composition>
+    <ui:composition template="/template.xhtml">
+        
+      <ui:define name="title">
+            <h:outputText value="#{bundle.ListResponsableMaintenanceTitle}"></h:outputText>
+        </ui:define>
+        
+               
+  <ui:define name="body">
+      
+      <div class="ui-g" align="center">
+                <div class="ui-g-12" align="center"> 
+                    <p:panel header="INFO Responsable" style="margin-top:20px" >
+                        <h:form id="ResponsableMaintenanceCreateForm">
+                            <h:panelGroup id="display" >
+                                <p:panelGrid columns="8" rendered="#{responsableMaintenanceController.selected != null}">
+                                    
+                                    
+                                    
+                                    <p:outputLabel value="#{bundle.CreateResponsableMaintenanceLabel_prenom}" for="prenom" />
+                                    <p:inputText id="prenom" value="#{responsableMaintenanceController.selected.prenom}" title="#{bundle.CreateResponsableMaintenanceTitle_prenom}" />
+                                    
+                                    <p:outputLabel value="#{bundle.CreateResponsableMaintenanceLabel_nom}" for="nom" />
+                                    <p:inputText id="nom" value="#{responsableMaintenanceController.selected.nom}" title="#{bundle.CreateResponsableMaintenanceTitle_nom}" />
+                                    
+                                    <p:outputLabel value="#{bundle.CreateResponsableMaintenanceLabel_grade}" for="grade" />
+                                    <p:inputText id="grade" value="#{responsableMaintenanceController.selected.grade}" title="#{bundle.CreateResponsableMaintenanceTitle_grade}" />
+                                    
+                                    <p:outputLabel value="#{bundle.CreateResponsableMaintenanceLabel_fonction}" for="fonction" />
+                                    <p:inputText id="fonction" value="#{responsableMaintenanceController.selected.fonction}" title="#{bundle.CreateResponsableMaintenanceTitle_fonction}" />
+                                    
+                                    <p:outputLabel value="#{bundle.CreateResponsableMaintenanceLabel_matricule}" for="matricule" />
+                                    <p:inputText id="matricule" value="#{responsableMaintenanceController.selected.matricule}" title="#{bundle.CreateResponsableMaintenanceTitle_matricule}" />
+                                    
+                                    <p:outputLabel value="#{bundle.CreateResponsableMaintenanceLabel_qualification}" for="qualification" />
+                                    <p:inputText id="qualification" value="#{responsableMaintenanceController.selected.qualification}" title="#{bundle.CreateResponsableMaintenanceTitle_qualification}" />
+                                    
+                                     <p:outputLabel value="#{bundle.CreateResponsableMaintenanceLabel_equipement}" for="equipement" />
+                                     <p:selectOneMenu id="equipement" value="#{responsableMaintenanceController.selected.equipement}" >
+                                         <f:selectItems value="#{equipementController.itemsAvailableSelectOne}"
+                                                       var="equipementItem"
+                                                       itemValue="#{equipementItem}" itemLabel="#{equipementItem.designation}"/>
+                                    </p:selectOneMenu>
+                                    
+                                   
+                                    
+                                </p:panelGrid>
+                                <p:commandButton actionListener="#{responsableMaintenanceController.save()}" icon="ui-icon-plus" value="ADD"  update=":ResponsableMaintenanceListForm:datalist" />
+                            </h:panelGroup>
+                        </h:form>
+                    </p:panel>
+                </div>
+                
+                
+                <div class="ui-g-12">
+                    <p:panel header="PLAN ResponsableMaintenance LIST" style="margin-top:20px">
+                        <h:form id="ResponsableMaintenanceListForm">
+                            <p:panel header="#{bundle.ListResponsableMaintenanceTitle}">
+                                <p:dataTable id="datalist" value="#{responsableMaintenanceController.items}" var="item"
+                                             selectionMode="single" selection="#{responsableMaintenanceController.selected}"
+                                             paginator="true"
+                                             rowKey="#{item.id}"
+                                             rows="10"
+                                             rowsPerPageTemplate="10,20,30,40,50"
+                                             >
 
-        <p:dialog id="ResponsableMaintenanceCreateDlg" widgetVar="ResponsableMaintenanceCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateResponsableMaintenanceTitle}">
-            <h:form id="ResponsableMaintenanceCreateForm">
-                <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{responsableMaintenanceController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreateResponsableMaintenanceLabel_nom}" for="nom" />
-                        <p:inputText id="nom" value="#{responsableMaintenanceController.selected.nom}" title="#{bundle.CreateResponsableMaintenanceTitle_nom}" />
-                        <p:outputLabel value="#{bundle.CreateResponsableMaintenanceLabel_matricule}" for="matricule" />
-                        <p:inputText id="matricule" value="#{responsableMaintenanceController.selected.matricule}" title="#{bundle.CreateResponsableMaintenanceTitle_matricule}" />
-                        <p:outputLabel value="#{bundle.CreateResponsableMaintenanceLabel_equipement}" for="equipement" />
-                        <p:selectOneMenu id="equipement" value="#{responsableMaintenanceController.selected.equipement}" >
-                            <f:selectItems value="#{equipementController.itemsAvailableSelectOne}"
-                                           var="equipementItem"
-                                           itemValue="#{equipementItem}"/>
-                        </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.CreateResponsableMaintenanceLabel_utilisateur}" for="utilisateur" />
-                        <p:selectOneMenu id="utilisateur" value="#{responsableMaintenanceController.selected.utilisateur}" >
-                            <f:selectItems value="#{utilisateurController.itemsAvailableSelectOne}"
-                                           var="utilisateurItem"
-                                           itemValue="#{utilisateurItem}"/>
-                        </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.CreateResponsableMaintenanceLabel_prenom}" for="prenom" />
-                        <p:inputText id="prenom" value="#{responsableMaintenanceController.selected.prenom}" title="#{bundle.CreateResponsableMaintenanceTitle_prenom}" />
-                        <p:outputLabel value="#{bundle.CreateResponsableMaintenanceLabel_grade}" for="grade" />
-                        <p:inputText id="grade" value="#{responsableMaintenanceController.selected.grade}" title="#{bundle.CreateResponsableMaintenanceTitle_grade}" />
-                        <p:outputLabel value="#{bundle.CreateResponsableMaintenanceLabel_fonction}" for="fonction" />
-                        <p:inputText id="fonction" value="#{responsableMaintenanceController.selected.fonction}" title="#{bundle.CreateResponsableMaintenanceTitle_fonction}" />
-                        <p:outputLabel value="#{bundle.CreateResponsableMaintenanceLabel_qualification}" for="qualification" />
-                        <p:inputText id="qualification" value="#{responsableMaintenanceController.selected.qualification}" title="#{bundle.CreateResponsableMaintenanceTitle_qualification}" />
-                        <p:outputLabel value="#{bundle.CreateResponsableMaintenanceLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{responsableMaintenanceController.selected.id}" title="#{bundle.CreateResponsableMaintenanceTitle_id}" />
-                    </p:panelGrid>
-                    <p:commandButton actionListener="#{responsableMaintenanceController.create}" value="#{bundle.Save}" update="display,:ResponsableMaintenanceListForm:datalist,:growl" oncomplete="handleSubmit(args,'ResponsableMaintenanceCreateDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="ResponsableMaintenanceCreateDialog.hide()"/>
-                </h:panelGroup>
-            </h:form>
-        </p:dialog>
+                                  
+                         <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListResponsableMaintenanceTitle_prenom}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.prenom}"/>
+                        </p:column>  
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListResponsableMaintenanceTitle_nom}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nom}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListResponsableMaintenanceTitle_grade}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.grade}"/>
+                        </p:column>
+                         <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListResponsableMaintenanceTitle_fonction}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.fonction}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListResponsableMaintenanceTitle_matricule}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.matricule}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListResponsableMaintenanceTitle_equipement}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.equipement}"/>
+                        </p:column>
+                        
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListResponsableMaintenanceTitle_qualification}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.qualification}"/>
+                        </p:column>
+                        
+                                    
+                                    
+                                </p:dataTable>
+                            </p:panel>
+                        </h:form>
+                    </p:panel>
+                </div>
+            </div>
+        </ui:define>
 
+        
+        
+       
     </ui:composition>
 </html>

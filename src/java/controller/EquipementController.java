@@ -1,8 +1,14 @@
 package controller;
 
+import static bean.Epuisement_.fournisseur;
 import bean.Equipement;
+import static bean.Equipement_.designation;
+import static bean.Equipement_.emplacement;
+import static bean.Equipement_.marque;
+import static bean.Equipement_.type;
 import controller.util.JsfUtil;
 import controller.util.JsfUtil.PersistAction;
+import java.io.IOException;
 import service.EquipementFacade;
 
 import java.io.Serializable;
@@ -18,6 +24,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import net.sf.jasperreports.engine.JRException;
 
 @Named("equipementController")
 @SessionScoped
@@ -27,11 +34,31 @@ public class EquipementController implements Serializable {
     private service.EquipementFacade ejbFacade;
     private List<Equipement> items = null;
     private Equipement selected;
+    
+    //
+     public void save() {
+        ejbFacade.create(getSelected());
+        items=ejbFacade.findAll();
+        initAttribute();
+    }
+      private void initAttribute() {
+        setSelected(null);
+        
+    }
+    //
+    
+        public void generatePdf() throws JRException, IOException{
+            ejbFacade.generatePdf();
+            FacesContext.getCurrentInstance().responseComplete();
+        }
 
     public EquipementController() {
     }
 
     public Equipement getSelected() {
+        if (selected == null) {
+            selected = new Equipement();
+        }
         return selected;
     }
 

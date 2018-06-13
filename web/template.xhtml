@@ -19,33 +19,47 @@
             <p:layoutUnit position="north" size="65" header="#{bundle.AppName}">
                 <h:form id="menuForm">
                     <p:menubar>
-                        <p:menuitem value="#{bundle.Home}" outcome="/index" icon="ui-icon-home"/>
-                        <p:submenu label="#{bundle.Maintenance}">
-                            <p:menuitem value="Categorie" outcome="/categorie/List.xhtml" />
-                            <p:menuitem value="Device" outcome="/device/List.xhtml" />
-                            <p:menuitem value="Entree" outcome="/entree/List.xhtml" />
-                            <p:menuitem value="EntreeItem" outcome="/entreeItem/List.xhtml" />
-                            <p:menuitem value="Epuisement" outcome="/epuisement/List.xhtml" />
-                            <p:menuitem value="Equipement" outcome="/equipement/List.xhtml" />
-                            <p:menuitem value="Fournisseur" outcome="/fournisseur/List.xhtml" />
-                            <p:menuitem value="Magasin" outcome="/magasin/List.xhtml" />
-                            <p:menuitem value="Maintenance" outcome="/maintenance/List.xhtml" />
-                            <p:menuitem value="MaintenanceItem" outcome="/maintenanceItem/List.xhtml" />
-                            <p:menuitem value="Planing" outcome="/planing/List.xhtml" />
-                            <p:menuitem value="PlaningItem" outcome="/planingItem/List.xhtml" />
-                            <p:menuitem value="ResponsableMaintenance" outcome="/responsableMaintenance/List.xhtml" />
-                            <p:menuitem value="Salle" outcome="/salle/List.xhtml" />
-                            <p:menuitem value="Service" outcome="/service/List.xhtml" />
-                            <p:menuitem value="Sortie" outcome="/sortie/List.xhtml" />
-                            <p:menuitem value="SortieItem" outcome="/sortieItem/List.xhtml" />
-                            <p:menuitem value="Stock" outcome="/stock/List.xhtml" />
-                            <p:menuitem value="Transfert" outcome="/transfert/List.xhtml" />
-                            <p:menuitem value="TransfertItem" outcome="/transfertItem/List.xhtml" />
-                            <p:menuitem value="TypeIntervention" outcome="/typeIntervention/List.xhtml" />
-                            <p:menuitem value="TypeMaintenance" outcome="/typeMaintenance/List.xhtml" />
-                            <p:menuitem value="TypePlaning" outcome="/typePlaning/List.xhtml" />
-                            <p:menuitem value="Utilisateur" outcome="/utilisateur/List.xhtml" />
+                        <p:menuitem value="#{bundle.Home}" outcome="/menu/menu.xhtml" icon="ui-icon-home"/>
+                            
+                            <p:submenu label="Entree" icon="ui-icon-mail-forward">
+                            <p:menuitem value="List" outcome="/entree/List.xhtml" />
+                            <p:menuitem value="Create" outcome="/entree/Create.xhtml" />
                         </p:submenu>
+                        <p:submenu label="Sortie" icon="ui-icon-angle-down">
+                            <p:menuitem value="List" outcome="/sortie/List.xhtml" />
+                            <p:menuitem value="Create" outcome="/sortie/Create.xhtml" />
+                        </p:submenu>
+                        <p:submenu label="Epuisement" icon="ui-icon-trash">
+                            <p:menuitem value="List" outcome="/epuisement/List.xhtml" />
+                            <p:menuitem value="Create" outcome="/epuisement/Create.xhtml" />
+                        </p:submenu>
+                        <p:submenu label="Equipement">
+                            <p:menuitem value="List" outcome="/equipement/List.xhtml" />
+                            <p:menuitem value="Create" outcome="/equipement/Create.xhtml" />
+                        </p:submenu>
+                        <p:submenu label="Maintenance" icon="ui-icon-cogs">
+                            <p:menuitem value="Maitenance préventive"  />
+                            <p:menuitem value="Maitenance corrective"  />
+                        </p:submenu>
+                        <p:submenu label="Personnel de maintenance">
+                            <p:menuitem value="List" outcome="/responsableMaintenance/List.xhtml" />
+                            <p:menuitem value="Create" outcome="/responsableMaintenance/Create.xhtml"/>
+                        </p:submenu>
+                        <p:submenu label="Fournisseur" icon="ui-icon-angle-down">
+                            <p:menuitem value="List"  />
+                            <p:menuitem value="Create"  />
+                        </p:submenu>
+                        <p:submenu label="Statistique" icon="ui-icon-signal">
+                            <p:menuitem value="List"  />
+                        </p:submenu>
+                       
+                      
+                            
+                            
+                            
+                            
+                            
+                            
                     </p:menubar>
                 </h:form>
             </p:layoutUnit>

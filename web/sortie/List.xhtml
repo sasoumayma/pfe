@@ -14,7 +14,41 @@
         </ui:define>
 
         <ui:define name="body">
+            
+                  
+         <div class="ui-g">
+                <div class="ui-g-12">
+              <h:form id="StatListFormSearch">
+                <p:fieldset id="StatField" legend="Critere de recherche" style="margin-bottom:20px" >
+                    <p:panelGrid columns="10">
 
+       
+                        <p:outputLabel value="Nombre Tolale" for="nombreTotal" />
+                        <p:inputText id="nombreTotal" value="#{sortieController.selected.nombreTotal}" title="#{bundle.CreateSortieTitle_nombreTotal}" />
+
+                        <p:outputLabel value="Date de sortie" for="dateSortie" />
+                        <p:calendar id="dateSortie" pattern="MM/dd/yyyy" value="#{sortieController.selected.dateSortie}" title="dateSortie"  showOn="button"/>
+
+                        
+                        <p:outputLabel value="Fournisseur" for="fournisseur" />
+                        <p:selectOneMenu id="fournisseur" value="#{sortieController.selected.fournisseur}" >
+                            <f:selectItem itemValue="#{null}" itemLabel="--SELECT--"></f:selectItem>
+                            <f:selectItems value="#{fournisseurController.itemsAvailableSelectOne}"
+                                           var="fournisseurItem"
+                                           itemValue="#{fournisseurItem}"
+                                           itemLabel="#{fournisseurItem.nom}"
+                                           />
+                        </p:selectOneMenu>
+                      
+                        <p:commandButton id="createButton" icon="ui-icon-search"   value="search" actionListener="#{statistiqueController.afficherChartIncident()}"  />
+
+                    </p:panelGrid>
+                </p:fieldset>
+            </h:form>
+                </div>
+            </div>
+            
+            
             <div class="ui-g">
                 <div class="ui-g-6">
                     <h:form id="SortieListForm">
@@ -26,18 +60,15 @@
                                          rows="10"
                                          rowsPerPageTemplate="10,20,30,40,50"
                                          >
+                                <p:ajax event="rowSelect"   update=" editButton deleteButton"/>
+                                <p:ajax event="rowUnselect" update=" editButton deleteButton"/>
+
 
                                 <p:column>
                                     <f:facet name="header">
                                         <h:outputText value="#{bundle.ListSortieTitle_utilisateur}"/>
                                     </f:facet>
                                     <h:outputText value="#{item.utilisateur}"/>
-                                </p:column>
-                                <p:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="#{bundle.ListSortieTitle_id}"/>
-                                    </f:facet>
-                                    <h:outputText value="#{item.id}"/>
                                 </p:column>
                                 <p:column>
                                     <f:facet name="header">
@@ -64,6 +95,7 @@
                                         <h:outputText value="Action"/>
                                     </f:facet>
                                     <p:commandButton id="detailButton" icon="ui-icon-plus" actionListener="#{sortieController.findBySortie(item)}" update=":SortieItemListForm:datalist , :SortieListForm:datalist" />
+                                    <p:commandButton id="editButton" icon="ui-icon-pencil"   update=":SortieEditForm" oncomplete="PF('SortieEditDialog').show()" disabled="#{empty sortieController.selected}" />
                                     <p:commandButton id="deleteButton" icon="ui-icon-trash" actionListener="#{sortieController.remove(item)}" update=":SortieItemListForm:datalist , :SortieListForm:datalist" />
                                 </p:column>
                             </p:dataTable>
@@ -96,12 +128,6 @@
                                     </p:column>
                                     <p:column>
                                         <f:facet name="header">
-                                            <h:outputText value="#{bundle.ListSortieItemTitle_id}"/>
-                                        </f:facet>
-                                        <h:outputText value="#{item.id}"/>
-                                    </p:column>
-                                    <p:column>
-                                        <f:facet name="header">
                                             <h:outputText value="#{bundle.ListSortieItemTitle_quantite}"/>
                                         </f:facet>
                                         <h:outputText value="#{item.quantite}"/>
@@ -130,13 +156,17 @@
                                         </f:facet>
                                         <h:outputText value="#{item.quantiteMinimale}"/>
                                     </p:column>
-
+<f:facet name="footer">
+                 <p:commandButton id="exportButton" icon="ui-icon-pdf"   value="Export" action="#{sortieController.generatePdf()}" ajax="false"/>
+                </f:facet>
                                 </p:dataTable>
                             </p:panel>
                         </h:form>
                     </p:panel>
                 </div>
             </div>
+                        <ui:include src="Edit.xhtml"/>
+
         </ui:define>
     </ui:composition>
 

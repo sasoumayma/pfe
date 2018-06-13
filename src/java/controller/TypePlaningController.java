@@ -1,5 +1,6 @@
 package controller;
 
+import bean.EntreeItem;
 import bean.TypePlaning;
 import controller.util.JsfUtil;
 import controller.util.JsfUtil.PersistAction;
@@ -32,6 +33,9 @@ public class TypePlaningController implements Serializable {
     }
 
     public TypePlaning getSelected() {
+        if (selected == null) {
+            selected = new TypePlaning();
+        }
         return selected;
     }
 

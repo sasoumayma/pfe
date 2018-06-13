@@ -15,8 +15,8 @@
 
         <ui:define name="body">
             <div class="ui-g">
-                <div class="ui-g-12">
-                    <p:panel header="INFO SORIE" style="margin-top:20px;">
+                <div class="ui-g-12" align="center">
+                    <p:panel header="INFO SORTIE" style="margin-top:20px;">
                         <h:form id="EntreeCreateForm">
                             <h:panelGroup id="display">
                                 <p:panelGrid columns="6" rendered="#{entreeController.selected != null}">
@@ -24,23 +24,20 @@
                                     <p:selectOneMenu id="utilisateur" value="#{entreeController.selected.utilisateur}" >
                                         <f:selectItems value="#{utilisateurController.itemsAvailableSelectOne}"
                                                        var="utilisateurItem"
-                                                       itemValue="#{utilisateurItem}"/>
+                                                       itemValue="#{utilisateurItem}" itemLabel="#{utilisateurItem.nom}"/>
                                     </p:selectOneMenu>
 
                                     <p:outputLabel value="#{bundle.CreateEntreeLabel_dateEntree}" for="dateEntree" />
                                     <p:calendar id="dateEntree" pattern="MM/dd/yyyy" value="#{entreeController.selected.dateEntree}" title="#{bundle.EditEntreeTitle_dateEntree}"  showOn="button"/>
 
-                                    <p:outputLabel value="#{bundle.CreateEntreeLabel_nombreTotal}" for="nombreTotal" />
-                                    <p:inputText id="nombreTotal" value="#{entreeController.selected.nombreTotal}" title="#{bundle.CreateEntreeTitle_nombreTotal}" />
-
                                     <p:outputLabel value="#{bundle.CreateEntreeLabel_fournisseur}" for="fournisseur" />
                                     <p:selectOneMenu id="fournisseur" value="#{entreeController.selected.fournisseur}" >
                                         <f:selectItems value="#{fournisseurController.itemsAvailableSelectOne}"
                                                        var="fournisseurItem"
-                                                       itemValue="#{fournisseurItem}"/>
+                                                       itemValue="#{fournisseurItem}" itemLabel="#{fournisseurItem.nom}"/>
                                     </p:selectOneMenu>
-                                    <p:commandButton id="createButton" icon="ui-icon-plus"   value="SAVE" actionListener="#{entreeController.save()}" update=":EntreeItemCreateForm, :EntreeCreateForm , :EntreeItemListForm:datalist" />
-                                    <p:commandButton id="resetButton" icon="ui-icon-pencil"   value="RESET" actionListener="#{entreeController.reset()}" update=":EntreeItemCreateForm, :EntreeCreateForm , :EntreeItemListForm:datalist" />
+                                    <p:commandButton id="createButton" icon="ui-icon-plus"   value="Enregistrer" actionListener="#{entreeController.save()}" update=":EntreeItemCreateForm, :EntreeCreateForm , :EntreeItemListForm:datalist" />
+                                    <p:commandButton id="resetButton" icon="ui-icon-pencil"   value="Vider" actionListener="#{entreeController.reset()}" update=":EntreeItemCreateForm, :EntreeCreateForm , :EntreeItemListForm:datalist" />
                                 </p:panelGrid>
                             </h:panelGroup>
                         </h:form>
@@ -59,7 +56,7 @@
                                     <p:selectOneMenu id="magasin" value="#{entreeController.entreeItem.magasin}" >
                                         <f:selectItems value="#{magasinController.itemsAvailableSelectOne}"
                                                        var="magasinItem"
-                                                       itemValue="#{magasinItem}"/>
+                                                       itemValue="#{magasinItem}" itemLabel="#{magasinItem.nom}"/>
                                     </p:selectOneMenu>
 
                                     <p:outputLabel value="#{bundle.CreateEntreeItemLabel_quantite}" for="quantite" />
@@ -78,7 +75,7 @@
                                                        itemValue="#{equipementItem}" itemLabel="#{equipementItem.designation}"/>
                                     </p:selectOneMenu>                                   
                                 </p:panelGrid>
-                                <p:commandButton actionListener="#{entreeController.add()}" icon="ui-icon-plus" value="ADD" update=":EntreeItemListForm:datalist" />
+                                <p:commandButton actionListener="#{entreeController.add()}" icon="ui-icon-plus" value="Ajouter" update=":EntreeItemListForm:datalist" />
                             </h:panelGroup>
                         </h:form>
                     </p:panel>

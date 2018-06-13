@@ -1,5 +1,6 @@
 package controller;
 
+import bean.EntreeItem;
 import bean.TransfertItem;
 import controller.util.JsfUtil;
 import controller.util.JsfUtil.PersistAction;
@@ -32,6 +33,9 @@ public class TransfertItemController implements Serializable {
     }
 
     public TransfertItem getSelected() {
+        if (selected == null) {
+            selected = new TransfertItem();
+        }
         return selected;
     }
 

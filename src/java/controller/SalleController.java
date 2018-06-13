@@ -32,6 +32,9 @@ public class SalleController implements Serializable {
     }
 
     public Salle getSelected() {
+       if (selected == null) {
+            selected = new Salle();
+        }
         return selected;
     }
 

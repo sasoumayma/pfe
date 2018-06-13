@@ -3,6 +3,7 @@ package controller;
 import bean.Fournisseur;
 import controller.util.JsfUtil;
 import controller.util.JsfUtil.PersistAction;
+import java.io.IOException;
 import service.FournisseurFacade;
 
 import java.io.Serializable;
@@ -18,6 +19,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import net.sf.jasperreports.engine.JRException;
 
 @Named("fournisseurController")
 @SessionScoped
@@ -27,11 +29,31 @@ public class FournisseurController implements Serializable {
     private service.FournisseurFacade ejbFacade;
     private List<Fournisseur> items = null;
     private Fournisseur selected;
+    
+    //
+     public void save() {
+        ejbFacade.create(getSelected());
+        items=ejbFacade.findAll();
+        initAttribute();
+    }
+      private void initAttribute() {
+        setSelected(null);
+        
+    }
+    //
+    
+    public void generatePdf() throws JRException, IOException{
+            ejbFacade.generatePdf();
+            FacesContext.getCurrentInstance().responseComplete();
+        }
 
     public FournisseurController() {
     }
 
     public Fournisseur getSelected() {
+        if (selected == null) {
+            selected = new Fournisseur();
+        }
         return selected;
     }
 

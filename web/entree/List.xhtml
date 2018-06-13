@@ -8,25 +8,68 @@
 
     <ui:composition template="/template.xhtml">
 
-
         <ui:define name="title">
             <h:outputText value="#{bundle.ListEntreeTitle}"></h:outputText>
         </ui:define>
-
+        
         <ui:define name="body">
+            
+            
+         <div class="ui-g">
+                <div class="ui-g-12">
+              <h:form id="StatListFormSearch">
+                <p:fieldset id="StatField" legend="Critere de recherche" style="margin-bottom:20px" >
+                    <p:panelGrid columns="10">
+
+       
+
+                        <p:outputLabel value="Date d'entree" for="dateEntree" />
+                         <p:calendar id="dateEntree" pattern="MM/dd/yyyy" value="#{entreeController.selected.dateEntree}" title="dateEntree"  showOn="button"/>
+
+                        
+
+                     
+                        <p:outputLabel value="Fournisseur" for="fournisseur" />
+                        <p:selectOneMenu id="fournisseur" value="#{entreeController.selected.fournisseur}" >
+                            <f:selectItem itemValue="#{null}" itemLabel="--SELECT--"></f:selectItem>
+                            <f:selectItems value="#{fournisseurController.itemsAvailableSelectOne}"
+                                           var="fournisseurItem"
+                                           itemValue="#{fournisseurItem}"
+                                           itemLabel="#{fournisseurItem.nom}"
+                                           />
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Utilisateur" for="utilisateur" />
+                        <p:selectOneMenu id="utilisateur" value="#{entreeController.selected.utilisateur}" >
+                            <f:selectItem itemValue="#{null}" itemLabel="--SELECT--"></f:selectItem>
+                            <f:selectItems value="#{utilisateurController.itemsAvailableSelectOne}"
+                                           var="utilisateurItem"
+                                           itemValue="#{utilisateurItem}"
+                                           itemLabel="#{utilisateurItem.nom}"
+                                           />
+                        </p:selectOneMenu>
+                        <p:commandButton id="createButton" icon="ui-icon-search"   value="rechercher" actionListener="#{statistiqueController.afficherChartIncident()}"  />
+
+                    </p:panelGrid>
+                </p:fieldset>
+            </h:form>
+                </div>
+            </div>
+            
+            
 
             <div class="ui-g">
                 <div class="ui-g-6">
-                    <h:form id="EntreeListForm">
-                        <p:panel header="#{bundle.ListEntreeTitle}">
-                            <p:dataTable id="datalist" value="#{entreeController.items}" var="item"
+                    <h:form id="EntreeListForm" >
+                        <p:panel header="#{bundle.ListEntreeTitle}" >
+                            <p:dataTable id="datalist" value="#{entreeController.items}" var="item"  
                                          selectionMode="single" selection="#{entreeController.selected}"
                                          paginator="true"
                                          rowKey="#{item.id}"
                                          rows="10"
                                          rowsPerPageTemplate="10,20,30,40,50"
                                          >
-
+                        <p:ajax event="rowSelect"   update=" editButton "/>
+                        <p:ajax event="rowUnselect" update=" editButton "/>
                         
                                 <p:column>
                                     <f:facet name="header">
@@ -61,6 +104,8 @@
                                     </f:facet>
                                     <p:commandButton id="detailButton" icon="ui-icon-plus" actionListener="#{entreeController.findByEntree(item)}" update=":EntreeItemListForm:datalist , :EntreeListForm:datalist" />
                                     <p:commandButton id="deleteButton" icon="ui-icon-trash" actionListener="#{entreeController.remove(item)}" update=":EntreeItemListForm:datalist , :EntreeListForm:datalist" />
+                                    <p:commandButton id="editButton" icon="ui-icon-pencil"   update=":EntreeEditForm" oncomplete="PF('EntreeEditDialog').show()" disabled="#{empty entreeController.selected}" />
+
                                 </p:column>
 
                             </p:dataTable>
@@ -78,7 +123,13 @@
                                              rows="10"
                                              rowsPerPageTemplate="10,20,30,40,50"
                                              >
-
+                                    
+                                    
+                
+                                   
+                                    
+                                    
+                                    
                                     <p:column>
                                         <f:facet name="header">
                                             <h:outputText value="#{bundle.ListEntreeItemTitle_quantiteMinimale}"/>
@@ -116,7 +167,9 @@
                                         </f:facet>
                                         <h:outputText value="#{item.equipement}"/>
                                     </p:column>
-
+                <f:facet name="footer">
+                 <p:commandButton id="exportButton" icon="ui-icon-pdf"   value="Imprimer" action="#{entreeController.generatePdf()}" ajax="false"/>
+                </f:facet>
 
                                 </p:dataTable>
                             </p:panel>
@@ -124,6 +177,8 @@
                     </p:panel>
                 </div>
             </div>
+                        <ui:include src="Edit.xhtml"/>
+
         </ui:define>
     </ui:composition>
 

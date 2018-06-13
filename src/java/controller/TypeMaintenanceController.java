@@ -1,5 +1,6 @@
 package controller;
 
+import bean.EntreeItem;
 import bean.TypeMaintenance;
 import controller.util.JsfUtil;
 import controller.util.JsfUtil.PersistAction;
@@ -32,6 +33,9 @@ public class TypeMaintenanceController implements Serializable {
     }
 
     public TypeMaintenance getSelected() {
+       if (selected == null) {
+            selected = new TypeMaintenance();
+        }
         return selected;
     }
 

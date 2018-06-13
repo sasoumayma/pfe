@@ -8,11 +8,16 @@ package service;
 import bean.Entree;
 import bean.Entree;
 import bean.EntreeItem;
+import controller.util.PdfUtil;
+import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import net.sf.jasperreports.engine.JRException;
 
 /**
  *
@@ -24,6 +29,7 @@ public class EntreeFacade extends AbstractFacade<Entree> {
     @PersistenceContext(unitName = "gmaov3PU")
     private EntityManager em;
 
+    
     
     @EJB
     EntreeItemFacade entreeItemFacade;

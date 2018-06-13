@@ -32,6 +32,9 @@ public class MaintenanceController implements Serializable {
     }
 
     public Maintenance getSelected() {
+       if (selected == null) {
+            selected = new Maintenance();
+        }
         return selected;
     }
 

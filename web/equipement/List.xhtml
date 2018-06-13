@@ -14,6 +14,50 @@
         </ui:define>
 
         <ui:define name="body">
+            
+             <div class="ui-g">
+                <div class="ui-g-12">
+              <h:form id="EquipementListFormSearch">
+                <p:fieldset id="StatField" legend="CRITERE DE RECHERCHE" style="margin-bottom:20px" >
+                    <p:panelGrid columns="8">
+
+       
+
+                         <p:outputLabel value="Designation" for="designation" />
+                         <p:inputText id="designation" value="#{equipementController.selected.designation}" title="Designation" />
+                         <p:outputLabel value="Type" for="type" />
+                         <p:inputText id="type" value="#{equipementController.selected.type}" title="Type" />
+                         <p:outputLabel value="Emplacement" for="emplacement" />
+                         <p:inputText id="emplacement" value="#{equipementController.selected.designation}" title="Emplacement" />
+
+
+                        <p:outputLabel value="#{bundle.CreateEquipementLabel_marque}" for="marque" />
+                        <p:selectOneMenu id="marque" value="#{equipementController.selected.marque}" >
+                            <f:selectItem itemValue="0" itemLabel="--SELECT--"></f:selectItem>
+                            <f:selectItem itemValue="1" itemLabel="societe"></f:selectItem>
+                            <f:selectItem itemValue="2" itemLabel="m1"></f:selectItem>
+                            <f:selectItem itemValue="3" itemLabel="m2"></f:selectItem>
+                        </p:selectOneMenu>
+
+                     
+                        <p:outputLabel value="Fournisseur" for="fournisseur" />
+                        <p:selectOneMenu id="fournisseur" value="#{equipementController.selected.fournisseur}" >
+                            <f:selectItem itemValue="#{null}" itemLabel="--SELECT--"></f:selectItem>
+                            <f:selectItems value="#{fournisseurController.itemsAvailableSelectOne}"
+                                           var="fournisseurItem"
+                                           itemValue="#{fournisseurItem}"
+                                           itemLabel="#{fournisseurItem.nom}"
+                                           />
+                        </p:selectOneMenu>
+                       
+                        <p:commandButton id="createButton" icon="ui-icon-search"   value="search"  />
+
+                    </p:panelGrid>
+                </p:fieldset>
+            </h:form>
+                </div>
+            </div>
+            
             <h:form id="EquipementListForm">
                 <p:panel header="#{bundle.ListEquipementTitle}">
                     <p:dataTable id="datalist" value="#{equipementController.items}" var="item"
@@ -24,8 +68,8 @@
                                  rowsPerPageTemplate="10,20,30,40,50"
                                  >
 
-                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
-                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+                        <p:ajax event="rowSelect"   update=" editButton deleteButton"/>
+                        <p:ajax event="rowUnselect" update=" editButton deleteButton"/>
 
                         <p:column>
                             <f:facet name="header">
@@ -33,12 +77,7 @@
                             </f:facet>
                             <h:outputText value="#{item.designation}"/>
                         </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListEquipementTitle_description}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.description}"/>
-                        </p:column>
+                        
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListEquipementTitle_type}"/>
@@ -85,35 +124,33 @@
                         </p:column>
                         <p:column>
                             <f:facet name="header">
+                                <h:outputText value="#{bundle.ListEquipementTitle_description}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.description}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
                                 <h:outputText value="#{bundle.ListEquipementTitle_observation}"/>
                             </f:facet>
                             <h:outputText value="#{item.observation}"/>
                         </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListEquipementTitle_utilisateur}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.utilisateur}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListEquipementTitle_id}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.id}"/>
-                        </p:column>
+                         <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Action"/>
+                                    </f:facet>
+                                    <p:commandButton id="editButton" icon="ui-icon-pencil"   update=":EquipementEditForm" oncomplete="PF('EquipementEditDialog').show()" disabled="#{empty equipementController.selected}" />
+                                    <p:commandButton id="deleteButton" icon="ui-icon-trash"   actionListener="#{equipementController.destroy}" update=":growl,datalist" disabled="#{empty equipementController.selected}"/>
+                          </p:column>
                         <f:facet name="footer">
-                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{equipementController.prepareCreate}" update=":EquipementCreateForm" oncomplete="PF('EquipementCreateDialog').show()"/>
-                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":EquipementViewForm" oncomplete="PF('EquipementViewDialog').show()" disabled="#{empty equipementController.selected}"/>
-                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":EquipementEditForm" oncomplete="PF('EquipementEditDialog').show()" disabled="#{empty equipementController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{equipementController.destroy}" update=":growl,datalist" disabled="#{empty equipementController.selected}"/>
-                        </f:facet>
+                 <p:commandButton id="exportButton" icon="ui-icon-pdf"   value="Export" action="#{equipementController.generatePdf()}" ajax="false"/>
+                </f:facet>
+                        
+                        
                     </p:dataTable>
                 </p:panel>
             </h:form>
 
-            <ui:include src="Create.xhtml"/>
             <ui:include src="Edit.xhtml"/>
-            <ui:include src="View.xhtml"/>
         </ui:define>
     </ui:composition>
 

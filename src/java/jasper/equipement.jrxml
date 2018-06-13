@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="923f5c8c-70a1-4d7f-a3a7-25e3919e1cb6">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="responsable" class="java.lang.String"/>
+	<field name="designation" class="java.lang.String"/>
+	<field name="type" class="java.lang.String"/>
+	<field name="emplacement" class="java.lang.String"/>
+	<field name="affectation" class="java.lang.String"/>
+	<field name="marque" class="java.lang.String"/>
+	<field name="dateMiseEnService" class="java.util.Date"/>
+	<field name="details" class="java.lang.String"/>
+	<field name="description" class="java.lang.String"/>
+	<field name="observation" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="385" y="0" width="170" height="20" uuid="7598462a-6adb-4937-b78f-e7fe3d3f1d18"/>
+				<textElement>
+					<font size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Marrakech le :          /            /]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="186" y="40" width="241" height="24" forecolor="#000066" uuid="c487bd09-842e-44cb-862e-6b1ce81c2a40"/>
+				<textElement>
+					<font size="14" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Aéroport MARRAKECH - MENARA]]></text>
+			</staticText>
+			<image>
+				<reportElement x="11" y="8" width="142" height="71" uuid="708f54f2-de1e-4d1f-b558-d0926d966c0b"/>
+				<imageExpression><![CDATA["C:\\Users\\user\\Desktop\\ONDA-LOGO.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="61" height="20" forecolor="#660033" uuid="0c111e53-ab72-4845-91c7-bee449f756ae"/>
+				<textElement>
+					<font size="10" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Désignation]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="61" y="0" width="39" height="20" forecolor="#660033" uuid="d205a18f-0a1f-40e5-b734-4a0462c4e042"/>
+				<textElement>
+					<font size="10" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Type]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="0" width="73" height="20" forecolor="#660033" uuid="f8f4fb9a-d24f-4783-b967-5207a82636b2"/>
+				<textElement>
+					<font size="10" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Emplacement]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="175" y="0" width="61" height="20" forecolor="#660033" uuid="198e0719-449f-4d23-828f-554f220a0bfc"/>
+				<textElement>
+					<font size="10" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Affectation]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="236" y="0" width="55" height="20" forecolor="#660033" uuid="1b895eb8-7a9d-4049-84ba-5c0b4226895b"/>
+				<textElement>
+					<font size="10" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Marque]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="291" y="0" width="81" height="20" forecolor="#660033" uuid="11a58fc6-bd33-4627-9602-205244783297"/>
+				<textElement>
+					<font size="10" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Date MS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="372" y="0" width="55" height="20" forecolor="#660033" uuid="1055bd19-0f11-459a-a8c2-7ec66ca7ef86"/>
+				<textElement>
+					<font size="10" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[ Détails]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="427" y="0" width="67" height="20" forecolor="#660033" uuid="48bf8e37-6240-4aed-91b2-2519df283157"/>
+				<textElement>
+					<font size="10" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Description]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="494" y="0" width="61" height="20" forecolor="#660033" uuid="13380829-caf0-49af-9ef7-cb3b2ea348b3"/>
+				<textElement>
+					<font size="10" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Observation]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="32" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="61" height="20" uuid="b2b009d5-a80c-4b6d-a698-edd3b3a2ac7b"/>
+				<textFieldExpression><![CDATA[$F{designation}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="61" y="0" width="39" height="20" uuid="d48415db-72be-4202-99e6-c4e6f55bf1a2"/>
+				<textFieldExpression><![CDATA[$F{type}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="100" y="0" width="73" height="20" uuid="f5a2f849-aee1-4daa-b4f7-405e8b6d77bb"/>
+				<textFieldExpression><![CDATA[$F{emplacement}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="175" y="0" width="61" height="20" uuid="8fa9e22b-7432-4cfb-9181-80a20319be7a"/>
+				<textFieldExpression><![CDATA[$F{affectation}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="236" y="0" width="55" height="20" uuid="077ebd45-8ec0-4ebf-bebf-e9d2ee0c21b8"/>
+				<textFieldExpression><![CDATA[$F{marque}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="291" y="0" width="81" height="20" uuid="f7c99b01-9f1e-48a1-90dc-1d1df9f93a51"/>
+				<textFieldExpression><![CDATA[$F{dateMiseEnService}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="372" y="0" width="55" height="20" uuid="f8ccb05b-dda1-4142-a1c8-7c7f841dc4d0"/>
+				<textFieldExpression><![CDATA[$F{details}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="427" y="0" width="67" height="20" uuid="c60f453e-ac65-4a2b-ba3c-4146413bc951"/>
+				<textFieldExpression><![CDATA[$F{description}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="494" y="0" width="61" height="20" uuid="390b674c-07b3-40ea-8256-3c3351dc80fc"/>
+				<textFieldExpression><![CDATA[$F{observation}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="14" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<textField>
+				<reportElement x="205" y="0" width="100" height="20" uuid="046a1115-2ee5-4a12-a2c7-cfd1ea0712d0"/>
+				<textFieldExpression><![CDATA[$P{responsable}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="330" y="0" width="135" height="20" uuid="6a4d426e-2f11-4fe0-a8c9-86ad58f93298"/>
+				<text><![CDATA[Signature et Cachet : ]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

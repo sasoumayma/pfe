@@ -1,5 +1,6 @@
 package controller;
 
+import bean.EntreeItem;
 import bean.TypeIntervention;
 import controller.util.JsfUtil;
 import controller.util.JsfUtil.PersistAction;
@@ -32,6 +33,9 @@ public class TypeInterventionController implements Serializable {
     }
 
     public TypeIntervention getSelected() {
+        if (selected == null) {
+            selected = new TypeIntervention();
+        }
         return selected;
     }
 

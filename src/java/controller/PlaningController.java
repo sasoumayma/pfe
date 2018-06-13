@@ -32,6 +32,9 @@ public class PlaningController implements Serializable {
     }
 
     public Planing getSelected() {
+        if (selected == null) {
+            selected = new Planing();
+        }
         return selected;
     }
 

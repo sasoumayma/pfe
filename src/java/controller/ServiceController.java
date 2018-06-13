@@ -32,6 +32,9 @@ public class ServiceController implements Serializable {
     }
 
     public Service getSelected() {
+        if (selected == null) {
+            selected = new Service();
+        }
         return selected;
     }
 

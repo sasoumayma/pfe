@@ -32,6 +32,9 @@ public class StockController implements Serializable {
     }
 
     public Stock getSelected() {
+        if (selected == null) {
+            selected = new Stock();
+        }
         return selected;
     }
 

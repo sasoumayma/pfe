@@ -3,6 +3,7 @@ package controller;
 import bean.Epuisement;
 import controller.util.JsfUtil;
 import controller.util.JsfUtil.PersistAction;
+import java.io.IOException;
 import service.EpuisementFacade;
 
 import java.io.Serializable;
@@ -18,6 +19,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import net.sf.jasperreports.engine.JRException;
 
 @Named("epuisementController")
 @SessionScoped
@@ -27,11 +29,31 @@ public class EpuisementController implements Serializable {
     private service.EpuisementFacade ejbFacade;
     private List<Epuisement> items = null;
     private Epuisement selected;
+    
+    //
+     public void save() {
+        ejbFacade.create(getSelected());
+        items=ejbFacade.findAll();
+        initAttribute();
+    }
+      private void initAttribute() {
+        setSelected(null);
+        
+    }
+    //
+    
+    public void generatePdf() throws JRException, IOException{
+            ejbFacade.generatePdf();
+            FacesContext.getCurrentInstance().responseComplete();
+        }
 
     public EpuisementController() {
     }
 
     public Epuisement getSelected() {
+       if (selected == null) {
+            selected = new Epuisement();
+        }
         return selected;
     }
 

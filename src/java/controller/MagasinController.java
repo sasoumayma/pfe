@@ -32,6 +32,9 @@ public class MagasinController implements Serializable {
     }
 
     public Magasin getSelected() {
+       if (selected == null) {
+            selected = new Magasin();
+        }
         return selected;
     }
 

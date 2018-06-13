@@ -3,6 +3,7 @@ package controller;
 import bean.EntreeItem;
 import controller.util.JsfUtil;
 import controller.util.JsfUtil.PersistAction;
+import java.io.IOException;
 import service.EntreeItemFacade;
 
 import java.io.Serializable;
@@ -18,6 +19,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import net.sf.jasperreports.engine.JRException;
 
 @Named("entreeItemController")
 @SessionScoped
@@ -27,11 +29,19 @@ public class EntreeItemController implements Serializable {
     private service.EntreeItemFacade ejbFacade;
     private List<EntreeItem> items = null;
     private EntreeItem selected;
+    
+    public void generatePdf() throws JRException, IOException{
+            ejbFacade.generatePdf();
+            FacesContext.getCurrentInstance().responseComplete();
+        }
 
     public EntreeItemController() {
     }
 
     public EntreeItem getSelected() {
+        if (selected == null) {
+            selected = new EntreeItem();
+        }
         return selected;
     }
 
