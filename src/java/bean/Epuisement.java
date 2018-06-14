@@ -35,7 +35,7 @@ public class Epuisement implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private int numeroSerie;
+    private String numeroSerie;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date dateSortie ;
     @Temporal(javax.persistence.TemporalType.DATE)
@@ -60,14 +60,16 @@ public class Epuisement implements Serializable {
         return id;
     }
 
-    
-    public int getNumeroSerie() {
+    public String getNumeroSerie() {
         return numeroSerie;
     }
 
-    public void setNumeroSerie(int numeroSerie) {
+    public void setNumeroSerie(String numeroSerie) {
         this.numeroSerie = numeroSerie;
     }
+
+    
+    
 
     public int getQuantiteMinimale() {
         return quantiteMinimale;
@@ -169,7 +171,7 @@ public class Epuisement implements Serializable {
         this.id = id;
     }
 
-    public Epuisement(Long id, int numeroSerie, Date dateSortie, Date dateEntree, Date dateEpuisement, int quantite, int quantiteMinimale, String observation) {
+    public Epuisement(Long id, String numeroSerie, Date dateSortie, Date dateEntree, Date dateEpuisement, int quantite, int quantiteMinimale, String observation) {
         this.id = id;
         this.numeroSerie = numeroSerie;
         this.dateSortie = dateSortie;
@@ -179,6 +181,9 @@ public class Epuisement implements Serializable {
         this.quantiteMinimale = quantiteMinimale;
         this.observation = observation;
     }
+    
+
+   
 
     
 
@@ -209,6 +214,8 @@ public class Epuisement implements Serializable {
     public String toString() {
         return "Epuisement{" + "id=" + id + ", numeroSerie=" + numeroSerie + ", dateSortie=" + dateSortie + ", dateEntree=" + dateEntree + ", dateEpuisement=" + dateEpuisement + ", quantite=" + quantite + ", quantiteMinimale=" + quantiteMinimale + ", observation=" + observation + '}';
     }
+
+    
 
    
     

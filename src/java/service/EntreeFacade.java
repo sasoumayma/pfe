@@ -9,7 +9,9 @@ import bean.Entree;
 import bean.Entree;
 import bean.EntreeItem;
 import controller.util.PdfUtil;
+import controller.util.SearchUtil;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,7 +31,30 @@ public class EntreeFacade extends AbstractFacade<Entree> {
     @PersistenceContext(unitName = "gmaov3PU")
     private EntityManager em;
 
-    
+    //statistique
+ public List<Long> findByCriteria(int annee, int quantite) {
+        List<Long> res = new ArrayList();
+        for (int i = 1; i <= 12; i++) {
+            res.add(findByCriteria(i, annee, quantite));
+        }
+        return res;
+    }    
+ public Long findByCriteria(int mois, int annee, int quantite) {
+        String moisConversion = mois + "";
+        if (mois < 10) {
+            moisConversion = "0" + mois;
+        }
+        String query = "SELECT COUNT(item.id) FROM Entree item WHERE item.dateEntree LIKE '" + annee + "-" + moisConversion + "-%'";
+        query += SearchUtil.addConstraint("item", "quantite", "=", quantite);
+        System.out.println(query);
+        List<Long> res = em.createQuery(query).getResultList();
+        if (res == null || res.isEmpty() || res.get(0) == null) {
+            return 0L;
+        }
+        return res.get(0);
+    }
+ 
+    //Fin statistique
     
     @EJB
     EntreeItemFacade entreeItemFacade;

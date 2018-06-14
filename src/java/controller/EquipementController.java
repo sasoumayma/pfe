@@ -1,21 +1,19 @@
 package controller;
 
-import static bean.Epuisement_.fournisseur;
 import bean.Equipement;
-import static bean.Equipement_.designation;
-import static bean.Equipement_.emplacement;
-import static bean.Equipement_.marque;
-import static bean.Equipement_.type;
 import controller.util.JsfUtil;
 import controller.util.JsfUtil.PersistAction;
+import controller.util.MathUtil;
 import java.io.IOException;
 import service.EquipementFacade;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.inject.Named;
@@ -25,6 +23,12 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import net.sf.jasperreports.engine.JRException;
+import org.primefaces.model.chart.Axis;
+import org.primefaces.model.chart.AxisType;
+import org.primefaces.model.chart.BarChartModel;
+import org.primefaces.model.chart.CartesianChartModel;
+import org.primefaces.model.chart.ChartSeries;
+import org.primefaces.model.chart.LineChartModel;
 
 @Named("equipementController")
 @SessionScoped
@@ -34,6 +38,231 @@ public class EquipementController implements Serializable {
     private service.EquipementFacade ejbFacade;
     private List<Equipement> items = null;
     private Equipement selected;
+    
+    private String type;
+    private String emplacement;
+    private String marque;
+    private String designation;
+    
+    // search
+      public void fingByCretar(){
+          System.out.println("ha designation=>"+designation);
+          System.out.println("ha type=>"+type);
+          System.out.println("ha emplacement=>"+emplacement);
+          System.out.println("ha marque=>"+marque);
+          items = ejbFacade.findByCretaria(designation, type, emplacement, marque);
+      }
+      
+      //search
+    
+    
+    //statistique//
+    
+    private int annee;
+    private int quantite;
+    
+
+    @EJB
+    private EquipementFacade equipementFacade;
+    private Long max = new Long(0);
+
+    private BarChartModel barModel;
+    private LineChartModel lineModel;
+
+    private int typeChart;
+    private LineChartModel chartModel;
+    
+    
+     @PostConstruct
+    public void init() {
+        barModel = new BarChartModel();
+        ChartSeries equipement = new ChartSeries();
+        ChartSeries entree = new ChartSeries();
+        for (int i = 0; i < 12; i++) {
+            equipement.set("mois " + (i + 1), 0);
+            entree.set("mois " + (i + 1), 0);
+        }
+        barModel.addSeries(equipement);
+        barModel.addSeries(entree);
+    }
+    
+    public void afficherChartEquipement() {
+        createBarModelEquipement();
+    }
+//     public void afficherChartPlan() {
+//        createBarModelPlan();
+//    }
+     private void createBarModelEquipement() {
+        barModel = new BarChartModel();
+        initBarModelForEquipement(barModel);
+        paramGraphForEquipement(barModel);
+    }
+
+     private void paramGraphForEquipement(CartesianChartModel model) {
+        model.setTitle("Statistiques de l'annee " + annee);
+        model.setLegendPosition("e");
+        model.setAnimate(true);
+        Axis yAxis = model.getAxis(AxisType.Y);
+        yAxis.setLabel("NOMBRE D'OCCURENCE");
+        yAxis.setMin(0);
+        yAxis.setMax(max * (1.1));
+        Axis xAxis = model.getAxis(AxisType.X);
+        xAxis.setMin(0);
+        xAxis.setTickAngle(-30);
+    }
+     
+     private void initBarModelForEquipement(CartesianChartModel model) {
+        attachResultatToModelForEquipement(model);
+    }
+//     private void initBarModelForPlan(CartesianChartModel model) {
+//        attachResultatToModelForPlan(model);
+//    }
+     private void attachResultatToModelForEquipement(CartesianChartModel model) {
+        Object[] res = equipementFacade.findIncidentAndTraitementByCriteria(annee, designation, quantite);
+        max = MathUtil.calculerMax(res);
+        ChartSeries equipement = new ChartSeries();
+        equipement.setLabel("Equipement");
+        ChartSeries entree = new ChartSeries();
+        entree.setLabel("Entree");
+        List<Long> equipementStat = (List<Long>) res[0];
+        List<Long> entreeStat = (List<Long>) res[0];
+        for (int i = 1; i <= 12; i++) {
+            equipement.set("" + i, equipementStat.get(i - 1));
+            entree.set("" + i, entreeStat.get(i - 1));
+        }
+        model.addSeries(equipement);
+        model.addSeries(entree);
+    }
+
+     
+     
+//      private void createBarModelPlan() {
+//        barModel = new BarChartModel();
+//        initBarModelForPlan(barModel);
+//        paramGraphForPlan(barModel);
+//    }
+//     private void paramGraphForPlan(CartesianChartModel model) {
+//        model.setTitle("Statistiques de l'annee " + annee);
+//        model.setLegendPosition("e");
+//        model.setAnimate(true);
+//        Axis yAxis = model.getAxis(AxisType.Y);
+//        yAxis.setLabel("NOMBRE D'OCCURENCE");
+//        yAxis.setMin(0);
+//        yAxis.setMax(max * (1.1));
+//        Axis xAxis = model.getAxis(AxisType.X);
+//        xAxis.setMin(0);
+//        xAxis.setTickAngle(-30);
+//    }
+
+    
+//    private void attachResultatToModelForPlan(CartesianChartModel model) {
+//        Object[] res = equipementFacade.findPlanAndExecutionByCriteria(annee, employeeDeclarant);
+//        max = MathUtil.calculerMax(res);
+//        ChartSeries planPreventif = new ChartSeries();
+//        planPreventif.setLabel("Plan Preventif");
+//        ChartSeries executionPlanPreventif = new ChartSeries();
+//        executionPlanPreventif.setLabel("Execution Plan Preventif");
+//        List<Long> planStat = (List<Long>) res[0];
+//        List<Long> executionStat = (List<Long>) res[0];
+//        for (int i = 1; i <= 12; i++) {
+//            planPreventif.set("" + i, planStat.get(i - 1));
+//            executionPlanPreventif.set("" + i, executionStat.get(i - 1));
+//        }
+//        model.addSeries(planPreventif);
+//        model.addSeries(executionPlanPreventif);
+//    }
+//      
+      
+      public void setTypeChart(int typeChart) {
+        this.typeChart = typeChart;
+    }
+     
+     public BarChartModel getBarModel() {
+        if (barModel == null) {
+            barModel = new BarChartModel();
+        }
+        return barModel;
+    }
+     
+    public LineChartModel getChartModel() {
+        if (chartModel == null) {
+            chartModel = new LineChartModel();
+        }
+        return chartModel;
+    }
+
+    public void setChartModel(LineChartModel chartModel) {
+        this.chartModel = chartModel;
+    }
+
+    public int getTypeChart() {
+        return typeChart;
+    }
+
+    public void setBarModel(BarChartModel barModel) {
+        this.barModel = barModel;
+    }
+
+    public LineChartModel getLineModel() {
+        if (lineModel == null) {
+            lineModel = new LineChartModel();
+        }
+        return lineModel;
+    }
+
+    public void setLineModel(LineChartModel lineModel) {
+        this.lineModel = lineModel;
+    }
+
+    public int getAnnee() {
+        if (annee == 0) {
+            annee = new Date().getYear() + 1900;
+        }
+        return annee;
+    }
+
+    public void setAnnee(int annee) {
+        this.annee = annee;
+    }
+
+    public String getDesignation() {
+        return designation;
+    }
+
+    public void setDesignation(String designation) {
+        this.designation = designation;
+    }
+
+    public EquipementFacade getEquipementFacade() {
+        return equipementFacade;
+    }
+
+    public void setEquipementFacade(EquipementFacade equipementFacade) {
+        this.equipementFacade = equipementFacade;
+    }
+
+     public Long getMax() {
+        return max;
+    }
+
+    public void setMax(Long max) {
+        this.max = max;
+    }
+
+    public int getQuantite() {
+        return quantite;
+    }
+
+    public void setQuantite(int quantite) {
+        this.quantite = quantite;
+    }
+
+    
+    
+    
+    //Fin statistique//
+    
+    
     
     //
      public void save() {

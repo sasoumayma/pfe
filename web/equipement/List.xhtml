@@ -17,7 +17,7 @@
             
              <div class="ui-g">
                 <div class="ui-g-12">
-              <h:form id="EquipementListFormSearch">
+              <h:form>
                 <p:fieldset id="StatField" legend="CRITERE DE RECHERCHE" style="margin-bottom:20px" >
                     <p:panelGrid columns="8">
 
@@ -40,17 +40,9 @@
                         </p:selectOneMenu>
 
                      
-                        <p:outputLabel value="Fournisseur" for="fournisseur" />
-                        <p:selectOneMenu id="fournisseur" value="#{equipementController.selected.fournisseur}" >
-                            <f:selectItem itemValue="#{null}" itemLabel="--SELECT--"></f:selectItem>
-                            <f:selectItems value="#{fournisseurController.itemsAvailableSelectOne}"
-                                           var="fournisseurItem"
-                                           itemValue="#{fournisseurItem}"
-                                           itemLabel="#{fournisseurItem.nom}"
-                                           />
-                        </p:selectOneMenu>
+                        
                        
-                        <p:commandButton id="createButton" icon="ui-icon-search"   value="search"  />
+                        <p:commandButton id="createButton" icon="ui-icon-search"   value="search"  actionListener="#{equipementController.fingByCretar()}" update=":EquipementListForm:datalist" class="btn btn-danger"  style="width: 200px" > </p:commandButton>
 
                     </p:panelGrid>
                 </p:fieldset>
@@ -68,8 +60,8 @@
                                  rowsPerPageTemplate="10,20,30,40,50"
                                  >
 
-                        <p:ajax event="rowSelect"   update=" editButton deleteButton"/>
-                        <p:ajax event="rowUnselect" update=" editButton deleteButton"/>
+                        <p:ajax event="rowSelect"   update=" viewButton editButton  deleteButton"/>
+                        <p:ajax event="rowUnselect" update=" viewButton editButton  deleteButton"/>
 
                         <p:column>
                             <f:facet name="header">
@@ -138,6 +130,8 @@
                                     <f:facet name="header">
                                         <h:outputText value="Action"/>
                                     </f:facet>
+                                     <p:commandButton id="viewButton"   icon="ui-icon-search"  update=":EquipementViewForm" oncomplete="PF('EquipementViewDialog').show()" disabled="#{empty equipementController.selected}"/>
+
                                     <p:commandButton id="editButton" icon="ui-icon-pencil"   update=":EquipementEditForm" oncomplete="PF('EquipementEditDialog').show()" disabled="#{empty equipementController.selected}" />
                                     <p:commandButton id="deleteButton" icon="ui-icon-trash"   actionListener="#{equipementController.destroy}" update=":growl,datalist" disabled="#{empty equipementController.selected}"/>
                           </p:column>
@@ -151,6 +145,8 @@
             </h:form>
 
             <ui:include src="Edit.xhtml"/>
+             <ui:include src="View.xhtml"/>
+
         </ui:define>
     </ui:composition>
 

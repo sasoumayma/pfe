@@ -32,14 +32,15 @@
 				</textElement>
 				<text><![CDATA[Aéroport MARRAKECH - MENARA]]></text>
 			</staticText>
-			<image>
-				<reportElement x="11" y="8" width="142" height="71" uuid="708f54f2-de1e-4d1f-b558-d0926d966c0b"/>
-				<imageExpression><![CDATA["C:\\Users\\user\\Desktop\\ONDA-LOGO.jpg"]]></imageExpression>
-			</image>
 		</band>
 	</title>
 	<pageHeader>
-		<band height="35" splitType="Stretch"/>
+		<band height="35" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="-79" width="173" height="79" uuid="c6376351-db99-4f64-8bda-f3721841bf91"/>
+				<imageExpression><![CDATA["C:\\Users\\user\\Desktop\\JEE\\ONDA-LOGO.jpg"]]></imageExpression>
+			</image>
+		</band>
 	</pageHeader>
 	<columnHeader>
 		<band height="20" splitType="Stretch">
