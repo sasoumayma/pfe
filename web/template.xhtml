@@ -11,46 +11,47 @@
         <h:outputScript library="js" name="jsfcrud.js"/>
     </h:head>
 
-    <h:body>
+    <h:body style="background-color:#F7ECC6">
+       
 
         <p:growl id="growl" life="3000" />
 
-        <p:layout fullPage="true">
-            <p:layoutUnit position="north" size="65" header="#{bundle.AppName}">
-                <h:form id="menuForm">
-                    <p:menubar>
-                        <p:menuitem value="#{bundle.Home}" outcome="/menu/menu.xhtml" icon="ui-icon-home"/>
+        <p:layout fullPage="true" >
+            <p:layoutUnit position="north" size="65" header="#{bundle.AppName}" >
+                <h:form id="menuForm" >
+                    <p:menubar style="background-color:#FAF3F0">
+                        <p:menuitem value="#{bundle.Home}" outcome="/menu/menu.xhtml" icon="ui-icon-home" />
                             
-                            <p:submenu label="Entree" icon="ui-icon-mail-forward">
-                            <p:menuitem value="List" outcome="/entree/List.xhtml" />
-                            <p:menuitem value="Create" outcome="/entree/Create.xhtml" />
+                            <p:submenu label="Entree" icon="ui-icon-arrowreturn-1-e" >
+                            <p:menuitem value="List" icon=" ui-icon-grip-solid-horizontal" outcome="/entree/List.xhtml" />
+                            <p:menuitem value="Create" icon=" ui-icon-circle-plus" outcome="/entree/Create.xhtml" />
                         </p:submenu>
-                        <p:submenu label="Sortie" icon="ui-icon-angle-down">
-                            <p:menuitem value="List" outcome="/sortie/List.xhtml" />
-                            <p:menuitem value="Create" outcome="/sortie/Create.xhtml" />
+                        <p:submenu label="Sortie" icon=" ui-icon-arrowreturn-1-w">
+                            <p:menuitem value="List" icon=" ui-icon-grip-solid-horizontal" outcome="/sortie/List.xhtml" />
+                            <p:menuitem value="Create" icon=" ui-icon-circle-plus" outcome="/sortie/Create.xhtml" />
                         </p:submenu>
                         <p:submenu label="Epuisement" icon="ui-icon-trash">
-                            <p:menuitem value="List" outcome="/epuisement/List.xhtml" />
-                            <p:menuitem value="Create" outcome="/epuisement/Create.xhtml" />
+                            <p:menuitem value="List" icon=" ui-icon-grip-solid-horizontal" outcome="/epuisement/List.xhtml" />
+                            <p:menuitem value="Create" icon=" ui-icon-circle-plus" outcome="/epuisement/Create.xhtml" />
                         </p:submenu>
-                        <p:submenu label="Equipement">
-                            <p:menuitem value="List" outcome="/equipement/List.xhtml" />
-                            <p:menuitem value="Create" outcome="/equipement/Create.xhtml" />
+                        <p:submenu label="Equipement" icon="ui-icon-calculator">
+                            <p:menuitem value="List" icon=" ui-icon-grip-solid-horizontal" outcome="/equipement/List.xhtml" />
+                            <p:menuitem value="Create" icon=" ui-icon-circle-plus" outcome="/equipement/Create.xhtml" />
                         </p:submenu>
-                        <p:submenu label="Maintenance" icon="ui-icon-cogs">
-                            <p:menuitem value="Maitenance préventive"  />
-                            <p:menuitem value="Maitenance corrective"  />
+                        <p:submenu label="Maintenance" icon="ui-icon-gear">
+                            <p:menuitem value="Maitenance préventive" icon="ui-icon-wrench" />
+                            <p:menuitem value="Maitenance corrective"  icon="ui-icon-check" />
                         </p:submenu>
-                        <p:submenu label="Personnel de maintenance">
-                            <p:menuitem value="List" outcome="/responsableMaintenance/List.xhtml" />
-                            <p:menuitem value="Create" outcome="/responsableMaintenance/Create.xhtml"/>
+                        <p:submenu label="Personnel de maintenance" icon="ui-icon-person">
+                            <p:menuitem value="List" icon=" ui-icon-grip-solid-horizontal" outcome="/responsableMaintenance/List.xhtml" />
+                            <p:menuitem value="Create" icon=" ui-icon-circle-plus" outcome="/responsableMaintenance/Create.xhtml"/>
                         </p:submenu>
-                        <p:submenu label="Fournisseur" icon="ui-icon-angle-down">
-                            <p:menuitem value="List"  />
-                            <p:menuitem value="Create"  />
+                        <p:submenu label="Fournisseur" icon="ui-icon-cart">
+                            <p:menuitem value="List" icon=" ui-icon-grip-solid-horizontal" outcome="/fournisseur/List.xhtml"/>
+                            <p:menuitem value="Create" icon=" ui-icon-circle-plus" outcome="/fournisseur/Create.xhtml" />
                         </p:submenu>
-                        <p:submenu label="Statistique" icon="ui-icon-signal">
-                            <p:menuitem value="List"  />
+                        <p:submenu label="Statistique"  icon="ui-icon-signal">
+                            <p:menuitem value="List" icon=" ui-icon-grip-solid-horizontal" />
                         </p:submenu>
                        
                       

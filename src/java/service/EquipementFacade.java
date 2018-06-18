@@ -43,20 +43,12 @@ public class EquipementFacade extends AbstractFacade<Equipement> {
     }
 
     //search
-    public List<Equipement> findByCretaria(String designation, String type, String emplacement, String marque ){
+    public List<Equipement> findByCretaria(String type, String emplacement, String marque ){
         String qry = "SELECT e FROM Equipement e WHERE 1=1";
-        if(!designation.equals("")){
-            qry += SearchUtil.addConstraint("e", "designation", "=", designation);
-        }
-        if(!type.equals("")){
             qry += SearchUtil.addConstraint("e", "type", "=", type);
-        }
-        if(!emplacement.equals("")){
             qry += SearchUtil.addConstraint("e", "emplacement", "=", emplacement);
-        }
-       if(!marque.equals("")){
             qry += SearchUtil.addConstraint("e", "marque", "=", marque);
-        }
+            System.out.println("qryqryqryqry "+qry);
         return em.createQuery(qry).getResultList();
     }
     //search

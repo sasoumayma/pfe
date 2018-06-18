@@ -51,7 +51,7 @@
                                            />
                         </p:selectOneMenu>
                        
-                        <p:commandButton id="createButton" icon="ui-icon-search"   value="search"  />
+                        <p:commandButton id="createButton" icon="ui-icon-search" style="background-color:#F7BC87"  value="Recherche"  />
 
                     </p:panelGrid>
                 </p:fieldset>
@@ -139,18 +139,20 @@
                               <f:facet name="header">
                                         <h:outputText value="Action"/>
                                     </f:facet>
-                            <p:commandButton id="editButton"   icon="ui-icon-pencil"   update=":EpuisementEditForm" oncomplete="PF('EpuisementEditDialog').show()" disabled="#{empty epuisementController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"   actionListener="#{epuisementController.destroy}" update=":growl,datalist" disabled="#{empty epuisementController.selected}"/>
+                             <p:commandButton id="viewButton"   icon="ui-icon-search" style="background-color:#F7B582" update=":EpuisementViewForm" oncomplete="PF('EpuisementViewDialog').show()" disabled="#{empty epuisementController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" style="background-color:#F7B582"  update=":EpuisementEditForm" oncomplete="PF('EpuisementEditDialog').show()" disabled="#{empty epuisementController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash" style="background-color:#F7B582"  actionListener="#{epuisementController.destroy}" update=":growl,datalist" disabled="#{empty epuisementController.selected}"/>
                         
                          </p:column>
                         <f:facet name="footer">
-                 <p:commandButton id="exportButton" icon="ui-icon-pdf"   value="Export" action="#{epuisementController.generatePdf()}" ajax="false"/>
+                 <p:commandButton id="exportButton" icon="ui-icon-print" style="background-color:#F7BC87"  value="Imprimer" action="#{epuisementController.generatePdf()}" ajax="false"/>
                 </f:facet>
                     </p:dataTable>
                 </p:panel>
             </h:form>
 
             <ui:include src="Edit.xhtml"/>
+           <ui:include src="View.xhtml"/>
            
         </ui:define>
     </ui:composition>

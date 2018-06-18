@@ -40,7 +40,7 @@ public class SearchUtil {
     }
 
     public static String addConstraint(String beanAbrev, String attributName, String operator, Object value) {
-        if (value != null) {
+        if (value != null && !value.equals("")) {
             return " AND " + beanAbrev + "." + attributName + " " + operator + "'" + value + "'";
         }
         return "";
@@ -51,7 +51,7 @@ public class SearchUtil {
         if (valueMin != null) {
             requette += " AND " + beanAbrev + "." + attributName + ">='" + valueMin + "'";
         }
-        if (valueMax != null ) {
+        if (valueMax != null) {
             requette += " AND " + beanAbrev + "." + attributName + "<='" + valueMax + "'";
         }
         return requette;

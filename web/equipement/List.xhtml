@@ -20,29 +20,16 @@
               <h:form>
                 <p:fieldset id="StatField" legend="CRITERE DE RECHERCHE" style="margin-bottom:20px" >
                     <p:panelGrid columns="8">
-
-       
-
-                         <p:outputLabel value="Designation" for="designation" />
-                         <p:inputText id="designation" value="#{equipementController.selected.designation}" title="Designation" />
                          <p:outputLabel value="Type" for="type" />
                          <p:inputText id="type" value="#{equipementController.selected.type}" title="Type" />
                          <p:outputLabel value="Emplacement" for="emplacement" />
                          <p:inputText id="emplacement" value="#{equipementController.selected.designation}" title="Emplacement" />
+                         <p:outputLabel value="Marque" for="marque" />
+                         <p:inputText id="marque" value="#{equipementController.selected.marque}" title="Marque" />
 
-
-                        <p:outputLabel value="#{bundle.CreateEquipementLabel_marque}" for="marque" />
-                        <p:selectOneMenu id="marque" value="#{equipementController.selected.marque}" >
-                            <f:selectItem itemValue="0" itemLabel="--SELECT--"></f:selectItem>
-                            <f:selectItem itemValue="1" itemLabel="societe"></f:selectItem>
-                            <f:selectItem itemValue="2" itemLabel="m1"></f:selectItem>
-                            <f:selectItem itemValue="3" itemLabel="m2"></f:selectItem>
-                        </p:selectOneMenu>
-
-                     
-                        
-                       
-                        <p:commandButton id="createButton" icon="ui-icon-search"   value="search"  actionListener="#{equipementController.fingByCretar()}" update=":EquipementListForm:datalist" class="btn btn-danger"  style="width: 200px" > </p:commandButton>
+                        <p:commandButton id="createButton" icon="ui-icon-search"  style="background-color:#F7BC87; width: 100px;" value="Recherche"
+                                         actionListener="#{equipementController.fingByCretar()}" update=":EquipementListForm:datalist"
+                                         class="btn btn-danger"   > </p:commandButton>
 
                     </p:panelGrid>
                 </p:fieldset>
@@ -126,20 +113,22 @@
                             </f:facet>
                             <h:outputText value="#{item.observation}"/>
                         </p:column>
+                        
                          <p:column>
-                                    <f:facet name="header">
+                                    <f:facet name="header" >
                                         <h:outputText value="Action"/>
                                     </f:facet>
-                                     <p:commandButton id="viewButton"   icon="ui-icon-search"  update=":EquipementViewForm" oncomplete="PF('EquipementViewDialog').show()" disabled="#{empty equipementController.selected}"/>
+                             <p:commandButton id="viewButton" style="background-color:#F7B582"  icon="ui-icon-search"  update=":EquipementViewForm" oncomplete="PF('Equipement7BBViewDialog').show()" disabled="#{empty equipementController.selected}"/>
 
-                                    <p:commandButton id="editButton" icon="ui-icon-pencil"   update=":EquipementEditForm" oncomplete="PF('EquipementEditDialog').show()" disabled="#{empty equipementController.selected}" />
-                                    <p:commandButton id="deleteButton" icon="ui-icon-trash"   actionListener="#{equipementController.destroy}" update=":growl,datalist" disabled="#{empty equipementController.selected}"/>
+                                    <p:commandButton id="editButton" icon="ui-icon-pencil" style="background-color:#F7B582"  update=":EquipementEditForm" oncomplete="PF('EquipementEditDialog').show()" disabled="#{empty equipementController.selected}" />
+                                    <p:commandButton id="deleteButton" icon="ui-icon-trash" style="background-color:#F7B582"  actionListener="#{equipementController.destroy}" update=":growl,datalist" disabled="#{empty equipementController.selected}"/>
                           </p:column>
+                            
                         <f:facet name="footer">
-                 <p:commandButton id="exportButton" icon="ui-icon-pdf"   value="Export" action="#{equipementController.generatePdf()}" ajax="false"/>
+                 <p:commandButton id="exportButton" icon="ui-icon-print" style="background-color:#F7BC87; width: 100px; height: 30px;"  value="Imprimer" action="#{equipementController.generatePdf()}" ajax="false"/>
                 </f:facet>
                         
-                        
+                 
                     </p:dataTable>
                 </p:panel>
             </h:form>

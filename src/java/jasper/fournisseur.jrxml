@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="0588aca7-12d8-435f-94a2-279389c20424">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<field name="nom" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="0" width="173" height="79" uuid="0a3133c3-3550-499c-a0a9-1ee234ce19f7"/>
+				<imageExpression><![CDATA["C:\\Users\\user\\Desktop\\JEE\\ONDA-LOGO.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="187" y="41" width="241" height="26" forecolor="#000066" uuid="a87e852d-0d70-48e0-8dbb-2dbe48eb13cb"/>
+				<textElement>
+					<font size="14" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Aéroport MARRAKECH - MENARA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="385" y="0" width="170" height="20" forecolor="#000066" uuid="9999fa40-a493-4cd3-b8c8-0e31fe9add65"/>
+				<textElement>
+					<font size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Marrakech le :          /            /]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement x="227" y="0" width="181" height="20" forecolor="#000066" uuid="dc2c8eef-6c9a-4047-9c65-7922c40451e0"/>
+				<textElement>
+					<font isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Liste des noms des fournisseurs :]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="22" splitType="Stretch">
+			<staticText>
+				<reportElement x="245" y="0" width="100" height="20" uuid="23eaea73-82ac-4e67-bd18-1cbb5634a390"/>
+				<text><![CDATA[nom]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="28" splitType="Stretch">
+			<textField>
+				<reportElement x="245" y="0" width="100" height="20" uuid="d48781a5-8575-4282-a91a-a7ff18b3dfbb"/>
+				<textFieldExpression><![CDATA[$F{nom}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="14" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<staticText>
+				<reportElement x="345" y="0" width="154" height="20" forecolor="#000066" uuid="b264f34b-0fa3-4b0b-946e-59b28299cb3c"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Visa responsable technique :]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

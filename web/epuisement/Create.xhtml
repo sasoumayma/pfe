@@ -5,6 +5,10 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
+    
+    
+     
+        
 
     <ui:composition template="/template.xhtml">
         
@@ -12,16 +16,29 @@
             <h:outputText value="#{bundle.ListEpuisementTitle}"></h:outputText>
         </ui:define>
         
-        <ui:define name="body">
+        
+       
+        <ui:define name="body" >
             
-             <div class="ui-g">
-                <div class="ui-g-4">
-                    <p:panel header="AJOUT EPUISEMENT" style="margin-top:20px;">
+            
+            <div class="bodyLogin">
+            <div class="ui-grid-row" style="background: url(../resources/image/10.jpg) no-repeat;background-size:cover;">
+                <img src="../resources/image/sas.png" style="width: 190px; height: 150px;" />
+            <h3 style="text-align: center; color: white; text-shadow: 2px 2px 2px black; font-weight: bold"></h3>
+        </div>
+                
+            </div>
+            
+            
+            
+             <div class="ui-g" style="background-color:#F7ECC6 " >
+                <div class="ui-g-4" style="background-color:#F7ECC6">
+                    <p:panel header="AJOUT EPUISEMENT" style="background-color:#F7ECC6" >
                         <h:form id="EpuisementCreateForm">
                             <h:panelGroup id="display">
                                 <p:panelGrid columns="2" rendered="#{epuisementController.selected != null}">
                                     
-                                    <p:outputLabel value="#{bundle.CreateEpuisementLabel_equipement}" for="equipement" />
+                                    <p:outputLabel value="#{bundle.CreateEpuisementLabel_equipement}" for="equipement" style="color:#F7ECC6 " />
                                     <p:selectOneMenu id="equipement" value="#{epuisementController.selected.equipement}" >
                                         <f:selectItems value="#{equipementController.itemsAvailableSelectOne}"
                                                        var="equipementItem"
@@ -54,7 +71,7 @@
                                     
                                 </p:panelGrid>
                                 
-                                <p:commandButton actionListener="#{epuisementController.save()}" style="background-color:blanchedalmond"  icon="ui-icon-plus" value="ADD" update=":EpuisementListForm:datalist" />
+                                <p:commandButton actionListener="#{epuisementController.save()}" style="background-color:#F3B896"   icon="ui-icon-plus" value="ADD" update=":EpuisementListForm:datalist" />
 
                                 
                             </h:panelGroup>
@@ -64,10 +81,10 @@
             
             
             
-                            <div class="ui-g-8">
-                    <p:panel header="PLAN EPUISEMENT LIST" style="margin-top:20px">
-                        <h:form id="EpuisementListForm">
-                            <p:panel header="#{bundle.ListEpuisementTitle}">
+                            <div class="ui-g-8" style="background-color:#F7ECC6">
+                                <p:panel header="PLAN EPUISEMENT LIST"  style="background-color:#F7ECC6 ">
+                        <h:form id="EpuisementListForm" style="background-color:#F7ECC6">
+                            <p:panel header="#{bundle.ListEpuisementTitle}" >
                                 <p:dataTable id="datalist" value="#{epuisementController.items}" var="item"
                                              selectionMode="single" selection="#{epuisementController.selected}"
                                              paginator="true"

@@ -46,51 +46,58 @@
 	<columnHeader>
 		<band height="20" splitType="Stretch">
 			<staticText>
-				<reportElement x="163" y="0" width="114" height="20" forecolor="#000066" uuid="2d0ba398-f2ca-4b55-82cd-a963c13a85f6"/>
+				<reportElement x="195" y="0" width="114" height="20" forecolor="#000066" uuid="2d0ba398-f2ca-4b55-82cd-a963c13a85f6"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Quantité]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="277" y="0" width="114" height="20" forecolor="#000066" uuid="4a49be47-6045-4a2a-a767-e8ffcb011b1a"/>
+				<reportElement x="309" y="0" width="114" height="20" forecolor="#000066" uuid="4a49be47-6045-4a2a-a767-e8ffcb011b1a"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Quantite Minimale]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="391" y="0" width="132" height="20" forecolor="#000066" uuid="2e04b77e-8c31-437d-bc33-70447200649c"/>
+				<reportElement x="423" y="0" width="132" height="20" forecolor="#000066" uuid="2e04b77e-8c31-437d-bc33-70447200649c"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Observation]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="63" y="0" width="100" height="20" forecolor="#000066" uuid="aaf9d983-6c1b-4956-ac1f-d1688f7ad7ca"/>
+				<reportElement x="95" y="0" width="100" height="20" forecolor="#000066" uuid="aaf9d983-6c1b-4956-ac1f-d1688f7ad7ca"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Numero de Serie]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="95" height="20" forecolor="#000066" uuid="067d15b8-bbcb-4db2-9c5f-553a7219f82b"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Désignation]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="39" splitType="Stretch">
 			<textField>
-				<reportElement x="163" y="0" width="114" height="20" uuid="d53dd1ac-92d6-460a-b332-a10bb7cea784"/>
+				<reportElement x="195" y="0" width="114" height="20" uuid="d53dd1ac-92d6-460a-b332-a10bb7cea784"/>
 				<textFieldExpression><![CDATA[$F{quantite}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="277" y="0" width="114" height="20" uuid="ab7bb375-7340-4d2c-ae1f-334d62ccda3b"/>
+				<reportElement x="309" y="0" width="114" height="20" uuid="ab7bb375-7340-4d2c-ae1f-334d62ccda3b"/>
 				<textFieldExpression><![CDATA[$F{quantiteMinimale}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="391" y="0" width="132" height="20" uuid="5e67c235-247e-4b14-89e7-8d62f42a0c17"/>
+				<reportElement x="423" y="0" width="132" height="20" uuid="5e67c235-247e-4b14-89e7-8d62f42a0c17"/>
 				<textFieldExpression><![CDATA[$F{observation}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="63" y="0" width="100" height="20" uuid="d19e9936-9472-4861-91d2-accb042b7ee6"/>
+				<reportElement x="95" y="0" width="100" height="20" uuid="d19e9936-9472-4861-91d2-accb042b7ee6"/>
 				<textFieldExpression><![CDATA[$F{numeroSerie}]]></textFieldExpression>
 			</textField>
 		</band>

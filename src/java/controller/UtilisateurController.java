@@ -43,7 +43,13 @@ public class UtilisateurController implements Serializable {
 //                SessionUtil.setAttribute("connectionUtilisateur", clone);
                 SessionUtil.registerUtilisateur(selected);
                 return "/menu/menu?faces-redirect=true";
+            case 2 :
+                JsfUtil.addSuccessMessage("Success");
+//                SessionUtil.setAttribute("connectionUtilisateur", clone);
+                SessionUtil.registerUtilisateur(selected);
+                return "/menu/menu_1?faces-redirect=true";
             // utilisateur blocked
+            
             case -2:
                 JsfUtil.addErrorMessage("this utilisateur is blocked");
                 return null;

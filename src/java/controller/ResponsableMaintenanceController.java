@@ -3,6 +3,7 @@ package controller;
 import bean.ResponsableMaintenance;
 import controller.util.JsfUtil;
 import controller.util.JsfUtil.PersistAction;
+import java.io.IOException;
 import service.ResponsableMaintenanceFacade;
 
 import java.io.Serializable;
@@ -18,6 +19,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import net.sf.jasperreports.engine.JRException;
 
 @Named("responsableMaintenanceController")
 @SessionScoped
@@ -27,6 +29,23 @@ public class ResponsableMaintenanceController implements Serializable {
     private service.ResponsableMaintenanceFacade ejbFacade;
     private List<ResponsableMaintenance> items = null;
     private ResponsableMaintenance selected;
+    
+    //
+     public void save() {
+        ejbFacade.create(getSelected());
+        items=ejbFacade.findAll();
+        initAttribute();
+    }
+      private void initAttribute() {
+        setSelected(null);
+        
+    }
+    //
+      
+       public void generatePdf() throws JRException, IOException{
+            ejbFacade.generatePdf();
+            FacesContext.getCurrentInstance().responseComplete();
+        }
 
     public ResponsableMaintenanceController() {
     }

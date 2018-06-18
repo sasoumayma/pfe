@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c16da274-2bb7-4162-8eb2-aba34d711160">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<field name="numeroSerie" class="java.lang.String"/>
+	<field name="dateSortie" class="java.util.Date"/>
+	<field name="dateEntree" class="java.util.Date"/>
+	<field name="dateEpuisement" class="java.util.Date"/>
+	<field name="quantite" class="java.lang.Integer"/>
+	<field name="quantiteMinimale" class="java.lang.Integer"/>
+	<field name="observation" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="85" splitType="Stretch">
+			<staticText>
+				<reportElement x="385" y="0" width="170" height="20" forecolor="#000066" uuid="47bf2b8e-4a27-4ec3-bb56-14bbb91fef3e"/>
+				<textElement>
+					<font size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Marrakech le :          /            /]]></text>
+			</staticText>
+			<image>
+				<reportElement x="0" y="0" width="173" height="79" uuid="270676d4-d815-4473-a938-d873a33140cc"/>
+				<imageExpression><![CDATA["C:\\Users\\user\\Desktop\\JEE\\ONDA-LOGO.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="187" y="42" width="241" height="24" forecolor="#000066" uuid="87e4bb25-7e9b-49c1-979a-5051a96819ae"/>
+				<textElement>
+					<font size="14" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Aéroport MARRAKECH - MENARA]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement x="212" y="0" width="198" height="24" forecolor="#000066" uuid="27e22ddf-3234-43a6-b79b-cb49054e0c9b"/>
+				<textElement>
+					<font size="12" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Liste des épuisements du stock :]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement x="93" y="0" width="79" height="20" uuid="ff29d640-8c5a-4069-83ad-4a4be9c57976"/>
+				<text><![CDATA[N° série]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="172" y="0" width="79" height="20" uuid="df33d647-ae4d-4571-bbc2-6713511a3635"/>
+				<text><![CDATA[D.Sortie]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="251" y="0" width="79" height="20" uuid="6300dd0c-d315-4bcf-8612-6bd4548c12ca"/>
+				<text><![CDATA[D.Entree]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="330" y="0" width="80" height="20" uuid="9acc2ec1-1470-4f48-aff2-0a0fbe19ac5d"/>
+				<text><![CDATA[D.Epuisement]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="410" y="0" width="31" height="20" uuid="84e6ba99-9436-4dbb-8048-532d53401ceb"/>
+				<text><![CDATA[Qte]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="441" y="0" width="46" height="20" uuid="9103304c-f496-4883-9cfa-225df055089e"/>
+				<text><![CDATA[Qte Min]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="487" y="0" width="68" height="20" uuid="89c603d5-3451-4370-81e0-2e56210bb979"/>
+				<text><![CDATA[observation]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="93" height="20" uuid="ad6f5cd2-a595-4946-8bb7-e8300213fbf4"/>
+				<text><![CDATA[Equipement]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="36" splitType="Stretch">
+			<textField>
+				<reportElement x="93" y="0" width="79" height="20" uuid="6f73bbed-2402-48f4-8227-9aa78f7354eb"/>
+				<textFieldExpression><![CDATA[$F{numeroSerie}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="172" y="0" width="79" height="20" uuid="58fb257d-1c8a-458d-8985-9fc1dfe1da83"/>
+				<textFieldExpression><![CDATA[$F{dateSortie}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="251" y="0" width="79" height="20" uuid="8813ec82-78f6-4a80-bc78-947803cff595"/>
+				<textFieldExpression><![CDATA[$F{dateEntree}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="330" y="0" width="80" height="20" uuid="e70b526e-37a8-4a50-b996-7abd7d7824b0"/>
+				<textFieldExpression><![CDATA[$F{dateEpuisement}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="410" y="0" width="31" height="20" uuid="d4661ee1-25dc-436d-9b79-169b796088b0"/>
+				<textFieldExpression><![CDATA[$F{quantite}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="441" y="0" width="46" height="20" uuid="a51b7b99-f795-4adf-8315-361c68972df8"/>
+				<textFieldExpression><![CDATA[$F{quantiteMinimale}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="487" y="0" width="66" height="20" uuid="7689ef2f-980e-44f7-a31d-de32f84d080c"/>
+				<textFieldExpression><![CDATA[$F{observation}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<staticText>
+				<reportElement x="330" y="0" width="154" height="20" forecolor="#000066" uuid="31897476-4419-46b0-9b0f-5492a6e480a3"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Visa responsable technique :]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

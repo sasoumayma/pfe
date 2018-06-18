@@ -14,45 +14,72 @@
         </ui:define>
 
         <ui:define name="body">
-            <h:form id="FournisseurListForm">
-                <p:panel header="#{bundle.ListFournisseurTitle}">
-                    <p:dataTable id="datalist" value="#{fournisseurController.items}" var="item"
+            
+             <div class="ui-g">
+                <div class="ui-g-12">
+              <h:form>
+                <p:fieldset id="StatField" legend="CRITERE DE RECHERCHE" style="margin-bottom:20px" >
+                    <p:panelGrid columns="8">
+
+       
+
+                         <p:outputLabel value="Designation" for="designation" />
+                         <p:inputText id="designation" value="#{fournisseurController.selected.nom}" title="Nom" />
+                         
+                         
+
+
+                        
+                        <p:commandButton id="createButton" icon="ui-icon-search" style="background-color:#F7BC87; width: 100px;"  value="Recherche"  actionListener="#{fournisseurController.fingByCretar()}" update=":FournisseurListForm:datalist" class="btn btn-danger"   > </p:commandButton>
+
+                    </p:panelGrid>
+                </p:fieldset>
+            </h:form>
+                </div>
+            </div>
+            
+            <h:form id="FournisseurListForm" >
+                <p:panel header="#{bundle.ListFournisseurTitle}" style="height: 1000px; width: 700px;">
+                    <p:dataTable id="datalist"  value="#{fournisseurController.items}" var="item"
                                  selectionMode="single" selection="#{fournisseurController.selected}"
                                  paginator="true"
                                  rowKey="#{item.id}"
                                  rows="10"
-                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 rowsPerPageTemplate="10,20,30,40,50" 
                                  >
 
-                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
-                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+                        <p:ajax event="rowSelect"   update=" viewButton editButton  deleteButton"/>
+                        <p:ajax event="rowUnselect" update=" viewButton editButton  deleteButton"/>
 
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListFournisseurTitle_id}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.id}"/>
-                        </p:column>
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListFournisseurTitle_nom}"/>
                             </f:facet>
-                            <h:outputText value="#{item.nom}" />
+                            <h:outputText value="#{item.nom}"/>
                         </p:column>
+                        
+                       
+                         <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Action"/>
+                                    </f:facet>
+                                     <p:commandButton id="viewButton" style="background-color:#F7B582"  icon="ui-icon-search"  update=":FournisseurViewForm" oncomplete="PF('FournisseurViewDialog').show()" disabled="#{empty fournisseurController.selected}"/>
+
+                                    <p:commandButton id="editButton" icon="ui-icon-pencil"  style="background-color:#F7B582" update=":FournisseurEditForm" oncomplete="PF('FournisseurEditDialog').show()" disabled="#{empty fournisseurController.selected}" />
+                                    <p:commandButton id="deleteButton" icon="ui-icon-trash" style="background-color:#F7B582"  actionListener="#{fournisseurController.destroy}" update=":growl,datalist" disabled="#{empty fournisseurController.selected}"/>
+                          </p:column>
                         <f:facet name="footer">
-                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{fournisseurController.prepareCreate}" update=":FournisseurCreateForm" oncomplete="PF('FournisseurCreateDialog').show()"/>
-                            <p:commandButton id="exportButton" icon="ui-icon-pdf"   value="Export" action="#{fournisseurController.generatePdf()}" ajax="false"/>
-                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":FournisseurViewForm" oncomplete="PF('FournisseurViewDialog').show()" disabled="#{empty fournisseurController.selected}"/>
-                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":FournisseurEditForm" oncomplete="PF('FournisseurEditDialog').show()" disabled="#{empty fournisseurController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{fournisseurController.destroy}" update=":growl,datalist" disabled="#{empty fournisseurController.selected}"/>
-                        </f:facet>
+                 <p:commandButton id="exportButton" icon="ui-icon-pdf" style="background-color:#F7BC87; width: 100px; height: 30px;"  value="Imprimer" action="#{fournisseurController.generatePdf()}" ajax="false"/>
+                </f:facet>
+                        
+                 
                     </p:dataTable>
                 </p:panel>
             </h:form>
 
-            <ui:include src="Create.xhtml"/>
             <ui:include src="Edit.xhtml"/>
-            <ui:include src="View.xhtml"/>
+             <ui:include src="View.xhtml"/>
+
         </ui:define>
     </ui:composition>
 

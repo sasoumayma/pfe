@@ -8,6 +8,7 @@ import java.io.IOException;
 import service.EquipementFacade;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -36,31 +37,19 @@ public class EquipementController implements Serializable {
 
     @EJB
     private service.EquipementFacade ejbFacade;
-    private List<Equipement> items = null;
+    private List<Equipement> items = new ArrayList<>();
     private Equipement selected;
-    
-    private String type;
-    private String emplacement;
-    private String marque;
     private String designation;
-    
+
     // search
-      public void fingByCretar(){
-          System.out.println("ha designation=>"+designation);
-          System.out.println("ha type=>"+type);
-          System.out.println("ha emplacement=>"+emplacement);
-          System.out.println("ha marque=>"+marque);
-          items = ejbFacade.findByCretaria(designation, type, emplacement, marque);
-      }
-      
-      //search
-    
-    
+    public void fingByCretar() {
+        items = ejbFacade.findByCretaria(selected.getType(), selected.getEmplacement(), selected.getMarque());
+    }
+
+    //search
     //statistique//
-    
     private int annee;
     private int quantite;
-    
 
     @EJB
     private EquipementFacade equipementFacade;
@@ -71,9 +60,8 @@ public class EquipementController implements Serializable {
 
     private int typeChart;
     private LineChartModel chartModel;
-    
-    
-     @PostConstruct
+
+    @PostConstruct
     public void init() {
         barModel = new BarChartModel();
         ChartSeries equipement = new ChartSeries();
@@ -85,20 +73,21 @@ public class EquipementController implements Serializable {
         barModel.addSeries(equipement);
         barModel.addSeries(entree);
     }
-    
+
     public void afficherChartEquipement() {
         createBarModelEquipement();
     }
 //     public void afficherChartPlan() {
 //        createBarModelPlan();
 //    }
-     private void createBarModelEquipement() {
+
+    private void createBarModelEquipement() {
         barModel = new BarChartModel();
         initBarModelForEquipement(barModel);
         paramGraphForEquipement(barModel);
     }
 
-     private void paramGraphForEquipement(CartesianChartModel model) {
+    private void paramGraphForEquipement(CartesianChartModel model) {
         model.setTitle("Statistiques de l'annee " + annee);
         model.setLegendPosition("e");
         model.setAnimate(true);
@@ -110,14 +99,15 @@ public class EquipementController implements Serializable {
         xAxis.setMin(0);
         xAxis.setTickAngle(-30);
     }
-     
-     private void initBarModelForEquipement(CartesianChartModel model) {
+
+    private void initBarModelForEquipement(CartesianChartModel model) {
         attachResultatToModelForEquipement(model);
     }
 //     private void initBarModelForPlan(CartesianChartModel model) {
 //        attachResultatToModelForPlan(model);
 //    }
-     private void attachResultatToModelForEquipement(CartesianChartModel model) {
+
+    private void attachResultatToModelForEquipement(CartesianChartModel model) {
         Object[] res = equipementFacade.findIncidentAndTraitementByCriteria(annee, designation, quantite);
         max = MathUtil.calculerMax(res);
         ChartSeries equipement = new ChartSeries();
@@ -134,8 +124,6 @@ public class EquipementController implements Serializable {
         model.addSeries(entree);
     }
 
-     
-     
 //      private void createBarModelPlan() {
 //        barModel = new BarChartModel();
 //        initBarModelForPlan(barModel);
@@ -153,8 +141,6 @@ public class EquipementController implements Serializable {
 //        xAxis.setMin(0);
 //        xAxis.setTickAngle(-30);
 //    }
-
-    
 //    private void attachResultatToModelForPlan(CartesianChartModel model) {
 //        Object[] res = equipementFacade.findPlanAndExecutionByCriteria(annee, employeeDeclarant);
 //        max = MathUtil.calculerMax(res);
@@ -172,18 +158,17 @@ public class EquipementController implements Serializable {
 //        model.addSeries(executionPlanPreventif);
 //    }
 //      
-      
-      public void setTypeChart(int typeChart) {
+    public void setTypeChart(int typeChart) {
         this.typeChart = typeChart;
     }
-     
-     public BarChartModel getBarModel() {
+
+    public BarChartModel getBarModel() {
         if (barModel == null) {
             barModel = new BarChartModel();
         }
         return barModel;
     }
-     
+
     public LineChartModel getChartModel() {
         if (chartModel == null) {
             chartModel = new LineChartModel();
@@ -241,7 +226,7 @@ public class EquipementController implements Serializable {
         this.equipementFacade = equipementFacade;
     }
 
-     public Long getMax() {
+    public Long getMax() {
         return max;
     }
 
@@ -257,29 +242,24 @@ public class EquipementController implements Serializable {
         this.quantite = quantite;
     }
 
-    
-    
-    
     //Fin statistique//
-    
-    
-    
     //
-     public void save() {
+    public void save() {
         ejbFacade.create(getSelected());
-        items=ejbFacade.findAll();
+        items = ejbFacade.findAll();
         initAttribute();
     }
-      private void initAttribute() {
+
+    private void initAttribute() {
         setSelected(null);
-        
+
     }
     //
-    
-        public void generatePdf() throws JRException, IOException{
-            ejbFacade.generatePdf();
-            FacesContext.getCurrentInstance().responseComplete();
-        }
+
+    public void generatePdf() throws JRException, IOException {
+        ejbFacade.generatePdf();
+        FacesContext.getCurrentInstance().responseComplete();
+    }
 
     public EquipementController() {
     }
@@ -332,7 +312,7 @@ public class EquipementController implements Serializable {
 
     public List<Equipement> getItems() {
         if (items == null) {
-            items = getFacade().findAll();
+            items = new ArrayList();
         }
         return items;
     }

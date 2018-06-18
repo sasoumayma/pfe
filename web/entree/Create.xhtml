@@ -20,12 +20,7 @@
                         <h:form id="EntreeCreateForm">
                             <h:panelGroup id="display">
                                 <p:panelGrid columns="6" rendered="#{entreeController.selected != null}">
-                                    <p:outputLabel value="#{bundle.CreateEntreeLabel_utilisateur}" for="utilisateur" />
-                                    <p:selectOneMenu id="utilisateur" value="#{entreeController.selected.utilisateur}" >
-                                        <f:selectItems value="#{utilisateurController.itemsAvailableSelectOne}"
-                                                       var="utilisateurItem"
-                                                       itemValue="#{utilisateurItem}" itemLabel="#{utilisateurItem.nom}"/>
-                                    </p:selectOneMenu>
+                                    
 
                                     <p:outputLabel value="#{bundle.CreateEntreeLabel_dateEntree}" for="dateEntree" />
                                     <p:calendar id="dateEntree" pattern="MM/dd/yyyy" value="#{entreeController.selected.dateEntree}" title="#{bundle.EditEntreeTitle_dateEntree}"  showOn="button"/>

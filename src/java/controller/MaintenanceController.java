@@ -27,12 +27,39 @@ public class MaintenanceController implements Serializable {
     private service.MaintenanceFacade ejbFacade;
     private List<Maintenance> items = null;
     private Maintenance selected;
+    private int showMaintenance;
+    private int typeMaintenance;
+    
+    public void save() {
+       
+    }
+    public void add() {
+       
+    }
 
     public MaintenanceController() {
     }
 
+    public int getTypeMaintenance() {
+        return typeMaintenance;
+    }
+
+    public void setTypeMaintenance(int typeMaintenance) {
+        this.typeMaintenance = typeMaintenance;
+    }
+
+    
+    public int getShowMaintenance() {
+        return showMaintenance;
+    }
+
+    public void setShowMaintenance(int showMaintenance) {
+        this.showMaintenance = showMaintenance;
+    }
+
+    
     public Maintenance getSelected() {
-       if (selected == null) {
+        if (selected == null) {
             selected = new Maintenance();
         }
         return selected;

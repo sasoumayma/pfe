@@ -53,14 +53,20 @@ public class UtilisateurFacade extends AbstractFacade<Utilisateur> {
                 return -3; // Wrong Password
             } else if (loadedUtilisateur.getBlocked() == 1) {
                 return -2; // this utilisateur is blocked
-            } else {
+            
+            }else if(utilisateur.getId().equals("ana")){
+                
+            return 1;
+            } 
+            
+            else  {
 //                loadedUtilisateur.setNbrCnx(0);
 //                edit(loadedUtilisateur);
 //                utilisateur = clone(loadedUtilisateur);
 //                utilisateur.setMdpChanged(loadedUtilisateur.isMdpChanged());
 //                edit(utilisateur);
                 // SessionUtil.attachUtilisateurToCommune(utilisateur);
-                return 1; // this utilisateur is exist
+                return 2; // this utilisateur is exist
             }
 
         }

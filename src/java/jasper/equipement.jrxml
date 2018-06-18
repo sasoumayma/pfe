@@ -19,7 +19,7 @@
 	<title>
 		<band height="79" splitType="Stretch">
 			<staticText>
-				<reportElement x="385" y="0" width="170" height="20" uuid="7598462a-6adb-4937-b78f-e7fe3d3f1d18"/>
+				<reportElement x="385" y="0" width="170" height="20" forecolor="#000066" uuid="7598462a-6adb-4937-b78f-e7fe3d3f1d18"/>
 				<textElement>
 					<font size="12" isBold="false"/>
 				</textElement>
@@ -40,68 +40,75 @@
 				<reportElement x="0" y="-79" width="173" height="79" uuid="c6376351-db99-4f64-8bda-f3721841bf91"/>
 				<imageExpression><![CDATA["C:\\Users\\user\\Desktop\\JEE\\ONDA-LOGO.jpg"]]></imageExpression>
 			</image>
+			<staticText>
+				<reportElement x="236" y="0" width="172" height="20" forecolor="#000066" uuid="bff8a5f0-cc3d-440c-b5e3-97fd6f8dbb09"/>
+				<textElement>
+					<font isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Liste des équipements du stock :]]></text>
+			</staticText>
 		</band>
 	</pageHeader>
 	<columnHeader>
 		<band height="20" splitType="Stretch">
 			<staticText>
-				<reportElement x="0" y="0" width="61" height="20" forecolor="#660033" uuid="0c111e53-ab72-4845-91c7-bee449f756ae"/>
+				<reportElement x="0" y="0" width="61" height="20" forecolor="#000066" uuid="0c111e53-ab72-4845-91c7-bee449f756ae"/>
 				<textElement>
 					<font size="10" isBold="true" isUnderline="true"/>
 				</textElement>
 				<text><![CDATA[Désignation]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="61" y="0" width="39" height="20" forecolor="#660033" uuid="d205a18f-0a1f-40e5-b734-4a0462c4e042"/>
+				<reportElement x="61" y="0" width="39" height="20" forecolor="#000066" uuid="d205a18f-0a1f-40e5-b734-4a0462c4e042"/>
 				<textElement>
 					<font size="10" isBold="true" isUnderline="true"/>
 				</textElement>
 				<text><![CDATA[Type]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="100" y="0" width="73" height="20" forecolor="#660033" uuid="f8f4fb9a-d24f-4783-b967-5207a82636b2"/>
+				<reportElement x="100" y="0" width="73" height="20" forecolor="#000066" uuid="f8f4fb9a-d24f-4783-b967-5207a82636b2"/>
 				<textElement>
 					<font size="10" isBold="true" isUnderline="true"/>
 				</textElement>
 				<text><![CDATA[Emplacement]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="175" y="0" width="61" height="20" forecolor="#660033" uuid="198e0719-449f-4d23-828f-554f220a0bfc"/>
+				<reportElement x="175" y="0" width="61" height="20" forecolor="#000066" uuid="198e0719-449f-4d23-828f-554f220a0bfc"/>
 				<textElement>
 					<font size="10" isBold="true" isUnderline="true"/>
 				</textElement>
 				<text><![CDATA[Affectation]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="236" y="0" width="55" height="20" forecolor="#660033" uuid="1b895eb8-7a9d-4049-84ba-5c0b4226895b"/>
+				<reportElement x="236" y="0" width="55" height="20" forecolor="#000066" uuid="1b895eb8-7a9d-4049-84ba-5c0b4226895b"/>
 				<textElement>
 					<font size="10" isBold="true" isUnderline="true"/>
 				</textElement>
 				<text><![CDATA[Marque]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="291" y="0" width="81" height="20" forecolor="#660033" uuid="11a58fc6-bd33-4627-9602-205244783297"/>
+				<reportElement x="291" y="0" width="81" height="20" forecolor="#000066" uuid="11a58fc6-bd33-4627-9602-205244783297"/>
 				<textElement>
 					<font size="10" isBold="true" isUnderline="true"/>
 				</textElement>
 				<text><![CDATA[Date MS]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="372" y="0" width="55" height="20" forecolor="#660033" uuid="1055bd19-0f11-459a-a8c2-7ec66ca7ef86"/>
+				<reportElement x="372" y="0" width="55" height="20" forecolor="#000066" uuid="1055bd19-0f11-459a-a8c2-7ec66ca7ef86"/>
 				<textElement>
 					<font size="10" isBold="true" isUnderline="true"/>
 				</textElement>
 				<text><![CDATA[ Détails]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="427" y="0" width="67" height="20" forecolor="#660033" uuid="48bf8e37-6240-4aed-91b2-2519df283157"/>
+				<reportElement x="427" y="0" width="67" height="20" forecolor="#000066" uuid="48bf8e37-6240-4aed-91b2-2519df283157"/>
 				<textElement>
 					<font size="10" isBold="true" isUnderline="true"/>
 				</textElement>
 				<text><![CDATA[Description]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="494" y="0" width="61" height="20" forecolor="#660033" uuid="13380829-caf0-49af-9ef7-cb3b2ea348b3"/>
+				<reportElement x="494" y="0" width="61" height="20" forecolor="#000066" uuid="13380829-caf0-49af-9ef7-cb3b2ea348b3"/>
 				<textElement>
 					<font size="10" isBold="true" isUnderline="true"/>
 				</textElement>
@@ -154,13 +161,9 @@
 	</columnFooter>
 	<pageFooter>
 		<band height="54" splitType="Stretch">
-			<textField>
-				<reportElement x="205" y="0" width="100" height="20" uuid="046a1115-2ee5-4a12-a2c7-cfd1ea0712d0"/>
-				<textFieldExpression><![CDATA[$P{responsable}]]></textFieldExpression>
-			</textField>
 			<staticText>
-				<reportElement x="330" y="0" width="135" height="20" uuid="6a4d426e-2f11-4fe0-a8c9-86ad58f93298"/>
-				<text><![CDATA[Signature et Cachet : ]]></text>
+				<reportElement x="330" y="0" width="164" height="20" forecolor="#000066" uuid="6a4d426e-2f11-4fe0-a8c9-86ad58f93298"/>
+				<text><![CDATA[Visa responsable technique :]]></text>
 			</staticText>
 		</band>
 	</pageFooter>

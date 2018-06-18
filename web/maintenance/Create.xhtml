@@ -11,28 +11,28 @@
             <h:outputText value="#{bundle.ListMaintenanceTitle}"></h:outputText>
         </ui:define>
 
-  <ui:define name="body">
+        <ui:define name="body">
             <div class="ui-g">
                 <div class="ui-g-12" align="center">
                     <p:panel header="INFO MAINTENANCE" style="margin-top:20px;">
                         <h:form id="MaintenanceCreateForm">
                             <h:panelGroup id="display">
                                 <p:panelGrid columns="6" rendered="#{maintenanceController.selected != null}">
-                                    
-                                 <p:outputLabel value="#{bundle.CreateMaintenanceLabel_mois}" for="mois" />
-                                 <p:inputText id="mois" value="#{maintenanceController.selected.mois}" title="#{bundle.CreateMaintenanceTitle_mois}" />
-                                    
-                                 <p:outputLabel value="#{bundle.CreateMaintenanceLabel_annee}" for="annee" />
-                                 <p:inputText id="annee" value="#{maintenanceController.selected.annee}" title="#{bundle.CreateMaintenanceTitle_annee}" />
-                                    
-                        <p:outputLabel value="#{bundle.CreateMaintenanceLabel_typeMaintenance}" for="typeMaintenance" />
-                        <p:selectOneMenu id="typeMaintenance" value="#{maintenanceController.selected.typeMaintenance}" >
-                            <f:selectItem itemValue="0" itemLabel="--SELECT--"></f:selectItem>
-                            <f:selectItem itemValue="1" itemLabel="par salle"></f:selectItem>
-                            <f:selectItem itemValue="2" itemLabel="par catégorie d'équipement"></f:selectItem>
 
-                        </p:selectOneMenu>
-                  
+                                    <p:outputLabel value="#{bundle.CreateMaintenanceLabel_mois}" for="mois" />
+                                    <p:inputText id="mois" value="#{maintenanceController.selected.mois}" title="#{bundle.CreateMaintenanceTitle_mois}" />
+
+                                    <p:outputLabel value="#{bundle.CreateMaintenanceLabel_annee}" for="annee" />
+                                    <p:inputText id="annee" value="#{maintenanceController.selected.annee}" title="#{bundle.CreateMaintenanceTitle_annee}" />
+
+                                    <p:outputLabel value="#{bundle.CreateMaintenanceLabel_typeMaintenance}" for="typeMaintenance" />
+                                    <p:selectOneMenu id="typeMaintenance" value="#{maintenanceController.typeMaintenance}" >
+                                        <f:selectItem itemValue="0" itemLabel="--SELECT--"></f:selectItem>
+                                        <f:selectItem itemValue="1" itemLabel="par salle"></f:selectItem>
+                                        <f:selectItem itemValue="2" itemLabel="par catégorie d'équipement"></f:selectItem>
+                                        <p:ajax listener="#{maintenanceController.typeMaintenance}" process="typeMaintenance"></p:ajax>
+                                    </p:selectOneMenu>
+
                                     <p:commandButton id="createButton" icon="ui-icon-plus"   value="Confirmer" actionListener="#{maintenanceController.save()}"/>
                                 </p:panelGrid>
                             </h:panelGroup>
@@ -40,21 +40,21 @@
                     </p:panel>
                 </div>
             </div>
-      
-                  <div class="ui-g">
+
+            <div class="ui-g">
                 <div class="ui-g-4">
-                    <p:panel header="INFO DETAIL MAINTENANCE " style="margin-top:30px">
+                    <p:panel header="INFO DETAIL MAINTENANCE " style="margin-top:30px" rendered="#{maintenanceController.typeMaintenance==1}">
                         <h:form id="MaintenanceItemCreateForm">
                             <h:panelGroup id="display">
                                 <p:panelGrid columns="2" rendered="#{maintenanceItemController.selected != null}">
-                                    
+
                                     <p:outputLabel value="salle" for="salle" />
                                     <p:selectOneMenu id="salle" value="#{maintenanceItemController.selected.equipement}" >
                                         <f:selectItems value="#{equipementController.itemsAvailableSelectOne}"
                                                        var="equipementItem"
                                                        itemValue="#{equipementItem}" itemLabel="#{equipementItem.affectation}"/>
                                     </p:selectOneMenu>
-                                    
+
                                     <p:outputLabel value="#{bundle.CreateMaintenanceItemLabel_dateMaintenance}" for="dateMaintenance" />
                                     <p:calendar id="dateMaintenance" pattern="MM/dd/yyyy" value="#{maintenanceItemController.selected.dateMaintenance}" title="#{bundle.EditMaintenanceItemTitle_dateMaintenance}"  showOn="button"/>
 
@@ -65,7 +65,7 @@
                                                        itemValue="#{equipementItem}" itemLabel="#{equipementItem.designation}"/>
                                     </p:selectOneMenu>
 
-                                                                      
+
                                 </p:panelGrid>
                                 <p:commandButton actionListener="#{maintenanceController.add()}" icon="ui-icon-plus" value="Ajouter" />
                             </h:panelGroup>
@@ -73,39 +73,39 @@
                     </p:panel>
                 </div>
                 <div class="ui-g-4">
-                    <p:panel header="PLAN CATEGORIE LIST" style="margin-top:30px">
+                    <p:panel header="PLAN CATEGORIE LIST" style="margin-top:30px" rendered="#{maintenanceController.typeMaintenance==2}">
                         <h:form id="MaintenanceItemListForm">
                             <h:panelGroup id="display">
                                 <p:panelGrid columns="2" rendered="#{maintenanceItemController.selected != null}">
 
-                                <p:outputLabel value="#{bundle.CreateMaintenanceItemLabel_salle}" for="salle" />
+                                    <p:outputLabel value="#{bundle.CreateMaintenanceItemLabel_salle}" for="salle" />
                                     <p:selectOneMenu id="salle" value="#{maintenanceItemController.selected.equipement}" >
                                         <f:selectItems value="#{equipementController.itemsAvailableSelectOne}"
                                                        var="equipementItem"
                                                        itemValue="#{equipementItem}" itemLabel="#{equipementItem.affectation}"/>
                                     </p:selectOneMenu>
-                                    
-                                   
+
+
                                     <p:outputLabel value="#{bundle.CreateMaintenanceItemLabel_equipement}" for="equipement" />
                                     <p:selectOneMenu id="equipement" value="#{maintenanceItemController.selected.equipement}" >
                                         <f:selectItems value="#{equipementController.itemsAvailableSelectOne}"
                                                        var="equipementItem"
                                                        itemValue="#{equipementItem}" itemLabel="#{equipementItem.designation}"/>
                                     </p:selectOneMenu>
-                                    
-                                     <p:outputLabel value="#{bundle.CreateMaintenanceItemLabel_dateMaintenance}" for="dateMaintenance" />
+
+                                    <p:outputLabel value="#{bundle.CreateMaintenanceItemLabel_dateMaintenance}" for="dateMaintenance" />
                                     <p:calendar id="dateMaintenance" pattern="MM/dd/yyyy" value="#{maintenanceItemController.selected.dateMaintenance}" title="#{bundle.EditMaintenanceItemTitle_dateMaintenance}"  showOn="button"/>
-                               
+
 
                                 </p:panelGrid>
-                                   <p:commandButton icon="ui-icon-plus" value="Ajouter" />
+                                <p:commandButton icon="ui-icon-plus" value="Ajouter" />
 
-                       </h:panelGroup>
+                            </h:panelGroup>
                         </h:form>
                     </p:panel>
                 </div>
             </div>
-      
+
 
         </ui:define>
 

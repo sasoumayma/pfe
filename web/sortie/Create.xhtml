@@ -31,8 +31,7 @@
                                     <p:outputLabel value="#{bundle.CreateSortieLabel_dateSortie}" for="dateSortie" />
                                     <p:calendar id="dateSortie" pattern="MM/dd/yyyy" value="#{sortieController.selected.dateSortie}" title="#{bundle.EditSortieTitle_dateSortie}"  showOn="button"/>
 
-                                    <p:outputLabel value="#{bundle.CreateSortieLabel_nombreTotal}" for="nombreTotal" />
-                                    <p:inputText id="nombreTotal" value="#{sortieController.selected.nombreTotal}" title="#{bundle.CreateSortieTitle_nombreTotal}" />
+                                    
 
                                     <p:commandButton id="createButton" icon="ui-icon-plus"   value="SAVE" actionListener="#{sortieController.save()}" update=":SortieItemCreateForm, :SortieCreateForm , :SortieItemListForm:datalist" />
                                     <p:commandButton id="resetButton" icon="ui-icon-pencil"   value="RESET" actionListener="#{sortieController.reset()}" update=":SortieItemCreateForm, :SortieCreateForm , :SortieItemListForm:datalist" />

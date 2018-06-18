@@ -38,16 +38,8 @@
                                            itemLabel="#{fournisseurItem.nom}"
                                            />
                         </p:selectOneMenu>
-                        <p:outputLabel value="Utilisateur" for="utilisateur" />
-                        <p:selectOneMenu id="utilisateur" value="#{entreeController.selected.utilisateur}" >
-                            <f:selectItem itemValue="#{null}" itemLabel="--SELECT--"></f:selectItem>
-                            <f:selectItems value="#{utilisateurController.itemsAvailableSelectOne}"
-                                           var="utilisateurItem"
-                                           itemValue="#{utilisateurItem}"
-                                           itemLabel="#{utilisateurItem.nom}"
-                                           />
-                        </p:selectOneMenu>
-                        <p:commandButton id="createButton" icon="ui-icon-search"   value="rechercher" actionListener="#{statistiqueController.afficherChartIncident()}"  />
+                        
+                        <p:commandButton id="createButton" icon="ui-icon-search" style="background-color:#F7BC87; width: 100px;"  value="rechercher" actionListener="#{statistiqueController.afficherChartIncident()}"  />
 
                     </p:panelGrid>
                 </p:fieldset>
@@ -71,13 +63,16 @@
                         <p:ajax event="rowSelect"   update=" editButton "/>
                         <p:ajax event="rowUnselect" update=" editButton "/>
                         
+                                
+
+                               
+                                
                                 <p:column>
                                     <f:facet name="header">
-                                        <h:outputText value="#{bundle.ListEntreeTitle_utilisateur}"/>
+                                        <h:outputText value="#{bundle.ListEntreeTitle_fournisseur}"/>
                                     </f:facet>
-                                    <h:outputText value="#{item.utilisateur}"/>
+                                    <h:outputText value="#{item.fournisseur}"/>
                                 </p:column>
-
                                 <p:column>
                                     <f:facet name="header">
                                         <h:outputText value="#{bundle.ListEntreeTitle_dateEntree}"/>
@@ -88,23 +83,11 @@
                                 </p:column>
                                 <p:column>
                                     <f:facet name="header">
-                                        <h:outputText value="#{bundle.ListEntreeTitle_nombreTotal}"/>
-                                    </f:facet>
-                                    <h:outputText value="#{item.nombreTotal}"/>
-                                </p:column>
-                                <p:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="#{bundle.ListEntreeTitle_fournisseur}"/>
-                                    </f:facet>
-                                    <h:outputText value="#{item.fournisseur}"/>
-                                </p:column>
-                                <p:column>
-                                    <f:facet name="header">
                                         <h:outputText value="Action"/>
                                     </f:facet>
-                                    <p:commandButton id="detailButton" icon="ui-icon-plus" actionListener="#{entreeController.findByEntree(item)}" update=":EntreeItemListForm:datalist , :EntreeListForm:datalist" />
-                                    <p:commandButton id="deleteButton" icon="ui-icon-trash" actionListener="#{entreeController.remove(item)}" update=":EntreeItemListForm:datalist , :EntreeListForm:datalist" />
-                                    <p:commandButton id="editButton" icon="ui-icon-pencil"   update=":EntreeEditForm" oncomplete="PF('EntreeEditDialog').show()" disabled="#{empty entreeController.selected}" />
+                                    <p:commandButton id="detailButton" icon="ui-icon-plus" style="background-color:#F7B582" actionListener="#{entreeController.findByEntree(item)}" update=":EntreeItemListForm:datalist , :EntreeListForm:datalist" />
+                                    <p:commandButton id="deleteButton" icon="ui-icon-trash" style="background-color:#F7B582" actionListener="#{entreeController.remove(item)}" update=":EntreeItemListForm:datalist , :EntreeListForm:datalist" />
+                                    <p:commandButton id="editButton" icon="ui-icon-pencil"  style="background-color:#F7B582" update=":EntreeEditForm" oncomplete="PF('EntreeEditDialog').show()" disabled="#{empty entreeController.selected}" />
 
                                 </p:column>
 
@@ -128,8 +111,24 @@
                 
                                    
                                     
-                                    
-                                    
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="#{bundle.ListEntreeItemTitle_equipement}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.equipement}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="#{bundle.ListEntreeItemTitle_numeroSerie}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.numeroSerie}"/>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="#{bundle.ListEntreeItemTitle_quantite}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.quantite}"/>
+                                    </p:column>
                                     <p:column>
                                         <f:facet name="header">
                                             <h:outputText value="#{bundle.ListEntreeItemTitle_quantiteMinimale}"/>
@@ -142,33 +141,15 @@
                                         </f:facet>
                                         <h:outputText value="#{item.magasin}"/>
                                     </p:column>
-
-                                    <p:column>
-                                        <f:facet name="header">
-                                            <h:outputText value="#{bundle.ListEntreeItemTitle_quantite}"/>
-                                        </f:facet>
-                                        <h:outputText value="#{item.quantite}"/>
-                                    </p:column>
-                                    <p:column>
-                                        <f:facet name="header">
-                                            <h:outputText value="#{bundle.ListEntreeItemTitle_numeroSerie}"/>
-                                        </f:facet>
-                                        <h:outputText value="#{item.numeroSerie}"/>
-                                    </p:column>
                                     <p:column>
                                         <f:facet name="header">
                                             <h:outputText value="#{bundle.ListEntreeItemTitle_observation}"/>
                                         </f:facet>
                                         <h:outputText value="#{item.observation}"/>
                                     </p:column>
-                                    <p:column>
-                                        <f:facet name="header">
-                                            <h:outputText value="#{bundle.ListEntreeItemTitle_equipement}"/>
-                                        </f:facet>
-                                        <h:outputText value="#{item.equipement}"/>
-                                    </p:column>
+                                    
                 <f:facet name="footer">
-                 <p:commandButton id="exportButton" icon="ui-icon-pdf"   value="Imprimer" action="#{entreeController.generatePdf()}" ajax="false"/>
+                 <p:commandButton id="exportButton" icon="ui-icon-print"  style="background-color:#F7BC87; width: 100px; height: 30px;" value="Imprimer" action="#{entreeController.generatePdf()}" ajax="false"/>
                 </f:facet>
 
                                 </p:dataTable>
