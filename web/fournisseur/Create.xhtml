@@ -14,9 +14,16 @@
         </ui:define>
 
         <ui:define name="body">
-            <div class="ui-g">
-                <div class="ui-g-4">
-                    <p:panel header="INFO SORIE" style="margin-top:20px;">
+            <div class="bodyLogin">
+            <div class="ui-grid-row" style="background: url(../resources/image/10.jpg) no-repeat;background-size:cover;">
+                <img src="../resources/image/sas.png" style="width: 190px; height: 150px;" />
+            <h3 style="text-align: center; color: white; text-shadow: 2px 2px 2px black; font-weight: bold"></h3>
+        </div>
+                
+            </div>
+            <div class="ui-g" style="background-color:#F7ECC6;">
+                <div class="ui-g-4" style="background-color:#F7ECC6;">
+                    <p:panel header="Ajouter un fournieur" style="margin-top:20px;">
                         <h:form id="FournisseurCreateForm">
                             <h:panelGroup id="display">
                                 <p:panelGrid columns="4" rendered="#{fournisseurController.selected != null}">
@@ -25,14 +32,14 @@
                                     <p:inputText id="nom" value="#{fournisseurController.selected.nom}" title="#{bundle.CreateFournisseurTitle_nom}" />
 
                                     
-                                    <p:commandButton id="createButton" icon="ui-icon-plus"   value="Ajouter" actionListener="#{fournisseurController.save()}" update=":FournisseurListForm:datalist" />
+                                    <p:commandButton id="createButton" icon="ui-icon-plus" style="background-color:#F7ECC6;"  value="Ajouter" actionListener="#{fournisseurController.save()}" update=":FournisseurListForm:datalist" />
                                 </p:panelGrid>
                             </h:panelGroup>
                         </h:form>
                     </p:panel>
                 </div>
-                <div class="ui-g-8">
-                    <p:panel header="PLAN CATEGORIE LIST" style="margin-top:20px">
+                <div class="ui-g-8" style="background-color:#F7ECC6;">
+                    <p:panel header="Liste des fournisseurs" style="margin-top:20px">
                         <h:form id="FournisseurListForm">
                             <p:panel header="#{bundle.ListFournisseurTitle}">
                                 <p:dataTable id="datalist" value="#{fournisseurController.items}" var="item"

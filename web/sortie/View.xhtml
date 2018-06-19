@@ -12,19 +12,14 @@
             <h:form id="SortieViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{sortieController.selected != null}">
-                        <h:outputText value="#{bundle.ViewSortieLabel_utilisateur}"/>
-                        <h:outputText value="#{sortieController.selected.utilisateur}" title="#{bundle.ViewSortieTitle_utilisateur}"/>
-                        <h:outputText value="#{bundle.ViewSortieLabel_id}"/>
-                        <h:outputText value="#{sortieController.selected.id}" title="#{bundle.ViewSortieTitle_id}"/>
+                        
                         <h:outputText value="#{bundle.ViewSortieLabel_fournisseur}"/>
-                        <h:outputText value="#{sortieController.selected.fournisseur}" title="#{bundle.ViewSortieTitle_fournisseur}"/>
+                        <h:outputText value="#{sortieController.selected.fournisseur.nom}" title="#{bundle.ViewSortieTitle_fournisseur}"/>
                         <h:outputText value="#{bundle.ViewSortieLabel_dateSortie}"/>
                         <h:outputText value="#{sortieController.selected.dateSortie}" title="#{bundle.ViewSortieTitle_dateSortie}">
                             <f:convertDateTime pattern="MM/dd/yyyy" />
                         </h:outputText>
-                        <h:outputText value="#{bundle.ViewSortieLabel_nombreTotal}"/>
-                        <h:outputText value="#{sortieController.selected.nombreTotal}" title="#{bundle.ViewSortieTitle_nombreTotal}"/>
-                    </p:panelGrid>
+                        </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="SortieViewDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

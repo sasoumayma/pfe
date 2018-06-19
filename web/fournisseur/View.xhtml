@@ -10,15 +10,15 @@
 
         <p:dialog id="FournisseurViewDlg" widgetVar="FournisseurViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewFournisseurTitle}">
             <h:form id="FournisseurViewForm">
+                 <div class="ui-g-8" align="center" >
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{fournisseurController.selected != null}">
-                        <h:outputText value="#{bundle.ViewFournisseurLabel_id}"/>
-                        <h:outputText value="#{fournisseurController.selected.id}" title="#{bundle.ViewFournisseurTitle_id}"/>
-                        <h:outputText value="#{bundle.ViewFournisseurLabel_nom}"/>
+                         <h:outputText value="#{bundle.ViewFournisseurLabel_nom}"/>
                         <h:outputText value="#{fournisseurController.selected.nom}" title="#{bundle.ViewFournisseurTitle_nom}"/>
                     </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="FournisseurViewDialog.hide()"/>
                 </h:panelGroup>
+                 </div>
             </h:form>
         </p:dialog>
 

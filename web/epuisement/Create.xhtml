@@ -33,12 +33,12 @@
             
              <div class="ui-g" style="background-color:#F7ECC6 " >
                 <div class="ui-g-4" style="background-color:#F7ECC6">
-                    <p:panel header="AJOUT EPUISEMENT" style="background-color:#F7ECC6" >
+                    <p:panel header="Ajouter un épuisment" style="background-color:#F7ECC6" >
                         <h:form id="EpuisementCreateForm">
                             <h:panelGroup id="display">
                                 <p:panelGrid columns="2" rendered="#{epuisementController.selected != null}">
                                     
-                                    <p:outputLabel value="#{bundle.CreateEpuisementLabel_equipement}" for="equipement" style="color:#F7ECC6 " />
+                                    <p:outputLabel value="#{bundle.CreateEpuisementLabel_equipement}" for="equipement" />
                                     <p:selectOneMenu id="equipement" value="#{epuisementController.selected.equipement}" >
                                         <f:selectItems value="#{equipementController.itemsAvailableSelectOne}"
                                                        var="equipementItem"
@@ -71,7 +71,7 @@
                                     
                                 </p:panelGrid>
                                 
-                                <p:commandButton actionListener="#{epuisementController.save()}" style="background-color:#F3B896"   icon="ui-icon-plus" value="ADD" update=":EpuisementListForm:datalist" />
+                                <p:commandButton actionListener="#{epuisementController.save()}" style="background-color:#F6C8B1"   icon="ui-icon-plus" value="Ajouter" update=":EpuisementListForm:datalist" />
 
                                 
                             </h:panelGroup>
@@ -82,7 +82,7 @@
             
             
                             <div class="ui-g-8" style="background-color:#F7ECC6">
-                                <p:panel header="PLAN EPUISEMENT LIST"  style="background-color:#F7ECC6 ">
+                                <p:panel header="Liste des éqipements épuisés"  style="background-color:#F7ECC6 ">
                         <h:form id="EpuisementListForm" style="background-color:#F7ECC6">
                             <p:panel header="#{bundle.ListEpuisementTitle}" >
                                 <p:dataTable id="datalist" value="#{epuisementController.items}" var="item"
@@ -146,7 +146,7 @@
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListEpuisementTitle_fournisseur}"/>
                             </f:facet>
-                            <h:outputText value="#{item.fournisseur}"/>
+                            <h:outputText value="#{item.fournisseur.nom}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">

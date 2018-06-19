@@ -14,10 +14,17 @@
         
         
   <ui:define name="body">
+      <div class="bodyLogin">
+            <div class="ui-grid-row" style="background: url(../resources/image/10.jpg) no-repeat;background-size:cover;">
+                <img src="../resources/image/sas.png" style="width: 190px; height: 150px;" />
+            <h3 style="text-align: center; color: white; text-shadow: 2px 2px 2px black; font-weight: bold"></h3>
+        </div>
+                
+            </div>
       
-            <div class="ui-g">
-                <div class="ui-g-4">
-                    <p:panel header="INFO EQUIPEMENT" style="margin-top:20px">
+            <div class="ui-g" style="background-color:#F7ECC6 ">
+                <div class="ui-g-4" style="background-color:#F7ECC6 ">
+                    <p:panel header="Ajouter un équipement:" style="margin-top:20px; background-color:#F7ECC6 ">
                         <h:form id="EquipementCreateForm">
                             <h:panelGroup id="display">
                                 <p:panelGrid columns="2" rendered="#{equipementController.selected != null}">
@@ -35,8 +42,9 @@
                                     <p:inputText id="marque" value="#{equipementController.selected.marque}" title="#{bundle.CreateEquipementTitle_marque}" />
                                     <p:outputLabel value="#{bundle.CreateEquipementLabel_fournisseur}" for="fournisseur" />
                                     <p:selectOneMenu id="fournisseur" value="#{equipementController.selected.fournisseur}" >
+                                                                            
                                         <f:selectItems value="#{fournisseurController.itemsAvailableSelectOne}"
-                                                       var="fournisseurItem"
+                                                       var="fournisseurItem" 
                                                        itemValue="#{fournisseurItem}" itemLabel="#{fournisseurItem.nom}"/>
                                     </p:selectOneMenu>
                                     
@@ -61,7 +69,7 @@
                                     
                                     
                                 </p:panelGrid>
-                                <p:commandButton actionListener="#{equipementController.save()}" icon="ui-icon-plus" value="ADD" update=":EquipementListForm:datalist" />
+                                <p:commandButton actionListener="#{equipementController.save()}" style="background-color:#F6C8B1" icon="ui-icon-plus" value="Ajouter" update=":EquipementListForm:datalist" />
                             </h:panelGroup>
                         </h:form>
                     </p:panel>
@@ -69,7 +77,7 @@
                 
                 
                 <div class="ui-g-8">
-                    <p:panel header="PLAN EQUIPEMENT LIST" style="margin-top:20px">
+                    <p:panel header="Listes des équipements" style="margin-top:20px">
                         <h:form id="EquipementListForm">
                             <p:panel header="#{bundle.ListEquipementTitle}">
                                 <p:dataTable id="datalist" value="#{equipementController.items}" var="item"

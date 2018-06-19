@@ -12,8 +12,16 @@
             <h:form id="ResponsableMaintenanceEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{responsableMaintenanceController.selected != null}">
+                         <p:outputLabel value="#{bundle.EditResponsableMaintenanceLabel_prenom}" for="prenom" />
+                        <p:inputText id="prenom" value="#{responsableMaintenanceController.selected.prenom}" title="#{bundle.EditResponsableMaintenanceTitle_prenom}" />
+                       
                         <p:outputLabel value="#{bundle.EditResponsableMaintenanceLabel_nom}" for="nom" />
                         <p:inputText id="nom" value="#{responsableMaintenanceController.selected.nom}" title="#{bundle.EditResponsableMaintenanceTitle_nom}" />
+                        <p:outputLabel value="#{bundle.EditResponsableMaintenanceLabel_grade}" for="grade" />
+                        <p:inputText id="grade" value="#{responsableMaintenanceController.selected.grade}" title="#{bundle.EditResponsableMaintenanceTitle_grade}" />
+                        <p:outputLabel value="#{bundle.EditResponsableMaintenanceLabel_fonction}" for="fonction" />
+                        <p:inputText id="fonction" value="#{responsableMaintenanceController.selected.fonction}" title="#{bundle.EditResponsableMaintenanceTitle_fonction}" />
+                       
                         <p:outputLabel value="#{bundle.EditResponsableMaintenanceLabel_matricule}" for="matricule" />
                         <p:inputText id="matricule" value="#{responsableMaintenanceController.selected.matricule}" title="#{bundle.EditResponsableMaintenanceTitle_matricule}" />
                         <p:outputLabel value="#{bundle.EditResponsableMaintenanceLabel_equipement}" for="equipement" />
@@ -21,26 +29,12 @@
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
                             <f:selectItems value="#{equipementController.itemsAvailableSelectOne}"
                                            var="equipementItem"
-                                           itemValue="#{equipementItem}"/>
+                                           itemValue="#{equipementItem}" itemLabel="#{equipementItem.designation}"/>
                         </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.EditResponsableMaintenanceLabel_utilisateur}" for="utilisateur" />
-                        <p:selectOneMenu id="utilisateur" value="#{responsableMaintenanceController.selected.utilisateur}" >
-                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
-                            <f:selectItems value="#{utilisateurController.itemsAvailableSelectOne}"
-                                           var="utilisateurItem"
-                                           itemValue="#{utilisateurItem}"/>
-                        </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.EditResponsableMaintenanceLabel_prenom}" for="prenom" />
-                        <p:inputText id="prenom" value="#{responsableMaintenanceController.selected.prenom}" title="#{bundle.EditResponsableMaintenanceTitle_prenom}" />
-                        <p:outputLabel value="#{bundle.EditResponsableMaintenanceLabel_grade}" for="grade" />
-                        <p:inputText id="grade" value="#{responsableMaintenanceController.selected.grade}" title="#{bundle.EditResponsableMaintenanceTitle_grade}" />
-                        <p:outputLabel value="#{bundle.EditResponsableMaintenanceLabel_fonction}" for="fonction" />
-                        <p:inputText id="fonction" value="#{responsableMaintenanceController.selected.fonction}" title="#{bundle.EditResponsableMaintenanceTitle_fonction}" />
-                        <p:outputLabel value="#{bundle.EditResponsableMaintenanceLabel_qualification}" for="qualification" />
+                        
+                         <p:outputLabel value="#{bundle.EditResponsableMaintenanceLabel_qualification}" for="qualification" />
                         <p:inputText id="qualification" value="#{responsableMaintenanceController.selected.qualification}" title="#{bundle.EditResponsableMaintenanceTitle_qualification}" />
-                        <p:outputLabel value="#{bundle.EditResponsableMaintenanceLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{responsableMaintenanceController.selected.id}" title="#{bundle.EditResponsableMaintenanceTitle_id}" />
-                    </p:panelGrid>
+                       </p:panelGrid>
                     <p:commandButton actionListener="#{responsableMaintenanceController.update}" value="#{bundle.Save}" update="display,:ResponsableMaintenanceListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ResponsableMaintenanceEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="ResponsableMaintenanceEditDialog.hide()"/>
                 </h:panelGroup>

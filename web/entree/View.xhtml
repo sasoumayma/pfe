@@ -12,19 +12,16 @@
             <h:form id="EntreeViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{entreeController.selected != null}">
-                        <h:outputText value="#{bundle.ViewEntreeLabel_utilisateur}"/>
-                        <h:outputText value="#{entreeController.selected.utilisateur}" title="#{bundle.ViewEntreeTitle_utilisateur}"/>
-                        <h:outputText value="#{bundle.ViewEntreeLabel_id}"/>
-                        <h:outputText value="#{entreeController.selected.id}" title="#{bundle.ViewEntreeTitle_id}"/>
+                    
+                         <h:outputText value="#{bundle.ViewEntreeLabel_fournisseur}"/>
+                         <h:outputText value="#{entreeController.selected.fournisseur.nom}" title="#{bundle.ViewEntreeTitle_fournisseur}"/>
+                   
                         <h:outputText value="#{bundle.ViewEntreeLabel_dateEntree}"/>
                         <h:outputText value="#{entreeController.selected.dateEntree}" title="#{bundle.ViewEntreeTitle_dateEntree}">
                             <f:convertDateTime pattern="MM/dd/yyyy" />
                         </h:outputText>
-                        <h:outputText value="#{bundle.ViewEntreeLabel_nombreTotal}"/>
-                        <h:outputText value="#{entreeController.selected.nombreTotal}" title="#{bundle.ViewEntreeTitle_nombreTotal}"/>
-                        <h:outputText value="#{bundle.ViewEntreeLabel_fournisseur}"/>
-                        <h:outputText value="#{entreeController.selected.fournisseur}" title="#{bundle.ViewEntreeTitle_fournisseur}"/>
-                    </p:panelGrid>
+                     
+                        </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="EntreeViewDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

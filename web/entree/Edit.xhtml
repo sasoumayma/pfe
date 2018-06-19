@@ -12,25 +12,15 @@
             <h:form id="EntreeEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{entreeController.selected != null}">
-                        <p:outputLabel value="#{bundle.EditEntreeLabel_utilisateur}" for="utilisateur" />
-                        <p:selectOneMenu id="utilisateur" value="#{entreeController.selected.utilisateur}" >
-                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
-                            <f:selectItems value="#{utilisateurController.itemsAvailableSelectOne}"
-                                           var="utilisateurItem"
-                                           itemValue="#{utilisateurItem}"/>
-                        </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.EditEntreeLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{entreeController.selected.id}" title="#{bundle.EditEntreeTitle_id}" />
+                        
                         <p:outputLabel value="#{bundle.EditEntreeLabel_dateEntree}" for="dateEntree" />
                         <p:calendar id="dateEntree" pattern="MM/dd/yyyy" value="#{entreeController.selected.dateEntree}" title="#{bundle.EditEntreeTitle_dateEntree}"  showOn="button"/>
-                        <p:outputLabel value="#{bundle.EditEntreeLabel_nombreTotal}" for="nombreTotal" />
-                        <p:inputText id="nombreTotal" value="#{entreeController.selected.nombreTotal}" title="#{bundle.EditEntreeTitle_nombreTotal}" />
-                        <p:outputLabel value="#{bundle.EditEntreeLabel_fournisseur}" for="fournisseur" />
-                        <p:selectOneMenu id="fournisseur" value="#{entreeController.selected.fournisseur}" >
+                       <p:outputLabel value="#{bundle.EditEntreeLabel_fournisseur}" for="fournisseur" />
+                       <p:selectOneMenu id="fournisseur" value="#{entreeController.selected.fournisseur}" >
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
                             <f:selectItems value="#{fournisseurController.itemsAvailableSelectOne}"
                                            var="fournisseurItem"
-                                           itemValue="#{fournisseurItem}"/>
+                                           itemValue="#{fournisseurItem.nom}" itemLabel="#{fournisseurItem.nom}"/>
                         </p:selectOneMenu>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{entreeController.update}" value="#{bundle.Save}" update="display,:EntreeListForm:datalist,:growl" oncomplete="handleSubmit(args, 'EntreeEditDialog');"/>

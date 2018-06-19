@@ -11,13 +11,20 @@
             <h:outputText value="#{bundle.ListMaintenanceTitle}"></h:outputText>
         </ui:define>
 
-        <ui:define name="body">
-            <div class="ui-g">
-                <div class="ui-g-12" align="center">
-                    <p:panel header="INFO MAINTENANCE" style="margin-top:20px;">
+        <ui:define name="body"  >
+              <div class="bodyLogin">
+            <div class="ui-grid-row" style="background: url(../resources/image/10.jpg) no-repeat;background-size:cover;">
+                <img src="../resources/image/sas.png" style="width: 190px; height: 150px;" />
+            <h3 style="text-align: center; color: white; text-shadow: 2px 2px 2px black; font-weight: bold"></h3>
+        </div>
+                
+            </div>
+            <div class="ui-g" style="background-color:#F7ECC6; margin-left:90px; " >
+                <div class="ui-g-7" align="center" style="background-color:#F7ECC6">
+                    <p:panel header="Ajouter detai pour le planing de mantenance" style="margin-top:60px; margin-right:30px;">
                         <h:form id="MaintenanceCreateForm">
                             <h:panelGroup id="display">
-                                <p:panelGrid columns="6" rendered="#{maintenanceController.selected != null}">
+                                <p:panelGrid columns="2" rendered="#{maintenanceController.selected != null}">
 
                                     <p:outputLabel value="#{bundle.CreateMaintenanceLabel_mois}" for="mois" />
                                     <p:inputText id="mois" value="#{maintenanceController.selected.mois}" title="#{bundle.CreateMaintenanceTitle_mois}" />
@@ -32,9 +39,9 @@
                                         <f:selectItem itemValue="2" itemLabel="par catégorie d'équipement"></f:selectItem>
                                         <p:ajax listener="#{maintenanceController.typeMaintenance}" process="typeMaintenance"></p:ajax>
                                     </p:selectOneMenu>
-
-                                    <p:commandButton id="createButton" icon="ui-icon-plus"   value="Confirmer" actionListener="#{maintenanceController.save()}"/>
                                 </p:panelGrid>
+
+                                <p:commandButton id="createButton" icon="ui-icon-plus" style="right: 20"  value="Confirmer" actionListener="#{maintenanceController.save()}"/>
                             </h:panelGroup>
                         </h:form>
                     </p:panel>

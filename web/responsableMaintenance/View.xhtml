@@ -12,25 +12,22 @@
             <h:form id="ResponsableMaintenanceViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{responsableMaintenanceController.selected != null}">
+                         <h:outputText value="#{bundle.ViewResponsableMaintenanceLabel_prenom}"/>
+                        <h:outputText value="#{responsableMaintenanceController.selected.prenom}" title="#{bundle.ViewResponsableMaintenanceTitle_prenom}"/>
+                        
                         <h:outputText value="#{bundle.ViewResponsableMaintenanceLabel_nom}"/>
                         <h:outputText value="#{responsableMaintenanceController.selected.nom}" title="#{bundle.ViewResponsableMaintenanceTitle_nom}"/>
-                        <h:outputText value="#{bundle.ViewResponsableMaintenanceLabel_matricule}"/>
-                        <h:outputText value="#{responsableMaintenanceController.selected.matricule}" title="#{bundle.ViewResponsableMaintenanceTitle_matricule}"/>
-                        <h:outputText value="#{bundle.ViewResponsableMaintenanceLabel_equipement}"/>
-                        <h:outputText value="#{responsableMaintenanceController.selected.equipement}" title="#{bundle.ViewResponsableMaintenanceTitle_equipement}"/>
-                        <h:outputText value="#{bundle.ViewResponsableMaintenanceLabel_utilisateur}"/>
-                        <h:outputText value="#{responsableMaintenanceController.selected.utilisateur}" title="#{bundle.ViewResponsableMaintenanceTitle_utilisateur}"/>
-                        <h:outputText value="#{bundle.ViewResponsableMaintenanceLabel_prenom}"/>
-                        <h:outputText value="#{responsableMaintenanceController.selected.prenom}" title="#{bundle.ViewResponsableMaintenanceTitle_prenom}"/>
-                        <h:outputText value="#{bundle.ViewResponsableMaintenanceLabel_grade}"/>
+                          <h:outputText value="#{bundle.ViewResponsableMaintenanceLabel_grade}"/>
                         <h:outputText value="#{responsableMaintenanceController.selected.grade}" title="#{bundle.ViewResponsableMaintenanceTitle_grade}"/>
                         <h:outputText value="#{bundle.ViewResponsableMaintenanceLabel_fonction}"/>
                         <h:outputText value="#{responsableMaintenanceController.selected.fonction}" title="#{bundle.ViewResponsableMaintenanceTitle_fonction}"/>
+                        <h:outputText value="#{bundle.ViewResponsableMaintenanceLabel_matricule}"/>
+                        <h:outputText value="#{responsableMaintenanceController.selected.matricule}" title="#{bundle.ViewResponsableMaintenanceTitle_matricule}"/>
+                        <h:outputText value="#{bundle.ViewResponsableMaintenanceLabel_equipement}"/>
+                        <h:outputText value="#{responsableMaintenanceController.selected.equipement.designation}" title="#{bundle.ViewResponsableMaintenanceTitle_equipement}"/>
                         <h:outputText value="#{bundle.ViewResponsableMaintenanceLabel_qualification}"/>
                         <h:outputText value="#{responsableMaintenanceController.selected.qualification}" title="#{bundle.ViewResponsableMaintenanceTitle_qualification}"/>
-                        <h:outputText value="#{bundle.ViewResponsableMaintenanceLabel_id}"/>
-                        <h:outputText value="#{responsableMaintenanceController.selected.id}" title="#{bundle.ViewResponsableMaintenanceTitle_id}"/>
-                    </p:panelGrid>
+                        </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="ResponsableMaintenanceViewDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

@@ -14,8 +14,15 @@
         </ui:define>
 
         <ui:define name="body">
-            <div class="ui-g">
-                <div class="ui-g-12" align="center">
+            <div class="bodyLogin">
+            <div class="ui-grid-row" style="background: url(../resources/image/10.jpg) no-repeat;background-size:cover;">
+                <img src="../resources/image/sas.png" style="width: 190px; height: 150px;" />
+            <h3 style="text-align: center; color: white; text-shadow: 2px 2px 2px black; font-weight: bold"></h3>
+        </div>
+                
+            </div>
+            <div class="ui-g" style="background-color:#F7ECC6;">
+                <div class="ui-g-12" align="center" style="background-color:#F7ECC6;">
                     <p:panel header="INFO SORTIE" style="margin-top:20px;">
                         <h:form id="EntreeCreateForm">
                             <h:panelGroup id="display">
@@ -31,16 +38,16 @@
                                                        var="fournisseurItem"
                                                        itemValue="#{fournisseurItem}" itemLabel="#{fournisseurItem.nom}"/>
                                     </p:selectOneMenu>
-                                    <p:commandButton id="createButton" icon="ui-icon-plus"   value="Enregistrer" actionListener="#{entreeController.save()}" update=":EntreeItemCreateForm, :EntreeCreateForm , :EntreeItemListForm:datalist" />
-                                    <p:commandButton id="resetButton" icon="ui-icon-pencil"   value="Vider" actionListener="#{entreeController.reset()}" update=":EntreeItemCreateForm, :EntreeCreateForm , :EntreeItemListForm:datalist" />
+                                    <p:commandButton id="createButton" icon="ui-icon-plus"  style="background-color:#F7ECC6;" value="Enregistrer" actionListener="#{entreeController.save()}" update=":EntreeItemCreateForm, :EntreeCreateForm , :EntreeItemListForm:datalist" />
+                                    <p:commandButton id="resetButton" icon="ui-icon-pencil" style="background-color:#F7ECC6;"  value="Vider" actionListener="#{entreeController.reset()}" update=":EntreeItemCreateForm, :EntreeCreateForm , :EntreeItemListForm:datalist" />
                                 </p:panelGrid>
                             </h:panelGroup>
                         </h:form>
                     </p:panel>
                 </div>
             </div>
-            <div class="ui-g">
-                <div class="ui-g-4">
+            <div class="ui-g" style="background-color:#F7ECC6;">
+                <div class="ui-g-4" style="background-color:#F7ECC6;">
                     <p:panel header="INFO EQUIPEMENT SORTIE " style="margin-top:20px">
                         <h:form id="EntreeItemCreateForm">
                             <h:panelGroup id="display">
@@ -70,12 +77,12 @@
                                                        itemValue="#{equipementItem}" itemLabel="#{equipementItem.designation}"/>
                                     </p:selectOneMenu>                                   
                                 </p:panelGrid>
-                                <p:commandButton actionListener="#{entreeController.add()}" icon="ui-icon-plus" value="Ajouter" update=":EntreeItemListForm:datalist" />
+                                <p:commandButton actionListener="#{entreeController.add()}" style="background-color:#F7ECC6;" icon="ui-icon-plus" value="Ajouter" update=":EntreeItemListForm:datalist" />
                             </h:panelGroup>
                         </h:form>
                     </p:panel>
                 </div>
-                <div class="ui-g-8">
+                <div class="ui-g-8" style="background-color:#F7ECC6;">
                     <p:panel header="PLAN CATEGORIE LIST" style="margin-top:20px">
                         <h:form id="EntreeItemListForm">
                             <p:panel header="#{bundle.ListEntreeItemTitle}">
@@ -121,7 +128,7 @@
                                         <f:facet name="header">
                                             <h:outputText value="#{bundle.ListEntreeItemTitle_equipement}"/>
                                         </f:facet>
-                                        <h:outputText value="#{item.equipement}"/>
+                                        <h:outputText value="#{item.equipement.designation}"/>
                                     </p:column>
                                     
                                    

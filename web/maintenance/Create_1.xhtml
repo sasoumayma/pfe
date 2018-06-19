@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListMaintenanceTitle}"></h:outputText>
+            
+        </ui:define>
+
+        <ui:define name="body">
+              <div class="bodyLogin">
+            <div class="ui-grid-row" style="background: url(../resources/image/10.jpg) no-repeat;background-size:cover;">
+                <img src="../resources/image/sas.png" style="width: 190px; height: 150px;" />
+            <h3 style="text-align: center; color: white; text-shadow: 2px 2px 2px black; font-weight: bold"></h3>
+        </div>
+                
+            </div>
+            <div class="ui-g" style="background-color:#F7ECC6">
+                <div class="ui-g-5">
+                    <p:panel header="Detail de maintenance: par salle " style="margin-top:40px" >
+                        <h:form id="MaintenanceItemCreateForm">
+                            <h:panelGroup id="display">
+                                <p:panelGrid columns="2" rendered="#{maintenanceItemController.selected != null}">
+
+                                    <p:outputLabel value="salle" for="salle" />
+                                    <p:selectOneMenu id="salle" value="#{maintenanceItemController.selected.equipement}" >
+                                        <f:selectItems value="#{equipementController.itemsAvailableSelectOne}"
+                                                       var="equipementItem"
+                                                       itemValue="#{equipementItem}" itemLabel="#{equipementItem.affectation}"/>
+                                    </p:selectOneMenu>
+
+                                    <p:outputLabel value="#{bundle.CreateMaintenanceItemLabel_equipement}" for="equipement" />
+                                    <p:selectOneMenu id="equipement" value="#{maintenanceItemController.selected.equipement}" >
+                                        <f:selectItems value="#{equipementController.itemsAvailableSelectOne}"
+                                                       var="equipementItem"
+                                                       itemValue="#{equipementItem}" itemLabel="#{equipementItem.designation}"/>
+                                    </p:selectOneMenu>
+                                    
+                                    <p:outputLabel value="#{bundle.CreateMaintenanceItemLabel_dateMaintenance}" for="dateMaintenance" />
+                                    <p:calendar id="dateMaintenance" pattern="MM/dd/yyyy" value="#{maintenanceItemController.selected.dateMaintenance}" title="#{bundle.EditMaintenanceItemTitle_dateMaintenance}"  showOn="button"/>
+
+
+                                </p:panelGrid>
+                                <p:commandButton actionListener="#{maintenanceController.add()}" icon="ui-icon-plus" value="Ajouter" update=":MaintenanceItemListForm:datalist"/>
+                            </h:panelGroup>
+                        </h:form>
+                    </p:panel>
+                </div>
+                   <div class="ui-g-5">
+                    <p:panel header="Detail de maintenance: par categorie d'equipements" style="margin-top:40px" >
+                        <h:form id="MaintenanceItemCreateForm2">
+                            <h:panelGroup id="display">
+                                <p:panelGrid columns="2" rendered="#{maintenanceItemController.selected != null}">
+
+                                    <p:outputLabel value="catgorie" for="salle" />
+                                    <p:selectOneMenu id="salle" value="#{maintenanceItemController.selected.equipement}" >
+                                        <f:selectItems value="#{equipementController.itemsAvailableSelectOne}"
+                                                       var="equipementItem"
+                                                       itemValue="#{equipementItem}" itemLabel="#{equipementItem.affectation}"/>
+                                    </p:selectOneMenu>
+
+
+                                    <p:outputLabel value="#{bundle.CreateMaintenanceItemLabel_equipement}" for="equipement" />
+                                    <p:selectOneMenu id="equipement" value="#{maintenanceItemController.selected.equipement}" >
+                                        <f:selectItems value="#{equipementController.itemsAvailableSelectOne}"
+                                                       var="equipementItem"
+                                                       itemValue="#{equipementItem}" itemLabel="#{equipementItem.designation}"/>
+                                    </p:selectOneMenu>
+
+                                    <p:outputLabel value="#{bundle.CreateMaintenanceItemLabel_dateMaintenance}" for="dateMaintenance" />
+                                    <p:calendar id="dateMaintenance" pattern="MM/dd/yyyy" value="#{maintenanceItemController.selected.dateMaintenance}" title="#{bundle.EditMaintenanceItemTitle_dateMaintenance}"  showOn="button"/>
+
+
+                                </p:panelGrid>
+                                <p:commandButton actionListener="#{maintenanceController.add()}" icon="ui-icon-plus" value="Ajouter" update=":MaintenanceItemListForm2:datalist"/>
+
+                            </h:panelGroup>
+                        </h:form>
+                    </p:panel>
+                </div>
+                
+                
+            </div>
+            <div class="ui-g" style="background-color:#F7ECC6">
+         
+ 
+               <div class="ui-g-5" >
+                    <p:panel header="List du planing par salle " style="margin-top:40px" >
+                        <h:form id="MaintenanceItemListForm">
+                            <p:panel header="#{bundle.ListMaintenanceItemTitle}">
+                    <p:dataTable id="datalist" value="#{maintenanceItemController.items}" var="item"
+                                 selectionMode="single" selection="#{maintenanceItemController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.id}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+
+                       
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListMaintenanceItemTitle_dateMaintenance}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.dateMaintenance}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Salle"/>
+                            </f:facet>
+                            <h:outputText value="#{item.equipement.affectation}"/>
+                        </p:column>
+                                               
+                        
+                    </p:dataTable>
+                </p:panel>
+                        </h:form>
+                    </p:panel>
+                </div>
+            
+                <div class="ui-g-5">
+                    <p:panel header="List du planing par categorie d'equipement " style="margin-top:40px" >
+                        <h:form id="MaintenanceItemListForm2">
+                            <p:panel header="#{bundle.ListMaintenanceItemTitle}">
+                    <p:dataTable id="datalist" value="#{maintenanceItemController.items}" var="item"
+                                 selectionMode="single" selection="#{maintenanceItemController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.id}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+
+                       
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListMaintenanceItemTitle_dateMaintenance}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.dateMaintenance}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListMaintenanceItemTitle_equipement}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.equipement.designation}"/>
+                        </p:column>
+                                               
+                        
+                    </p:dataTable>
+                </p:panel>
+                        </h:form>
+                    </p:panel>
+                </div>
+                
+</div>
+        </ui:define>
+
+    </ui:composition>
+</html>

@@ -12,10 +12,20 @@
             <h:form id="EpuisementEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{epuisementController.selected != null}">
-                        <p:outputLabel value="#{bundle.EditEpuisementLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{epuisementController.selected.id}" title="#{bundle.EditEpuisementTitle_id}" />
+                         <p:outputLabel value="#{bundle.EditEpuisementLabel_equipement}" for="equipement" />
+                         <p:inputText id="equipement" value="#{epuisementController.selected.equipement.designation}" title="#{bundle.EditEpuisementTitle_equipement}" />
+                      
                         <p:outputLabel value="#{bundle.EditEpuisementLabel_numeroSerie}" for="numeroSerie" />
                         <p:inputText id="numeroSerie" value="#{epuisementController.selected.numeroSerie}" title="#{bundle.EditEpuisementTitle_numeroSerie}" />
+                        <p:outputLabel value="#{bundle.EditEpuisementLabel_dateEntree}" for="dateEntree" />
+                        <p:calendar id="dateEntree" pattern="MM/dd/yyyy" value="#{epuisementController.selected.dateEntree}" title="#{bundle.EditEpuisementTitle_dateEntree}"  showOn="button"/>
+                         <p:outputLabel value="#{bundle.EditEpuisementLabel_dateSortie}" for="dateSortie" />
+                        <p:calendar id="dateSortie" pattern="MM/dd/yyyy" value="#{epuisementController.selected.dateSortie}" title="#{bundle.EditEpuisementTitle_dateSortie}"  showOn="button"/>
+                       <p:outputLabel value="#{bundle.EditEpuisementLabel_dateEpuisement}" for="dateEpuisement" />
+                        <p:calendar id="dateEpuisement" pattern="MM/dd/yyyy" value="#{epuisementController.selected.dateEpuisement}" title="#{bundle.EditEpuisementTitle_dateEpuisement}"  showOn="button"/>
+                         <p:outputLabel value="#{bundle.EditEpuisementLabel_quantite}" for="quantite" />
+                        <p:inputText id="quantite" value="#{epuisementController.selected.quantite}" title="#{bundle.EditEpuisementTitle_quantite}" />
+                       
                         <p:outputLabel value="#{bundle.EditEpuisementLabel_quantiteMinimale}" for="quantiteMinimale" />
                         <p:inputText id="quantiteMinimale" value="#{epuisementController.selected.quantiteMinimale}" title="#{bundle.EditEpuisementTitle_quantiteMinimale}" />
                         <p:outputLabel value="#{bundle.EditEpuisementLabel_fournisseur}" for="fournisseur" />
@@ -23,41 +33,12 @@
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
                             <f:selectItems value="#{fournisseurController.itemsAvailableSelectOne}"
                                            var="fournisseurItem"
-                                           itemValue="#{fournisseurItem}"/>
+                                           itemValue="#{fournisseurItem}" itemLabel="#{fournisseurItem.nom}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.EditEpuisementLabel_observation}" for="observation" />
                         <p:inputText id="observation" value="#{epuisementController.selected.observation}" title="#{bundle.EditEpuisementTitle_observation}" />
-                        <p:outputLabel value="#{bundle.EditEpuisementLabel_utilisateur}" for="utilisateur" />
-                        <p:selectOneMenu id="utilisateur" value="#{epuisementController.selected.utilisateur}" >
-                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
-                            <f:selectItems value="#{utilisateurController.itemsAvailableSelectOne}"
-                                           var="utilisateurItem"
-                                           itemValue="#{utilisateurItem}"/>
-                        </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.EditEpuisementLabel_dateSortie}" for="dateSortie" />
-                        <p:calendar id="dateSortie" pattern="MM/dd/yyyy" value="#{epuisementController.selected.dateSortie}" title="#{bundle.EditEpuisementTitle_dateSortie}"  showOn="button"/>
-                        <p:outputLabel value="#{bundle.EditEpuisementLabel_dateEntree}" for="dateEntree" />
-                        <p:calendar id="dateEntree" pattern="MM/dd/yyyy" value="#{epuisementController.selected.dateEntree}" title="#{bundle.EditEpuisementTitle_dateEntree}"  showOn="button"/>
-                        <p:outputLabel value="#{bundle.EditEpuisementLabel_dateEpuisement}" for="dateEpuisement" />
-                        <p:calendar id="dateEpuisement" pattern="MM/dd/yyyy" value="#{epuisementController.selected.dateEpuisement}" title="#{bundle.EditEpuisementTitle_dateEpuisement}"  showOn="button"/>
-                        <p:outputLabel value="#{bundle.EditEpuisementLabel_quantite}" for="quantite" />
-                        <p:inputText id="quantite" value="#{epuisementController.selected.quantite}" title="#{bundle.EditEpuisementTitle_quantite}" />
-                        <p:outputLabel value="#{bundle.EditEpuisementLabel_equipement}" for="equipement" />
-                        <p:inputText id="equipement" value="#{epuisementController.selected.equipement}" title="#{bundle.EditEpuisementTitle_equipement}" />
-                        <p:outputLabel value="#{bundle.EditEpuisementLabel_salle}" for="salle" />
-                        <p:selectOneMenu id="salle" value="#{epuisementController.selected.salle}" >
-                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
-                            <f:selectItems value="#{salleController.itemsAvailableSelectOne}"
-                                           var="salleItem"
-                                           itemValue="#{salleItem}"/>
-                        </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.EditEpuisementLabel_magasin}" for="magasin" />
-                        <p:selectOneMenu id="magasin" value="#{epuisementController.selected.magasin}" >
-                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
-                            <f:selectItems value="#{magasinController.itemsAvailableSelectOne}"
-                                           var="magasinItem"
-                                           itemValue="#{magasinItem}"/>
-                        </p:selectOneMenu>
+                        
+                      
                     </p:panelGrid>
                     <p:commandButton actionListener="#{epuisementController.update}" value="#{bundle.Save}" update="display,:EpuisementListForm:datalist,:growl" oncomplete="handleSubmit(args, 'EpuisementEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="EpuisementEditDialog.hide()"/>

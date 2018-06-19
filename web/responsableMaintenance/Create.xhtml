@@ -14,10 +14,16 @@
         
                
   <ui:define name="body">
-      
-      <div class="ui-g" align="center">
-                <div class="ui-g-12" align="center"> 
-                    <p:panel header="INFO Responsable" style="margin-top:20px" >
+      <div class="bodyLogin">
+            <div class="ui-grid-row" style="background: url(../resources/image/10.jpg) no-repeat;background-size:cover;">
+                <img src="../resources/image/sas.png" style="width: 190px; height: 150px;" />
+            <h3 style="text-align: center; color: white; text-shadow: 2px 2px 2px black; font-weight: bold"></h3>
+        </div>
+                
+            </div>
+      <div class="ui-g" align="center" style="background-color:#F7ECC6;">
+                <div class="ui-g-12" align="center" style="background-color:#F7ECC6;"> 
+                    <p:panel header="Ajouter un personnel de maintenance" style="margin-top:20px" >
                         <h:form id="ResponsableMaintenanceCreateForm">
                             <h:panelGroup id="display" >
                                 <p:panelGrid columns="8" rendered="#{responsableMaintenanceController.selected != null}">
@@ -52,15 +58,15 @@
                                    
                                     
                                 </p:panelGrid>
-                                <p:commandButton actionListener="#{responsableMaintenanceController.save()}" icon="ui-icon-plus" value="ADD"  update=":ResponsableMaintenanceListForm:datalist" />
+                                <p:commandButton actionListener="#{responsableMaintenanceController.save()}" icon="ui-icon-plus" style="background-color:#F7ECC6;" value="Ajouter"  update=":ResponsableMaintenanceListForm:datalist" />
                             </h:panelGroup>
                         </h:form>
                     </p:panel>
                 </div>
                 
                 
-                <div class="ui-g-12">
-                    <p:panel header="PLAN ResponsableMaintenance LIST" style="margin-top:20px">
+                <div class="ui-g-12" style="background-color:#F7ECC6;">
+                    <p:panel header="Liste du prsonnel de maintenance" style="margin-top:20px">
                         <h:form id="ResponsableMaintenanceListForm">
                             <p:panel header="#{bundle.ListResponsableMaintenanceTitle}">
                                 <p:dataTable id="datalist" value="#{responsableMaintenanceController.items}" var="item"
@@ -106,7 +112,7 @@
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListResponsableMaintenanceTitle_equipement}"/>
                             </f:facet>
-                            <h:outputText value="#{item.equipement}"/>
+                            <h:outputText value="#{item.equipement.designation}"/>
                         </p:column>
                         
                         <p:column>
