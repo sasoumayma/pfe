@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListMaintenanceTitle}"></h:outputText>
+
+        </ui:define>
+
+        <ui:define name="body">
+            <div class="bodyLogin">
+                <div class="ui-grid-row" style="background: url(../resources/image/10.jpg) no-repeat;background-size:cover;">
+                    <img src="../resources/image/sas.png" style="width: 190px; height: 150px;" />
+                    <h3 style="text-align: center; color: white; text-shadow: 2px 2px 2px black; font-weight: bold"></h3>
+                </div>
+
+            </div>
+
+
+            <div class="ui-g" style="background-color:#F7ECC6;">
+                <div class="ui-g-12" align="center" style="background-color:#F7ECC6;">
+                    <p:panel header="Ajouter detai pour le planing de mantenance" style="margin-top:60px; margin-right:30px;">
+                        <h:form id="MaintenanceCreateForm">
+                            <h:panelGroup id="display">
+                                <p:panelGrid columns="2" rendered="#{maintenanceController.selected != null}">
+
+                                    <p:outputLabel value="#{bundle.CreateMaintenanceLabel_mois}" for="mois" />
+                                    <p:inputText id="mois" value="#{maintenanceController.selected.mois}" title="#{bundle.CreateMaintenanceTitle_mois}" />
+
+                                    <p:outputLabel value="#{bundle.CreateMaintenanceLabel_annee}" for="annee" />
+                                    <p:inputText id="annee" value="#{maintenanceController.selected.annee}" title="#{bundle.CreateMaintenanceTitle_annee}" />
+
+
+                                </p:panelGrid>
+
+                                <p:commandButton id="createButton" icon="ui-icon-plus" style="right: 20px"  value="Confirmer" actionListener="#{maintenanceController.save()}" update=":MaintenanceItemCreateForm, :MaintenanceCreateForm , :MaintenanceItemListForm:datalist"/>
+                            </h:panelGroup>
+                        </h:form>
+                    </p:panel>
+                </div>
+            </div>
+
+            <div class="ui-g" style="background-color:#F7ECC6;">
+                <div class="ui-g-4" style="background-color:#F7ECC6;">
+                    <p:panel header="Detail de maintenance: par equipement " style="margin-top:40px" >
+                        <h:form id="MaintenanceItemCreateForm">
+                            <h:panelGroup id="display">
+                                <p:panelGrid columns="2" rendered="#{maintenanceController.maintenanceItem != null}">
+
+                                    <p:outputLabel value="equipement" for="equipement" />
+                                    <p:selectOneMenu id="equipement" value="#{maintenanceController.maintenanceItem.equipement}" >
+                                        <f:selectItems value="#{equipementController.itemsAvailableSelectOne}"
+                                                       var="equipementItem"
+                                                       itemValue="#{equipementItem}" itemLabel="#{equipementItem.designation}"/>
+                                    </p:selectOneMenu>
+
+
+
+                                    <p:outputLabel value="#{bundle.CreateMaintenanceItemLabel_dateMaintenance}" for="dateMaintenance" />
+                                    <p:calendar id="dateMaintenance" pattern="MM/dd/yyyy" value="#{maintenanceController.maintenanceItem.dateMaintenance}" title="#{bundle.EditMaintenanceItemTitle_dateMaintenance}"  showOn="button"/>
+
+
+                                </p:panelGrid>
+                                <p:commandButton actionListener="#{maintenanceController.add()}" icon="ui-icon-plus" value="Ajouter" update=":MaintenanceItemListForm"/>
+                            </h:panelGroup>
+                        </h:form>
+                    </p:panel>
+                </div>
+
+                <div class="ui-g-8" style="background-color:#F7ECC6;">
+                    <p:panel header="List du planing par equipement " style="margin-top:40px" >
+                        <h:form id="MaintenanceItemListForm" >
+                            <p:panel header="#{bundle.ListMaintenanceItemTitle}">
+                                <p:dataTable id="datalist" value="#{maintenanceController.maintenanceItems}" var="item"
+                                             selectionMode="single" selection="#{maintenanceItemController.selected}"
+                                             paginator="true"
+                                             rowKey="#{item.equipement.id}"
+                                             rows="10"
+                                             rowsPerPageTemplate="10,20,30,40,50"
+                                             >
+
+
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="#{bundle.ListMaintenanceItemTitle_dateMaintenance}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.dateMaintenance}">
+                                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                                        </h:outputText>
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Equipement"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.equipement.designation}"/>
+                                    </p:column>
+
+
+                                </p:dataTable>
+                            </p:panel>
+                        </h:form>
+                    </p:panel>
+                </div>
+            </div>
+        </ui:define>
+
+    </ui:composition>
+</html>

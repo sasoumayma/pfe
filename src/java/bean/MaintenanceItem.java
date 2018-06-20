@@ -6,7 +6,6 @@
 package bean;
 
 import java.io.Serializable;
-import java.sql.Time;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -31,6 +30,8 @@ public class MaintenanceItem implements Serializable {
     private Date dateMaintenance;
     @ManyToOne
     private Equipement equipement;
+    @ManyToOne
+    private Salle salle;
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date dateDebutTravaux;
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
@@ -38,6 +39,26 @@ public class MaintenanceItem implements Serializable {
     private String observation;
     @ManyToOne
     private ResponsableMaintenance responsableMaintenance;
+    @ManyToOne
+    private Maintenance maintenance;
+
+    public Salle getSalle() {
+        return salle;
+    }
+
+    public void setSalle(Salle salle) {
+        this.salle = salle;
+    }
+
+    
+    
+    public Maintenance getMaintenance() {
+        return maintenance;
+    }
+
+    public void setMaintenance(Maintenance maintenance) {
+        this.maintenance = maintenance;
+    }
 
     public ResponsableMaintenance getResponsableMaintenance() {
         return responsableMaintenance;

@@ -1,11 +1,13 @@
 package controller;
 
 import bean.Maintenance;
+import bean.MaintenanceItem;
 import controller.util.JsfUtil;
 import controller.util.JsfUtil.PersistAction;
 import service.MaintenanceFacade;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -24,17 +26,55 @@ import javax.faces.convert.FacesConverter;
 public class MaintenanceController implements Serializable {
 
     @EJB
+    private service.MaintenanceItemFacade maintenanceItemFacade;
+    @EJB
     private service.MaintenanceFacade ejbFacade;
     private List<Maintenance> items = null;
     private Maintenance selected;
     private int showMaintenance;
     private int typeMaintenance;
-    
+
+    //
+    private MaintenanceItem maintenanceItem;
+    private List<MaintenanceItem> maintenanceItems;
+    //
+
+    //
     public void save() {
-       
+        ejbFacade.save(getSelected(), getMaintenanceItems());
+        initAttribute();
     }
+
     public void add() {
-       
+        maintenanceItemFacade.add(getMaintenanceItem(), getMaintenanceItems());
+    }
+
+    private void initAttribute() {
+        setSelected(null);
+        setMaintenanceItem(null);
+        setMaintenanceItems(null);
+    }
+
+    public MaintenanceItem getMaintenanceItem() {
+        if (maintenanceItem == null) {
+            maintenanceItem = new MaintenanceItem();
+        }
+        return maintenanceItem;
+    }
+
+    public void setMaintenanceItem(MaintenanceItem maintenanceItem) {
+        this.maintenanceItem = maintenanceItem;
+    }
+
+    public List<MaintenanceItem> getMaintenanceItems() {
+        if (maintenanceItems == null) {
+            maintenanceItems = new ArrayList();
+        }
+        return maintenanceItems;
+    }
+
+    public void setMaintenanceItems(List<MaintenanceItem> maintenanceItems) {
+        this.maintenanceItems = maintenanceItems;
     }
 
     public MaintenanceController() {
@@ -48,7 +88,6 @@ public class MaintenanceController implements Serializable {
         this.typeMaintenance = typeMaintenance;
     }
 
-    
     public int getShowMaintenance() {
         return showMaintenance;
     }
@@ -57,7 +96,6 @@ public class MaintenanceController implements Serializable {
         this.showMaintenance = showMaintenance;
     }
 
-    
     public Maintenance getSelected() {
         if (selected == null) {
             selected = new Maintenance();
@@ -105,9 +143,7 @@ public class MaintenanceController implements Serializable {
     }
 
     public List<Maintenance> getItems() {
-        if (items == null) {
-            items = getFacade().findAll();
-        }
+        items = getFacade().findAll();
         return items;
     }
 

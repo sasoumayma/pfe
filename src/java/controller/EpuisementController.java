@@ -41,6 +41,13 @@ public class EpuisementController implements Serializable {
         
     }
     //
+      
+      // search
+    public void fingByCretar() {
+        items = ejbFacade.findByCretaria(selected.getNumeroSerie(), selected.getQuantite());
+    }
+
+    //search
     
     public void generatePdf() throws JRException, IOException{
             ejbFacade.generatePdf();

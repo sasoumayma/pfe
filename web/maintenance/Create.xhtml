@@ -37,11 +37,11 @@
                                         <f:selectItem itemValue="0" itemLabel="--SELECT--"></f:selectItem>
                                         <f:selectItem itemValue="1" itemLabel="par salle"></f:selectItem>
                                         <f:selectItem itemValue="2" itemLabel="par catégorie d'équipement"></f:selectItem>
-                                        <p:ajax listener="#{maintenanceController.typeMaintenance}" process="typeMaintenance"></p:ajax>
+                                        <p:ajax listener="#{maintenanceController.typeMaintenance}" process="typeMaintenance" update=":MaintenanceItemCreateForm, :MaintenanceCreateForm"></p:ajax>
                                     </p:selectOneMenu>
                                 </p:panelGrid>
 
-                                <p:commandButton id="createButton" icon="ui-icon-plus" style="right: 20"  value="Confirmer" actionListener="#{maintenanceController.save()}"/>
+                                <p:commandButton id="createButton" icon="ui-icon-plus" style="right: 20px"  value="Confirmer" actionListener="#{maintenanceController.save()}" update=":MaintenanceItemCreateForm, :MaintenanceCreateForm"/>
                             </h:panelGroup>
                         </h:form>
                     </p:panel>
@@ -50,7 +50,7 @@
 
             <div class="ui-g">
                 <div class="ui-g-4">
-                    <p:panel header="INFO DETAIL MAINTENANCE " style="margin-top:30px" rendered="#{maintenanceController.typeMaintenance==1}">
+                    <p:panel header="INFO DETAIL MAINTENANCE " id="parSalle" style="margin-top:30px" rendered="#{maintenanceController.typeMaintenance==1}">
                         <h:form id="MaintenanceItemCreateForm">
                             <h:panelGroup id="display">
                                 <p:panelGrid columns="2" rendered="#{maintenanceItemController.selected != null}">
@@ -74,7 +74,7 @@
 
 
                                 </p:panelGrid>
-                                <p:commandButton actionListener="#{maintenanceController.add()}" icon="ui-icon-plus" value="Ajouter" />
+                                <p:commandButton actionListener="#{maintenanceController.add()}" style="background-color:#F7ECC6;" icon="ui-icon-plus" value="Ajouter"/>
                             </h:panelGroup>
                         </h:form>
                     </p:panel>
@@ -105,7 +105,7 @@
 
 
                                 </p:panelGrid>
-                                <p:commandButton icon="ui-icon-plus" value="Ajouter" />
+                                <p:commandButton icon="ui-icon-plus"  value="Ajouter" />
 
                             </h:panelGroup>
                         </h:form>

@@ -27,16 +27,7 @@
                 <p:fieldset id="StatField" legend="CRITERE DE RECHERCHE" style="margin-bottom:20px" >
                     <p:panelGrid columns="6">
 
-        <p:outputLabel value="Designation" for="equipement" />
-        <p:selectOneMenu id="equipement" value="#{epuisementController.selected.equipement}" >
-                            <f:selectItem itemValue="#{null}" itemLabel="--SELECT--"></f:selectItem>
-                            <f:selectItems value="#{equipementController.itemsAvailableSelectOne}"
-                                           var="equipementItem"
-                                           itemValue="#{equipementItem}"
-                                           itemLabel="#{equipementItem.designation}"
-                                           />
-                        </p:selectOneMenu>
-
+        
                          <p:outputLabel value="Numero de serie" for="numeroSerie" />
                        <p:inputText id="numeroSerie" value="#{epuisementController.selected.numeroSerie}" title="numeroSerie" />
                          
@@ -47,16 +38,7 @@
                        
 
                      
-                        <p:outputLabel value="Fournisseur" for="fournisseur" />
-                        <p:selectOneMenu id="fournisseur" value="#{epuisementController.selected.fournisseur}" >
-                            <f:selectItem itemValue="#{null}" itemLabel="--SELECT--"></f:selectItem>
-                            <f:selectItems value="#{fournisseurController.itemsAvailableSelectOne}"
-                                           var="fournisseurItem"
-                                           itemValue="#{fournisseurItem}"
-                                           itemLabel="#{fournisseurItem.nom}"
-                                           />
-                        </p:selectOneMenu>
-                       
+                        
                         <p:commandButton id="createButton" icon="ui-icon-search" style="background-color:#F7ECC6;"  value="Recherche"  />
 
                     </p:panelGrid>

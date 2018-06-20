@@ -25,17 +25,11 @@
                         <p:inputText id="mois" value="#{maintenanceController.selected.mois}" title="#{bundle.EditMaintenanceTitle_mois}" />
                         <p:outputLabel value="#{bundle.EditMaintenanceLabel_description}" for="description" />
                         <p:inputText id="description" value="#{maintenanceController.selected.description}" title="#{bundle.EditMaintenanceTitle_description}" />
-                        <p:outputLabel value="#{bundle.EditMaintenanceLabel_typeMaintenance}" for="typeMaintenance" />
-                        <p:selectOneMenu id="typeMaintenance" value="#{maintenanceController.selected.typeMaintenance}" >
-                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
-                            <f:selectItems value="#{typeMaintenanceController.itemsAvailableSelectOne}"
-                                           var="typeMaintenanceItem"
-                                           itemValue="#{typeMaintenanceItem}"/>
-                        </p:selectOneMenu>
+                      
                         <p:outputLabel value="#{bundle.EditMaintenanceLabel_id}" for="id" />
                         <p:inputText id="id" value="#{maintenanceController.selected.id}" title="#{bundle.EditMaintenanceTitle_id}" />
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{maintenanceController.update}" value="#{bundle.Save}" update="display,:MaintenanceListForm:datalist,:growl" oncomplete="handleSubmit(args, 'MaintenanceEditDialog');"/>
+                    <p:commandButton actionListener="#{maintenanceController.update}" value="#{bundle.Save}" update="display,:MaintenanceListForm:datalist" oncomplete="handleSubmit(args, 'MaintenanceEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="MaintenanceEditDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

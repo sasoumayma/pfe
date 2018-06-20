@@ -30,8 +30,10 @@ public class EntreeItemFacade extends AbstractFacade<EntreeItem> {
     
    
     public void generatePdf() throws JRException, IOException{
+        
         Map<String,Object> params = new HashMap();
         params.put("responsable", "Mme HAGCHI Faiza");
+        params.put("designation", "");
         PdfUtil.generatePdf(findAll(), params, "entreeItem", "/jasper/entreeItem.jasper");
     }
 

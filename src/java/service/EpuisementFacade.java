@@ -7,8 +7,10 @@ package service;
 
 import bean.Epuisement;
 import controller.util.PdfUtil;
+import controller.util.SearchUtil;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -25,6 +27,17 @@ public class EpuisementFacade extends AbstractFacade<Epuisement> {
     @PersistenceContext(unitName = "gmaov3PU")
     private EntityManager em;
 
+    //search
+    public List<Epuisement> findByCretaria(String numeroSerie, int quantite ){
+        String qry = "SELECT e FROM Equipement e WHERE 1=1";
+            qry += SearchUtil.addConstraint("e", "numeroSerie", "=", numeroSerie);
+            qry += SearchUtil.addConstraint("e", "quantite", "=", quantite);
+         //   qry += SearchUtil.addConstraint("e", "designation", "=", designation);
+            System.out.println("qryqryqryqry "+qry);
+        return em.createQuery(qry).getResultList();
+    }
+    //search
+    
     
     @Override
     public void create(Epuisement epuisement) {
